@@ -187,7 +187,7 @@ GenParticleCounter::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       {
 	 const reco::GenParticle &c1 = (*collection1)[i];
 	 
-	 if ( c1.et() < 14 )  continue;
+	 if ( c1.et() < 0 )  continue;
 	 
 	 et[nPar] = c1.et();
 	 eta[nPar] = c1.eta();
