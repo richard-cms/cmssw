@@ -50,7 +50,7 @@ process.SimpleMemoryCheck = cms.Service('SimpleMemoryCheck',
                                         oncePerEventMode = cms.untracked.bool(False)
                                         )
 
-process.ana = cms.EDAnalyzer('HydjetAnalyzer')
+#process.ana = cms.EDAnalyzer('HydjetAnalyzer')
 
 process.genpana = cms.EDAnalyzer("GenParticleCounter",
                                  src = cms.untracked.string("genParticles"),
