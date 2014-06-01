@@ -2,23 +2,33 @@ import FWCore.ParameterSet.Config as cms
 
 hiSignal = cms.EDFilter("PyquenGeneratorFilter",
                         filterType = cms.untracked.string('EcalGenEvtSelector'),
-                        partons = cms.vint32(1, 2, 3, 4, 5,
-                                             6, 21, 22),
-                        partonPt = cms.vdouble(0, 0, 0, 0, 0,
-                                               0, 0, 0),
-                        partonStatus = cms.vint32(2, 2, 2, 2, 2,
-                                                  2, 2, 1),
-                        particles = cms.vint32(221, -221, 331, -331, 223,
-                                               -223, 211, -211, 111, 311,
-                                               11, -11),                             # removed photon 
+                        partons = cms.vint32(1, 2, 3, 4, 5, 6, #quarks
+                                             21, 22), #gluon, photon
+                        partonPt = cms.vdouble(0, 0, 0, 0, 0, 0,
+                                               0, 0),
+                        partonStatus = cms.vint32(2, 2, 2, 2, 2, 2,
+                                                  2, 1), 
+                        particles = cms.vint32(221, #eta
+                                               331, #eta'
+                                               223, #omega
+                                               211, #pi+
+                                               -211, #pi-
+                                               111, #pi0
+                                               311, #K0
+                                               11, #e-
+                                               -11), #e+
                         particlePt = cms.vdouble(15, 15, 15, 15, 15,
-                                                 15, 15, 15, 15, 15,
-                                                 15, 15),
-                        particleStatus = cms.vint32(2, 2, 2, 2, 2,
-                                                    2, 1, 1, 2, 2,
-                                                    1, 1 ),
-                        
-                        etaMax = cms.double(3),   # Photon eta cut
+                                                 15, 15, 15, 15),
+                        particleStatus = cms.vint32(2, #eta
+                                                    2, #eta'
+                                                    2, #omega
+                                                    1, #pi+
+                                                    1, #pi-
+                                                    2, #pi0
+                                                    2, #K0
+                                                    1, #e-
+                                                    1), #e+
+                        etaMax = cms.double(5),   # Photon eta cut
                         aBeamTarget = cms.double(208.0),
                         comEnergy = cms.double(2760.0),
                         qgpInitialTemperature = cms.double(1.0),
@@ -84,7 +94,7 @@ hiSignal = cms.EDFilter("PyquenGeneratorFilter",
                             parameterSets = cms.vstring('pythiaUESettingsZ2Tune',
                                                         'ppJets',
                                                         'kinematics'),
-                            
+
                             kinematics = cms.vstring('CKIN(3)=30',
                                  'CKIN(4)=9999'
                                                  )
