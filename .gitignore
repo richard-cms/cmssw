@@ -1,3 +1,7 @@
 __init__.py
 *.pyc
 *.log
+*.root
+
+*_C.d
+*.so
