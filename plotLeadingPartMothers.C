@@ -35,7 +35,7 @@ bool isPhotonPiEta(Int_t id);
 int getHisto(int id);
 bool notInConfig(Int_t id);
 
-void stackPlotConfigParticles()
+void plotLeadingPartMothers()
 {
   const int nFILES = 7;
   TString filenames[nFILES] = {
@@ -62,15 +62,15 @@ void stackPlotConfigParticles()
 
   const int nPART = 7;
   TString labels[nFILES*nPART] = {
-    "30_0_pi","30_0_eta", "30_0_eta1", "30_0_omega","30_0_cpi","30_0_e","30_0_K",
-    "30_15_pi","30_15_eta", "30_15_eta1", "30_15_omega","30_15_cpi","30_15_e","30_15_K",
-    //"30_60_pi","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K",
-    "80_0_pi","80_0_eta", "80_0_eta1", "80_0_omega","80_0_cpi","80_0_e","80_0_K",
-    "80_15_pi","80_15_eta", "80_15_eta1", "80_15_omega","80_15_cpi","80_15_e","80_15_K",
-    //"80_60_pi","80_60_eta", "80_60_eta1", "80_60_omega","80_60_cpi","80_60_e","80_60_K",
-    "170_0_pi","170_0_eta", "170_0_eta1", "170_0_omega","170_0_cpi","170_0_e","170_0_K",
-    "170_15_pi","170_15_eta", "170_15_eta1", "170_15_omega","170_15_cpi","170_15_e","170_15_K",
-    "170_60_pi","170_60_eta", "170_60_eta1", "170_60_omega","170_60_cpi","170_60_e","170_60_K"
+    "30_0_pi0","30_0_eta", "30_0_eta1", "30_0_omega","30_0_cpi","30_0_e","30_0_K0",
+    "30_15_pi0","30_15_eta", "30_15_eta1", "30_15_omega","30_15_cpi","30_15_e","30_15_K0",
+    //"30_60_pi0","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K0",
+    "80_0_pi0","80_0_eta", "80_0_eta1", "80_0_omega","80_0_cpi","80_0_e","80_0_K0",
+    "80_15_pi0","80_15_eta", "80_15_eta1", "80_15_omega","80_15_cpi","80_15_e","80_15_K0",
+    //"80_60_pi0","80_60_eta", "80_60_eta1", "80_60_omega","80_60_cpi","80_60_e","80_60_K0",
+    "170_0_pi0","170_0_eta", "170_0_eta1", "170_0_omega","170_0_cpi","170_0_e","170_0_K0",
+    "170_15_pi0","170_15_eta", "170_15_eta1", "170_15_omega","170_15_cpi","170_15_e","170_15_K0",
+    "170_60_pi0","170_60_eta", "170_60_eta1", "170_60_omega","170_60_cpi","170_60_e","170_60_K0"
   };
 
   TH1D *hists[nFILES][nPART];
@@ -81,7 +81,7 @@ void stackPlotConfigParticles()
   {
     for(int j = 0; j < nPART; ++j) 
     {
-      hists[i][j] = new TH1D(labels[i*nPART+j],";leading particle from config et;Count",nBins,0,maxEt);
+      hists[i][j] = new TH1D(labels[i*nPART+j],";leading photon et;Count",nBins,0,maxEt);
     }
 
     for(int entry = 0; entry < trees[i]->GetEntries(); ++entry)
@@ -94,11 +94,11 @@ void stackPlotConfigParticles()
       int id = -999;
       for(int photon = 0; photon < gens[i]->nPar; photon++)
       {
-	//if(gens[i]->status[photon] != 1) continue;
+	if(gens[i]->status[photon] != 1) continue;
 	id = gens[i]->id[photon];
-	if( notInConfig(id) ) continue;
+	//if( notInConfig(id) ) continue;
 	//if(id != ids[j]) continue;
-	//if(id != 22) continue;
+	if(id != 22) continue;
 	//if(TMath::Abs(gens[i]->eta[photon]) > 3) continue;
 	if (gens[i]->et[photon] > maxet)
 	{
@@ -110,11 +110,11 @@ void stackPlotConfigParticles()
       if(index > -1)
       {
 	//hists[i][j]->Fill(gens[i]->momId[index]);
-	int j = getHisto(gens[i]->id[index]);
+	int j = getHisto(gens[i]->momId[index]);
 	if(j != -1)
 	  hists[i][j]->Fill(maxet);
 	else
-	  printf("unexpected id: %d\n",gens[i]->id[index]);
+	  printf("unexpected id: %d\n",gens[i]->momId[index]);
 	//hists[i][0]->Fill(gens[i]->eta[index]);
 	// if(TMath::Abs(gens[i]->momId[index]) < 22){
 	//   hists[i][1]->Fill(maxet);
@@ -142,19 +142,6 @@ void stackPlotConfigParticles()
     leg[i]->SetFillColor(0);
     leg[i]->SetTextFont(43);
     leg[i]->SetTextSize(20);
-    // for(int j = 0; j < nPART; j++)
-    // {
-    //   hists[i][j]->SetLineColor(colors[j]);
-    //   if(j==0){
-    // 	hists[i][j]->SetMaximum(200);
-    // 	hists[i][j]->Draw();
-    //   }else{
-    // 	hists[i][j]->Add(hists[i][j-1]);
-    // 	hists[i][j]->Draw("same");
-    //   }
-
-    //   leg[i]->AddEntry(hists[i][j],hists[i][j]->GetName(),"l");
-    // }
 
     //add histos for stackplot
     for(int j = 0; j<nPART; j++)
@@ -174,7 +161,6 @@ void stackPlotConfigParticles()
       hists[i][j]->SetFillColor(colors[j]);
       hists[i][j]->Draw("same");
     }
-
     //c[i]->SetLogy();
     leg[i]->Draw();
 
@@ -247,6 +233,6 @@ bool isPhotonPiEta(Int_t id){
 
 int main()
 {
-  stackPlotConfigParticles();
+  plotLeadingPartMothers();
   return 0;
 }
