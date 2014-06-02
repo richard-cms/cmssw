@@ -35,38 +35,53 @@ bool isPhotonPiEta(Int_t id);
 int getHisto(int id);
 bool notInConfig(Int_t id);
 
-void findMomId()
+void stackPlotConfigParticles()
 {
-  TString filenames[3] = {
+  const int nFILES = 7;
+  TString filenames[nFILES] = {
+    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt15_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    "Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    "Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt15_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt15_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root"
   };
 
-  TFile *files[3];
-  TTree *trees[3];
-  genpana *gens[3];
-  for(int i = 0; i < 3; ++i)
+  TFile *files[nFILES];
+  TTree *trees[nFILES];
+  genpana *gens[nFILES];
+  for(int i = 0; i < nFILES; ++i)
   {
     files[i] = TFile::Open(filenames[i]);
     trees[i] = (TTree*)files[i]->Get("genpana/photon");
     gens[i] = new genpana(trees[i]);
   }
 
-  TString labels[3*7] = {"Pt0_pi","Pt0_eta", "Pt0_eta1", "Pt0_omega","Pt0_cpi","Pt0_e","Pt0_K",
-			"Pt15_pi","Pt15_eta", "Pt15_eta1", "Pt15_omega","Pt15_cpi","Pt15_e","Pt15_K",
-			"Pt60_pi","Pt60_eta", "Pt60_eta1", "Pt60_omega","Pt60_cpi","Pt60_e","Pt60_K"};
+  const int nPART = 7;
+  TString labels[nFILES*nPART] = {
+    "30_0_pi","30_0_eta", "30_0_eta1", "30_0_omega","30_0_cpi","30_0_e","30_0_K",
+    "30_15_pi","30_15_eta", "30_15_eta1", "30_15_omega","30_15_cpi","30_15_e","30_15_K",
+    //"30_60_pi","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K",
+    "80_0_pi","80_0_eta", "80_0_eta1", "80_0_omega","80_0_cpi","80_0_e","80_0_K",
+    "80_15_pi","80_15_eta", "80_15_eta1", "80_15_omega","80_15_cpi","80_15_e","80_15_K",
+    //"80_60_pi","80_60_eta", "80_60_eta1", "80_60_omega","80_60_cpi","80_60_e","80_60_K",
+    "170_0_pi","170_0_eta", "170_0_eta1", "170_0_omega","170_0_cpi","170_0_e","170_0_K",
+    "170_15_pi","170_15_eta", "170_15_eta1", "170_15_omega","170_15_cpi","170_15_e","170_15_K",
+    "170_60_pi","170_60_eta", "170_60_eta1", "170_60_omega","170_60_cpi","170_60_e","170_60_K"
+  };
 
-  TH1D *hists[3][7];
-  //TCut idcuts[3] = {"", "momId<22", "momId>22"};
+  TH1D *hists[nFILES][nPART];
   const Double_t maxEt = 200;
   const Int_t nBins = 50;
 
-  for(int i = 0; i < 3; ++i) //file
+  for(int i = 0; i < nFILES; ++i)
   {
-    for(int j = 0; j < 7; ++j) //particle
+    for(int j = 0; j < nPART; ++j) 
     {
-      hists[i][j] = new TH1D(labels[i*7+j],";leading particle et;Count",nBins,0,maxEt);
+      hists[i][j] = new TH1D(labels[i*nPART+j],";leading particle et;Count",nBins,0,maxEt);
     }
 
     for(int entry = 0; entry < trees[i]->GetEntries(); ++entry)
@@ -116,18 +131,18 @@ void findMomId()
     }
   }
 
-  TCanvas *c[3];
-  TLegend *leg[3];
-  TString savename[3] = {"pthat30_momId.pdf", "pthat80_momId.pdf", "pthat170_momId.pdf"};
-  Int_t colors[7] = {1, kBlue, kRed, 40, 41, 42, 43};
-  for(int i = 0; i < 3; ++i)
+  TCanvas *c[nFILES];
+  TLegend *leg[nFILES];
+  //TString savename[nFILES] = {"pthat30_momId.pdf", "pthat80_momId.pdf", "pthat170_momId.pdf"};
+  Int_t colors[nPART] = {1, 2, 3, 4, 90, 8, 9};
+  for(int i = 0; i < nFILES; ++i)
   {
     c[i] = new TCanvas();
-    leg[i] = new TLegend(0.6,0.6,0.8,0.8);
+    leg[i] = new TLegend(0.6,0.4,0.8,0.8);
     leg[i]->SetFillColor(0);
     leg[i]->SetTextFont(43);
     leg[i]->SetTextSize(20);
-    for(int j = 0; j < 7; j++)
+    for(int j = 0; j < nPART; j++)
     {
       hists[i][j]->SetLineColor(colors[j]);
       if(j==0){
@@ -212,6 +227,6 @@ bool isPhotonPiEta(Int_t id){
 
 int main()
 {
-  findMomId();
+  stackPlotConfigParticles();
   return 0;
 }
