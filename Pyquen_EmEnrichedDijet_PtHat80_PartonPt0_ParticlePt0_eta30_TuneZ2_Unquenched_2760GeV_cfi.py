@@ -11,24 +11,13 @@ hiSignal = cms.EDFilter("PyquenGeneratorFilter",
                         particles = cms.vint32(221, #eta
                                                331, #eta'
                                                223, #omega
-                                               211, #pi+
-                                               -211, #pi-
-                                               111, #pi0
-                                               311, #K0
-                                               11, #e-
-                                               -11), #e+
-                        particlePt = cms.vdouble(0, 0, 0, 0, 0,
-                                                 0, 0, 0, 0),
+                                               111), #pi0
+                        particlePt = cms.vdouble(0, 0, 0, 0),
                         particleStatus = cms.vint32(2, #eta
                                                     2, #eta'
                                                     2, #omega
-                                                    1, #pi+
-                                                    1, #pi-
-                                                    2, #pi0
-                                                    2, #K0
-                                                    1, #e-
-                                                    1), #e+
-                        etaMax = cms.double(5),   # Photon eta cut
+                                                    2), #pi0
+                        etaMax = cms.double(3.0),   # Photon eta cut
                         aBeamTarget = cms.double(208.0),
                         comEnergy = cms.double(2760.0),
                         qgpInitialTemperature = cms.double(1.0),
