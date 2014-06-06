@@ -34,19 +34,20 @@ bool notMeson(Int_t id);
 bool isPhotonPiEta(Int_t id);
 int getHisto(int id);
 bool notInConfig(Int_t id);
+bool notInConfig2(Int_t id);
 
 void stackPlotConfigParticles()
 {
   const int nFILES = 7;
   TString filenames[nFILES] = {
     "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt15_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    //"Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt15_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     //"Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt15_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root"
   };
 
@@ -63,13 +64,13 @@ void stackPlotConfigParticles()
   const int nPART = 7;
   TString labels[nFILES*nPART] = {
     "30_0_pi","30_0_eta", "30_0_eta1", "30_0_omega","30_0_cpi","30_0_e","30_0_K",
-    "30_15_pi","30_15_eta", "30_15_eta1", "30_15_omega","30_15_cpi","30_15_e","30_15_K",
-    //"30_60_pi","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K",
+    "30_35_pi","30_35_eta", "30_35_eta1", "30_35_omega","30_35_cpi","30_35_e","30_35_K",
+    "30_60_pi","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K",
     "80_0_pi","80_0_eta", "80_0_eta1", "80_0_omega","80_0_cpi","80_0_e","80_0_K",
-    "80_15_pi","80_15_eta", "80_15_eta1", "80_15_omega","80_15_cpi","80_15_e","80_15_K",
+    //"80_35_pi","80_35_eta", "80_35_eta1", "80_35_omega","80_35_cpi","80_35_e","80_35_K",
     //"80_60_pi","80_60_eta", "80_60_eta1", "80_60_omega","80_60_cpi","80_60_e","80_60_K",
     "170_0_pi","170_0_eta", "170_0_eta1", "170_0_omega","170_0_cpi","170_0_e","170_0_K",
-    "170_15_pi","170_15_eta", "170_15_eta1", "170_15_omega","170_15_cpi","170_15_e","170_15_K",
+    "170_35_pi","170_35_eta", "170_35_eta1", "170_35_omega","170_35_cpi","170_35_e","170_35_K",
     "170_60_pi","170_60_eta", "170_60_eta1", "170_60_omega","170_60_cpi","170_60_e","170_60_K"
   };
 
@@ -79,7 +80,7 @@ void stackPlotConfigParticles()
 
   for(int i = 0; i < nFILES; ++i)
   {
-    for(int j = 0; j < nPART; ++j) 
+    for(int j = 0; j < nPART; ++j)
     {
       hists[i][j] = new TH1D(labels[i*nPART+j],";leading particle from config et;Count",nBins,0,maxEt);
     }
@@ -96,7 +97,7 @@ void stackPlotConfigParticles()
       {
 	//if(gens[i]->status[photon] != 1) continue;
 	id = gens[i]->id[photon];
-	if( notInConfig(id) ) continue;
+	if( notInConfig2(id) ) continue;
 	//if(id != ids[j]) continue;
 	//if(id != 22) continue;
 	//if(TMath::Abs(gens[i]->eta[photon]) > 3) continue;
@@ -166,7 +167,7 @@ void stackPlotConfigParticles()
 
     hists[i][0]->SetMaximum(hists[i][nPART-1]->GetMaximum()*1.5);
     hists[i][0]->Draw();
-    
+
     for(int j = nPART-1; j >= 0; j--)
     {
       hists[i][j]->SetLineColor(colors[j]);
@@ -217,6 +218,16 @@ bool notInConfig(Int_t id){
 		    return true;
   return false;
 }
+
+bool notInConfig2(Int_t id){
+  if(id != 221)
+    if(id != 331)
+      if(id != 223)
+	if(id != 111)
+	  return true;
+  return false;
+}
+
 
 int getHisto(int id){
   if(id == 111)
