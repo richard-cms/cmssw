@@ -1,6 +1,7 @@
 #!/bin/sh
-for file in Pyquen_EmEn*80*35*.py
+for file in Configuration/GenProduction/python/Pyquen_EmEn*170*35*.py
 do
-    echo files=${file/%.py/} output=$(basename ${file/%.py/.root})
-    cmsRun genPartTest.py files=${file/%.py/} output=$(basename ${file/%.py/.root})
+    stripped_name=$(echo ${file} | sed 's/python\///' | sed 's/.py//')
+    echo files=${stripped_name} output=$(basename ${file/%.py/_2.root})
+    cmsRun genPartTest.py files=${stripped_name} output=$(basename ${file/%.py/_2.root})
 done

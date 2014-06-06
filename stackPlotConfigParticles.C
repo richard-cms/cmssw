@@ -38,17 +38,18 @@ bool notInConfig2(Int_t id);
 
 void stackPlotConfigParticles()
 {
-  const int nFILES = 7;
+  const int nFILES = 2;
   TString filenames[nFILES] = {
-    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat30_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     //"Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     //"Pyquen_EmEnrichedDijet_PtHat80_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
+    //"Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt0_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
     "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root",
-    "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root"
+    //"Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt60_eta30_TuneZ2_Unquenched_2760GeV_cfi_numEvent1000.root"
+    "Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi_2_numEvent1000.root"
   };
 
   TFile *files[nFILES];
@@ -63,13 +64,13 @@ void stackPlotConfigParticles()
 
   const int nPART = 7;
   TString labels[nFILES*nPART] = {
-    "30_0_pi","30_0_eta", "30_0_eta1", "30_0_omega","30_0_cpi","30_0_e","30_0_K",
-    "30_35_pi","30_35_eta", "30_35_eta1", "30_35_omega","30_35_cpi","30_35_e","30_35_K",
-    "30_60_pi","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K",
-    "80_0_pi","80_0_eta", "80_0_eta1", "80_0_omega","80_0_cpi","80_0_e","80_0_K",
+    //"30_0_pi","30_0_eta", "30_0_eta1", "30_0_omega","30_0_cpi","30_0_e","30_0_K",
+    //"30_35_pi","30_35_eta", "30_35_eta1", "30_35_omega","30_35_cpi","30_35_e","30_35_K",
+    //"30_60_pi","30_60_eta", "30_60_eta1", "30_60_omega","30_60_cpi","30_60_e","30_60_K",
+    //"80_0_pi","80_0_eta", "80_0_eta1", "80_0_omega","80_0_cpi","80_0_e","80_0_K",
     //"80_35_pi","80_35_eta", "80_35_eta1", "80_35_omega","80_35_cpi","80_35_e","80_35_K",
     //"80_60_pi","80_60_eta", "80_60_eta1", "80_60_omega","80_60_cpi","80_60_e","80_60_K",
-    "170_0_pi","170_0_eta", "170_0_eta1", "170_0_omega","170_0_cpi","170_0_e","170_0_K",
+    //"170_0_pi","170_0_eta", "170_0_eta1", "170_0_omega","170_0_cpi","170_0_e","170_0_K",
     "170_35_pi","170_35_eta", "170_35_eta1", "170_35_omega","170_35_cpi","170_35_e","170_35_K",
     "170_60_pi","170_60_eta", "170_60_eta1", "170_60_omega","170_60_cpi","170_60_e","170_60_K"
   };
