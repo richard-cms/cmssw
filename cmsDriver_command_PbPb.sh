@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # First Step is GEN-SIM
 cmsDriver.py Configuration/GenProduction/Pyquen_EmEnrichedDijet_PtHat170_PartonPt0_ParticlePt35_eta30_TuneZ2_Unquenched_2760GeV_cfi --filein="dbs:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM" --fileout file:GENSIM.root --eventcontent=RAWSIM --datatier GEN-SIM --step GEN,SIM --conditions STARTHI53_LV1::All --scenario HeavyIons --himix --processName HISIGNAL --python_filename cfg1.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 100
 cmsRun -e -j cfg1_rt.xml cfg1.py
