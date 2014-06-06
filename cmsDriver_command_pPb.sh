@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # First Step is GEN-SIM
-cmsDriver.py Generator/genproductions/HI/Pyquen_Unquenched_AllQCDPhoton170_PhotonFilter35GeV_eta3_TuneZ2_5020GeV_cfi.py --filein /Hijing_PPb502_MinimumBias/HiWinter13-pa-START53_V10-v1/GEN-SIM --fileout file:GENSIM.root --eventcontent=RAWSIM --datatier GEN-SIM --step GEN,SIM --conditions  STARTHI53_V27::All --scenario HeavyIons --himix --processName HISIGNAL --python_filename cfg_pPb1.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 100 --beamspot Match8TeVCollisionPPbBoost
+cmsDriver.py Configuration/GenProduction/HI/Pyquen_Unquenched_AllQCDPhoton170_PhotonFilter35GeV_eta3_TuneZ2_5020GeV_cfi --filein="dbs:/Hijing_PPb502_MinimumBias/HiWinter13-pa-START53_V10-v2/GEN-SIM" --fileout file:GENSIM.root --eventcontent=RAWSIM --datatier GEN-SIM --step GEN,SIM --conditions  STARTHI53_V27::All --scenario HeavyIons --himix --processName HISIGNAL --python_filename cfg_pPb1.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 100 --beamspot Match8TeVCollisionPPbBoost
 cmsRun -e -j cfg_pPb1_rt.xml cfg_pPb1.py
 echo GEN-SIM step
 echo 100 were run
