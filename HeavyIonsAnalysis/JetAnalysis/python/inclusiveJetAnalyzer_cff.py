@@ -1,12 +1,12 @@
 import FWCore.ParameterSet.Config as cms
 
-inclusiveJetAnalyzer = cms.EDAnalyzer("HiInclusiveJetAnalyzer",
+inclusiveJetAnalyzer = cms.EDProducer("HiInclusiveJetAnalyzer",
 
                                       jetTag = cms.InputTag("icPu5patJets"),
                                       matchTag = cms.untracked.InputTag("akPu3PFpatJets"),
                                       genjetTag = cms.InputTag("iterativeCone5HiGenJets"),
                                       eventInfoTag = cms.InputTag("generator"),
-                                      isMC = cms.untracked.bool(False), 
+                                      isMC = cms.untracked.bool(False),
                                       fillGenJets = cms.untracked.bool(False),
                                       rParam = cms.double(0.5),
                                       trackTag = cms.InputTag("hiTracks"),
@@ -18,7 +18,7 @@ inclusiveJetAnalyzer = cms.EDAnalyzer("HiInclusiveJetAnalyzer",
 
                                       doHiJetID = cms.untracked.bool(True),
                                       doStandardJetID = cms.untracked.bool(False),
-                                      
+
                                       hltTrgResults = cms.untracked.string("TriggerResults::HLT"),
                                       hltTrgNames  = cms.untracked.vstring('HLT_HIMinBiasHfOrBSC_Core',
                                                                            'HLT_HIJet35U',
@@ -94,4 +94,3 @@ inclusiveJetAnalyzer = cms.EDAnalyzer("HiInclusiveJetAnalyzer",
 # icPu5JPTJetAnalyzer = inclusiveJetAnalyzer.clone()
 # icPu5JPTJetAnalyzer.jetTag = 'jpticPu5patJets'
 # icPu5JPTJetAnalyzer.genjetTag = 'iterativeCone5HiGenJets'
-

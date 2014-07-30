@@ -1,9 +1,9 @@
 import FWCore.ParameterSet.Config as cms
 
-inclusiveJetAnalyzer = cms.EDAnalyzer("HiInclusiveJetAnalyzer",
+inclusiveJetAnalyzer = cms.EDProducer("HiInclusiveJetAnalyzer",
                                       jetTag = cms.InputTag("icPu5patJets"),
                                       genjetTag = cms.InputTag("iterativeCone5HiGenJets"),
-                                      isMC = cms.untracked.bool(True), 
+                                      isMC = cms.untracked.bool(True),
                                       useCentrality = cms.untracked.bool(True),
                                       L1gtReadout = cms.InputTag("gtDigis"),
                                       hltTrgResults = cms.untracked.string("TriggerResults::HLT"),
@@ -96,6 +96,3 @@ allJetAnalyzers = cms.Sequence(                         inclusiveJetAnalyzer
                                                         *ak7PFJetAnalyzer
                                                         *icPu5JPTJetAnalyzer
                                                         )
-
-
-

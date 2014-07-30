@@ -8,7 +8,7 @@
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
-#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/EDProducer.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
@@ -35,14 +35,14 @@
 
 
 
-class HiInclusiveJetAnalyzer : public edm::EDAnalyzer {
+class HiInclusiveJetAnalyzer : public edm::EDProducer {
 public:
 
   explicit HiInclusiveJetAnalyzer(const edm::ParameterSet&);
 
   ~HiInclusiveJetAnalyzer();
 
-  virtual void analyze(const edm::Event&, const edm::EventSetup&);
+  virtual void produce(edm::Event&, const edm::EventSetup&);
 
   virtual void beginRun(const edm::Run & r, const edm::EventSetup & c);
 
@@ -61,6 +61,7 @@ public:
 
 
 private:
+  void fillEvent(edm::Event &iEvent);
 
   int getPFJetMuon(const pat::Jet& pfJet, const reco::PFCandidateCollection *pfCandidateColl);
 
@@ -108,8 +109,9 @@ private:
   double hardPtMin_;
   double jetPtMin_;
 
-  TTree *t;
-  edm::Service<TFileService> fs1;
+  //TTree *t;
+  //edm::Service<TFileService> fs1;
+  //std::auto_ptr<TTree> t;
 
   CentralityProvider * centrality_;
   const CaloGeometry *geo;
@@ -154,209 +156,212 @@ private:
 
   struct JRA{
 
-    int nref;
-    int run;
-    int evt;
-    int lumi;
-    int bin;
-    float vx, vy, vz;
-    float b;
-    float hf;
+    std::auto_ptr<int> nref;
+    std::auto_ptr<int> run;
+    std::auto_ptr<int> evt;
+    std::auto_ptr<int> lumi;
+    std::auto_ptr<int> bin;
+    std::auto_ptr<float> vx;
+    std::auto_ptr<float> vy;
+    std::auto_ptr<float> vz;
+    std::auto_ptr<float> b;
+    std::auto_ptr<float> hf;
 
-    float rawpt[MAXJETS];
-    float jtpt[MAXJETS];
-    float jteta[MAXJETS];
-    float jtphi[MAXJETS];
-    float jty[MAXJETS];
-    float jtpu[MAXJETS];
-    float jtm[MAXJETS];
+    std::auto_ptr<std::vector<float> > rawpt;
+    std::auto_ptr<std::vector<float> > jtpt;
+    std::auto_ptr<std::vector<float> > jteta;
+    std::auto_ptr<std::vector<float> > jtphi;
+    std::auto_ptr<std::vector<float> > jty;
+    std::auto_ptr<std::vector<float> > jtpu;
+    std::auto_ptr<std::vector<float> > jtm;
 
-    float trackMax[MAXJETS];
-    float trackSum[MAXJETS];
-    int trackN[MAXJETS];
+    std::auto_ptr<std::vector<float> > trackMax;
+    std::auto_ptr<std::vector<float> > trackSum;
+    std::auto_ptr<std::vector<int> > trackN;
 
-    float chargedMax[MAXJETS];
-    float chargedSum[MAXJETS];
-    int chargedN[MAXJETS];
+    std::auto_ptr<std::vector<float> > chargedMax;
+    std::auto_ptr<std::vector<float> > chargedSum;
+    std::auto_ptr<std::vector<int> > chargedN;
 
-    float photonMax[MAXJETS];
-    float photonSum[MAXJETS];
-    int photonN[MAXJETS];
+    std::auto_ptr<std::vector<float> > photonMax;
+    std::auto_ptr<std::vector<float> > photonSum;
+    std::auto_ptr<std::vector<int> > photonN;
 
-    float trackHardSum[MAXJETS];
-    float chargedHardSum[MAXJETS];
-    float photonHardSum[MAXJETS];
+    std::auto_ptr<std::vector<float> > trackHardSum;
+    std::auto_ptr<std::vector<float> > chargedHardSum;
+    std::auto_ptr<std::vector<float> > photonHardSum;
 
-    int trackHardN[MAXJETS];
-    int chargedHardN[MAXJETS];
-    int photonHardN[MAXJETS];
+    std::auto_ptr<std::vector<int> > trackHardN;
+    std::auto_ptr<std::vector<int> > chargedHardN;
+    std::auto_ptr<std::vector<int> > photonHardN;
 
-    float neutralMax[MAXJETS];
-    float neutralSum[MAXJETS];
-    int neutralN[MAXJETS];
+    std::auto_ptr<std::vector<float> > neutralMax;
+    std::auto_ptr<std::vector<float> > neutralSum;
+    std::auto_ptr<std::vector<int> > neutralN;
 
-    float eMax[MAXJETS];
-    float eSum[MAXJETS];
-    int eN[MAXJETS];
+    std::auto_ptr<std::vector<float> > eMax;
+    std::auto_ptr<std::vector<float> > eSum;
+    std::auto_ptr<std::vector<int> > eN;
 
-    float muMax[MAXJETS];
-    float muSum[MAXJETS];
-    int muN[MAXJETS];
+    std::auto_ptr<std::vector<float> > muMax;
+    std::auto_ptr<std::vector<float> > muSum;
+    std::auto_ptr<std::vector<int> > muN;
 
-    float genChargedSum[MAXJETS];
-    float genHardSum[MAXJETS];
-    float signalChargedSum[MAXJETS];
-    float signalHardSum[MAXJETS];
+    std::auto_ptr<std::vector<float> > genChargedSum;
+    std::auto_ptr<std::vector<float> > genHardSum;
+    std::auto_ptr<std::vector<float> > signalChargedSum;
+    std::auto_ptr<std::vector<float> > signalHardSum;
 
-    float hcalSum[MAXJETS];
-    float ecalSum[MAXJETS];
-
-
-    float fHPD[MAXJETS];
-    float fRBX[MAXJETS];
-    int n90[MAXJETS];
-    float fSubDet1[MAXJETS];
-    float fSubDet2[MAXJETS];
-    float fSubDet3[MAXJETS];
-    float fSubDet4[MAXJETS];
-    float restrictedEMF[MAXJETS];
-    int nHCAL[MAXJETS];
-    int nECAL[MAXJETS];
-    float apprHPD[MAXJETS];
-    float apprRBX[MAXJETS];
-
-    //    int n90[MAXJETS];
-    int n2RPC[MAXJETS];
-    int n3RPC[MAXJETS];
-    int nRPC[MAXJETS];
-
-    float fEB[MAXJETS];
-    float fEE[MAXJETS];
-    float fHB[MAXJETS];
-    float fHE[MAXJETS];
-    float fHO[MAXJETS];
-    float fLong[MAXJETS];
-    float fShort[MAXJETS];
-    float fLS[MAXJETS];
-    float fHFOOT[MAXJETS];
+    std::auto_ptr<std::vector<float> > hcalSum;
+    std::auto_ptr<std::vector<float> > ecalSum;
 
 
-    int subid[MAXJETS];
+    std::auto_ptr<std::vector<float> > fHPD;
+    std::auto_ptr<std::vector<float> > fRBX;
+    std::auto_ptr<std::vector<int> > n90;
+    std::auto_ptr<std::vector<float> > fSubDet1;
+    std::auto_ptr<std::vector<float> > fSubDet2;
+    std::auto_ptr<std::vector<float> > fSubDet3;
+    std::auto_ptr<std::vector<float> > fSubDet4;
+    std::auto_ptr<std::vector<float> > restrictedEMF;
+    std::auto_ptr<std::vector<int> > nHCAL;
+    std::auto_ptr<std::vector<int> > nECAL;
+    std::auto_ptr<std::vector<float> > apprHPD;
+    std::auto_ptr<std::vector<float> > apprRBX;
 
-    float matchedPt[MAXJETS];
-    float matchedRawPt[MAXJETS];
-    float matchedR[MAXJETS];
-    float matchedPu[MAXJETS];
+    //    std::auto_ptr<std::vector<int> > n90;
+    std::auto_ptr<std::vector<int> > n2RPC;
+    std::auto_ptr<std::vector<int> > n3RPC;
+    std::auto_ptr<std::vector<int> > nRPC;
 
-    float discr_csvMva[MAXJETS];
-    float discr_csvSimple[MAXJETS];
-    float discr_muByIp3[MAXJETS];
-    float discr_muByPt[MAXJETS];
-    float discr_prob[MAXJETS];
-    float discr_probb[MAXJETS];
-    float discr_tcHighEff[MAXJETS];
-    float discr_tcHighPur[MAXJETS];
-    float discr_ssvHighEff[MAXJETS];
-    float discr_ssvHighPur[MAXJETS];
+    std::auto_ptr<std::vector<float> > fEB;
+    std::auto_ptr<std::vector<float> > fEE;
+    std::auto_ptr<std::vector<float> > fHB;
+    std::auto_ptr<std::vector<float> > fHE;
+    std::auto_ptr<std::vector<float> > fHO;
+    std::auto_ptr<std::vector<float> > fLong;
+    std::auto_ptr<std::vector<float> > fShort;
+    std::auto_ptr<std::vector<float> > fLS;
+    std::auto_ptr<std::vector<float> > fHFOOT;
 
-    float ndiscr_ssvHighEff[MAXJETS];
-    float ndiscr_ssvHighPur[MAXJETS];
-    float ndiscr_csvSimple[MAXJETS];
-    float ndiscr_muByPt[MAXJETS];
-    float ndiscr_prob[MAXJETS];
-    float ndiscr_probb[MAXJETS];
-    float ndiscr_tcHighEff[MAXJETS];
-    float ndiscr_tcHighPur[MAXJETS];
 
-    float pdiscr_csvSimple[MAXJETS];
-    float pdiscr_prob[MAXJETS];
-    float pdiscr_probb[MAXJETS];
+    std::auto_ptr<std::vector<int> > subid;
 
-    int nsvtx[MAXJETS];
-    int svtxntrk[MAXJETS];
-    float svtxdl[MAXJETS];
-    float svtxdls[MAXJETS];
-    float svtxm[MAXJETS];
-    float svtxpt[MAXJETS];
-    float svtxnormchi2[MAXJETS];
+    std::auto_ptr<std::vector<float> > matchedPt;
+    std::auto_ptr<std::vector<float> > matchedRawPt;
+    std::auto_ptr<std::vector<float> > matchedR;
+    std::auto_ptr<std::vector<float> > matchedPu;
 
-    int nIPtrk[MAXJETS];
-    int nselIPtrk[MAXJETS];
+    std::auto_ptr<std::vector<float> > discr_csvMva;
+    std::auto_ptr<std::vector<float> > discr_csvSimple;
+    std::auto_ptr<std::vector<float> > discr_muByIp3;
+    std::auto_ptr<std::vector<float> > discr_muByPt;
+    std::auto_ptr<std::vector<float> > discr_prob;
+    std::auto_ptr<std::vector<float> > discr_probb;
+    std::auto_ptr<std::vector<float> > discr_tcHighEff;
+    std::auto_ptr<std::vector<float> > discr_tcHighPur;
+    std::auto_ptr<std::vector<float> > discr_ssvHighEff;
+    std::auto_ptr<std::vector<float> > discr_ssvHighPur;
 
-    int nIP;
-    int ipJetIndex[MAXTRACKS];
-    float ipPt[MAXTRACKS];
-    float ipEta[MAXTRACKS];
-    float ipDxy[MAXTRACKS];
-    float ipDz[MAXTRACKS];
-    float ipChi2[MAXTRACKS];
-    int ipNHit[MAXTRACKS];
-    int ipNHitPixel[MAXTRACKS];
-    int ipNHitStrip[MAXTRACKS];
-    bool ipIsHitL1[MAXTRACKS];
-    float ipProb0[MAXTRACKS];
-    float ipProb1[MAXTRACKS];
-    float ip2d[MAXTRACKS];
-    float ip2dSig[MAXTRACKS];
-    float ip3d[MAXTRACKS];
-    float ip3dSig[MAXTRACKS];
-    float ipDist2Jet[MAXTRACKS];
-    float ipDist2JetSig[MAXTRACKS];
-    float ipClosest2Jet[MAXTRACKS];
+    std::auto_ptr<std::vector<float> > ndiscr_ssvHighEff;
+    std::auto_ptr<std::vector<float> > ndiscr_ssvHighPur;
+    std::auto_ptr<std::vector<float> > ndiscr_csvSimple;
+    std::auto_ptr<std::vector<float> > ndiscr_muByPt;
+    std::auto_ptr<std::vector<float> > ndiscr_prob;
+    std::auto_ptr<std::vector<float> > ndiscr_probb;
+    std::auto_ptr<std::vector<float> > ndiscr_tcHighEff;
+    std::auto_ptr<std::vector<float> > ndiscr_tcHighPur;
 
-    float mue[MAXJETS];
-    float mupt[MAXJETS];
-    float mueta[MAXJETS];
-    float muphi[MAXJETS];
-    float mudr[MAXJETS];
-    float muptrel[MAXJETS];
-    int muchg[MAXJETS];
+    std::auto_ptr<std::vector<float> > pdiscr_csvSimple;
+    std::auto_ptr<std::vector<float> > pdiscr_prob;
+    std::auto_ptr<std::vector<float> > pdiscr_probb;
 
-    float discr_fr01[MAXJETS];
+    std::auto_ptr<std::vector<int> > nsvtx;
+    std::auto_ptr<std::vector<int> > svtxntrk;
+    std::auto_ptr<std::vector<float> > svtxdl;
+    std::auto_ptr<std::vector<float> > svtxdls;
+    std::auto_ptr<std::vector<float> > svtxm;
+    std::auto_ptr<std::vector<float> > svtxpt;
+    std::auto_ptr<std::vector<float> > svtxnormchi2;
 
-    float refpt[MAXJETS];
-    float refeta[MAXJETS];
-    float refphi[MAXJETS];
-    float refy[MAXJETS];
-    float refdphijt[MAXJETS];
-    float refdrjt[MAXJETS];
-    float refparton_pt[MAXJETS];
-    int refparton_flavor[MAXJETS];
-    int refparton_flavorForB[MAXJETS];
+    std::auto_ptr<std::vector<int> > nIPtrk;
+    std::auto_ptr<std::vector<int> > nselIPtrk;
 
-    float pthat;
-    int beamId1, beamId2;
-    int ngen;
-    int genmatchindex[MAXJETS];
-    float genpt[MAXJETS];
-    float geneta[MAXJETS];
-    float genphi[MAXJETS];
-    float geny[MAXJETS];
-    float gendphijt[MAXJETS];
-    float gendrjt[MAXJETS];
-    int gensubid[MAXJETS];
+    std::auto_ptr<int> nIP;
+    std::auto_ptr<std::vector<int> > ipJetIndex;
+    std::auto_ptr<std::vector<float> > ipPt;
+    std::auto_ptr<std::vector<float> > ipEta;
+    std::auto_ptr<std::vector<float> > ipDxy;
+    std::auto_ptr<std::vector<float> > ipDz;
+    std::auto_ptr<std::vector<float> > ipChi2;
+    std::auto_ptr<std::vector<int> > ipNHit;
+    std::auto_ptr<std::vector<int> > ipNHitPixel;
+    std::auto_ptr<std::vector<int> > ipNHitStrip;
+    std::auto_ptr<std::vector<bool> > ipIsHitL1;
+    std::auto_ptr<std::vector<float> > ipProb0;
+    std::auto_ptr<std::vector<float> > ipProb1;
+    std::auto_ptr<std::vector<float> > ip2d;
+    std::auto_ptr<std::vector<float> > ip2dSig;
+    std::auto_ptr<std::vector<float> > ip3d;
+    std::auto_ptr<std::vector<float> > ip3dSig;
+    std::auto_ptr<std::vector<float> > ipDist2Jet;
+    std::auto_ptr<std::vector<float> > ipDist2JetSig;
+    std::auto_ptr<std::vector<float> > ipClosest2Jet;
+
+    std::auto_ptr<std::vector<float> > mue;
+    std::auto_ptr<std::vector<float> > mupt;
+    std::auto_ptr<std::vector<float> > mueta;
+    std::auto_ptr<std::vector<float> > muphi;
+    std::auto_ptr<std::vector<float> > mudr;
+    std::auto_ptr<std::vector<float> > muptrel;
+    std::auto_ptr<std::vector<int> > muchg;
+
+    std::auto_ptr<std::vector<float> > discr_fr01;
+
+    std::auto_ptr<std::vector<float> > refpt;
+    std::auto_ptr<std::vector<float> > refeta;
+    std::auto_ptr<std::vector<float> > refphi;
+    std::auto_ptr<std::vector<float> > refy;
+    std::auto_ptr<std::vector<float> > refdphijt;
+    std::auto_ptr<std::vector<float> > refdrjt;
+    std::auto_ptr<std::vector<float> > refparton_pt;
+    std::auto_ptr<std::vector<int> > refparton_flavor;
+    std::auto_ptr<std::vector<int> > refparton_flavorForB;
+
+    std::auto_ptr<float> pthat;
+    std::auto_ptr<int> beamId1;
+    std::auto_ptr<int> beamId2;
+    std::auto_ptr<int> ngen;
+    std::auto_ptr<std::vector<int> > genmatchindex;
+    std::auto_ptr<std::vector<float> > genpt;
+    std::auto_ptr<std::vector<float> > geneta;
+    std::auto_ptr<std::vector<float> > genphi;
+    std::auto_ptr<std::vector<float> > geny;
+    std::auto_ptr<std::vector<float> > gendphijt;
+    std::auto_ptr<std::vector<float> > gendrjt;
+    std::auto_ptr<std::vector<int> > gensubid;
 
     // hlt
-    int nHLTBit;
-    bool hltBit[MAXHLTBITS];
+    std::auto_ptr<int> nHLTBit;
+    std::auto_ptr<std::vector<bool> > hltBit;
 
     // l1
-    int nL1TBit;
-    bool l1TBit[MAXHLTBITS];
-    int nL1ABit;
-    bool l1ABit[MAXHLTBITS];
+    std::auto_ptr<int> nL1TBit;
+    std::auto_ptr<std::vector<bool> > l1TBit;
+    std::auto_ptr<int> nL1ABit;
+    std::auto_ptr<std::vector<bool> > l1ABit;
 
-    int bMult;
-    int bJetIndex[MAXBFRAG];
-    int bStatus[MAXBFRAG];
-    int bPdg[MAXBFRAG];
-    int bChg[MAXBFRAG];
-    float bVx[MAXBFRAG];
-    float bVy[MAXBFRAG];
-    float bVz[MAXBFRAG];
-    float bPt[MAXBFRAG];
-    float bEta[MAXBFRAG];
-    float bPhi[MAXBFRAG];
+    std::auto_ptr<int> bMult;
+    std::auto_ptr<std::vector<int> > bJetIndex;
+    std::auto_ptr<std::vector<int> > bStatus;
+    std::auto_ptr<std::vector<int> > bPdg;
+    std::auto_ptr<std::vector<int> > bChg;
+    std::auto_ptr<std::vector<float> > bVx;
+    std::auto_ptr<std::vector<float> > bVy;
+    std::auto_ptr<std::vector<float> > bVz;
+    std::auto_ptr<std::vector<float> > bPt;
+    std::auto_ptr<std::vector<float> > bEta;
+    std::auto_ptr<std::vector<float> > bPhi;
 
 
   };

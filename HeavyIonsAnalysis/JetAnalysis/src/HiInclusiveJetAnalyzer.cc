@@ -146,6 +146,213 @@ HiInclusiveJetAnalyzer::HiInclusiveJetAnalyzer(const edm::ParameterSet& iConfig)
   }
 
 
+  //produces<TTree>("myjets");
+  produces<int>("nref");
+  produces<int>("run");
+  produces<int>("evt");
+  produces<int>("lumi");
+  produces<int>("bin");
+  produces<float>("vx");
+  produces<float>("vy");
+  produces<float>("vz");
+  produces<float>("b");
+  produces<float>("hf");
+
+  produces<std::vector<float> > ("rawpt");
+  produces<std::vector<float> > ("jtpt");
+  produces<std::vector<float> > ("jteta");
+  produces<std::vector<float> > ("jtphi");
+  produces<std::vector<float> > ("jty");
+  produces<std::vector<float> > ("jtpu");
+  produces<std::vector<float> > ("jtm");
+
+  produces<std::vector<float> > ("trackMax");
+  produces<std::vector<float> > ("trackSum");
+  produces<std::vector<int> > ("trackN");
+
+  produces<std::vector<float> > ("chargedMax");
+  produces<std::vector<float> > ("chargedSum");
+  produces<std::vector<int> > ("chargedN");
+
+  produces<std::vector<float> > ("photonMax");
+  produces<std::vector<float> > ("photonSum");
+  produces<std::vector<int> > ("photonN");
+
+  produces<std::vector<float> > ("trackHardSum");
+  produces<std::vector<float> > ("chargedHardSum");
+  produces<std::vector<float> > ("photonHardSum");
+
+  produces<std::vector<int> > ("trackHardN");
+  produces<std::vector<int> > ("chargedHardN");
+  produces<std::vector<int> > ("photonHardN");
+
+  produces<std::vector<float> > ("neutralMax");
+  produces<std::vector<float> > ("neutralSum");
+  produces<std::vector<int> > ("neutralN");
+
+  produces<std::vector<float> > ("eMax");
+  produces<std::vector<float> > ("eSum");
+  produces<std::vector<int> > ("eN");
+
+  produces<std::vector<float> > ("muMax");
+  produces<std::vector<float> > ("muSum");
+  produces<std::vector<int> > ("muN");
+
+  produces<std::vector<float> > ("genChargedSum");
+  produces<std::vector<float> > ("genHardSum");
+  produces<std::vector<float> > ("signalChargedSum");
+  produces<std::vector<float> > ("signalHardSum");
+
+  produces<std::vector<float> > ("hcalSum");
+  produces<std::vector<float> > ("ecalSum");
+
+
+  produces<std::vector<float> > ("fHPD");
+  produces<std::vector<float> > ("fRBX");
+  produces<std::vector<int> > ("n90");
+  produces<std::vector<float> > ("fSubDet1");
+  produces<std::vector<float> > ("fSubDet2");
+  produces<std::vector<float> > ("fSubDet3");
+  produces<std::vector<float> > ("fSubDet4");
+  produces<std::vector<float> > ("restrictedEMF");
+  produces<std::vector<int> > ("nHCAL");
+  produces<std::vector<int> > ("nECAL");
+  produces<std::vector<float> > ("apprHPD");
+  produces<std::vector<float> > ("apprRBX");
+
+    //    std::auto_ptr<std::vector<int> > n90;
+  produces<std::vector<int> > ("n2RPC");
+  produces<std::vector<int> > ("n3RPC");
+  produces<std::vector<int> > ("nRPC");
+
+  produces<std::vector<float> > ("fEB");
+  produces<std::vector<float> > ("fEE");
+  produces<std::vector<float> > ("fHB");
+  produces<std::vector<float> > ("fHE");
+  produces<std::vector<float> > ("fHO");
+  produces<std::vector<float> > ("fLong");
+  produces<std::vector<float> > ("fShort");
+  produces<std::vector<float> > ("fLS");
+  produces<std::vector<float> > ("fHFOOT");
+
+
+  produces<std::vector<int> > ("subid");
+
+  produces<std::vector<float> > ("matchedPt");
+  produces<std::vector<float> > ("matchedRawPt");
+  produces<std::vector<float> > ("matchedR");
+  produces<std::vector<float> > ("matchedPu");
+
+  produces<std::vector<float> > ("discrcsvMva");
+  produces<std::vector<float> > ("discrcsvSimple");
+  produces<std::vector<float> > ("discrmuByIp3");
+  produces<std::vector<float> > ("discrmuByPt");
+  produces<std::vector<float> > ("discrprob");
+  produces<std::vector<float> > ("discrprobb");
+  produces<std::vector<float> > ("discrtcHighEff");
+  produces<std::vector<float> > ("discrtcHighPur");
+  produces<std::vector<float> > ("discrssvHighEff");
+  produces<std::vector<float> > ("discrssvHighPur");
+
+  produces<std::vector<float> > ("ndiscrssvHighEff");
+  produces<std::vector<float> > ("ndiscrssvHighPur");
+  produces<std::vector<float> > ("ndiscrcsvSimple");
+  produces<std::vector<float> > ("ndiscrmuByPt");
+  produces<std::vector<float> > ("ndiscrprob");
+  produces<std::vector<float> > ("ndiscrprobb");
+  produces<std::vector<float> > ("ndiscrtcHighEff");
+  produces<std::vector<float> > ("ndiscrtcHighPur");
+
+  produces<std::vector<float> > ("pdiscrcsvSimple");
+  produces<std::vector<float> > ("pdiscrprob");
+  produces<std::vector<float> > ("pdiscrprobb");
+
+  produces<std::vector<int> > ("nsvtx");
+  produces<std::vector<int> > ("svtxntrk");
+  produces<std::vector<float> > ("svtxdl");
+  produces<std::vector<float> > ("svtxdls");
+  produces<std::vector<float> > ("svtxm");
+  produces<std::vector<float> > ("svtxpt");
+  produces<std::vector<float> > ("svtxnormchi2");
+
+  produces<std::vector<int> > ("nIPtrk");
+  produces<std::vector<int> > ("nselIPtrk");
+
+  produces<int> ("nIP");
+  produces<std::vector<int> > ("ipJetIndex");
+  produces<std::vector<float> > ("ipPt");
+  produces<std::vector<float> > ("ipEta");
+  produces<std::vector<float> > ("ipDxy");
+  produces<std::vector<float> > ("ipDz");
+  produces<std::vector<float> > ("ipChi2");
+  produces<std::vector<int> > ("ipNHit");
+  produces<std::vector<int> > ("ipNHitPixel");
+  produces<std::vector<int> > ("ipNHitStrip");
+  produces<std::vector<bool> > ("ipIsHitL1");
+  produces<std::vector<float> > ("ipProb0");
+  produces<std::vector<float> > ("ipProb1");
+  produces<std::vector<float> > ("ip2d");
+  produces<std::vector<float> > ("ip2dSig");
+  produces<std::vector<float> > ("ip3d");
+  produces<std::vector<float> > ("ip3dSig");
+  produces<std::vector<float> > ("ipDist2Jet");
+  produces<std::vector<float> > ("ipDist2JetSig");
+  produces<std::vector<float> > ("ipClosest2Jet");
+
+  produces<std::vector<float> > ("mue");
+  produces<std::vector<float> > ("mupt");
+  produces<std::vector<float> > ("mueta");
+  produces<std::vector<float> > ("muphi");
+  produces<std::vector<float> > ("mudr");
+  produces<std::vector<float> > ("muptrel");
+  produces<std::vector<int> > ("muchg");
+
+  produces<std::vector<float> > ("discrfr01");
+
+  produces<std::vector<float> > ("refpt");
+  produces<std::vector<float> > ("refeta");
+  produces<std::vector<float> > ("refphi");
+  produces<std::vector<float> > ("refy");
+  produces<std::vector<float> > ("refdphijt");
+  produces<std::vector<float> > ("refdrjt");
+  produces<std::vector<float> > ("refpartonpt");
+  produces<std::vector<int> > ("refpartonflavor");
+  produces<std::vector<int> > ("refpartonflavorForB");
+  produces<float> ("pthat");
+
+  produces<int> ("beamId1");
+  produces<int> ("beamId2");
+  produces<int> ("ngen");
+  produces<std::vector<int> > ("genmatchindex");
+  produces<std::vector<float> > ("genpt");
+  produces<std::vector<float> > ("geneta");
+  produces<std::vector<float> > ("genphi");
+  produces<std::vector<float> > ("geny");
+  produces<std::vector<float> > ("gendphijt");
+  produces<std::vector<float> > ("gendrjt");
+  produces<std::vector<int> > ("gensubid");
+
+  // hlt
+  produces<int> ("nHLTBit");
+  produces<std::vector<bool> > ("hltBit");
+
+  // l1
+  produces<int> ("nL1TBit");
+  produces<std::vector<bool> > ("l1TBit");
+  produces<int> ("nL1ABit");
+  produces<std::vector<bool> > ("l1ABit");
+
+  produces<int> ("bMult");
+  produces<std::vector<int> > ("bJetIndex");
+  produces<std::vector<int> > ("bStatus");
+  produces<std::vector<int> > ("bPdg");
+  produces<std::vector<int> > ("bChg");
+  produces<std::vector<float> > ("bVx");
+  produces<std::vector<float> > ("bVy");
+  produces<std::vector<float> > ("bVz");
+  produces<std::vector<float> > ("bPt");
+  produces<std::vector<float> > ("bEta");
+  produces<std::vector<float> > ("bPhi");
 }
 
 
@@ -160,265 +367,229 @@ HiInclusiveJetAnalyzer::beginRun(const edm::Run& run,
 
 void
 HiInclusiveJetAnalyzer::beginJob() {
-
   centrality_ = 0;
-
-  //string jetTagName = jetTag_.label()+"_tree";
-  string jetTagTitle = jetTag_.label()+" Jet Analysis Tree";
-  t = fs1->make<TTree>("t",jetTagTitle.c_str());
-
-  //  TTree* t= new TTree("t","Jet Response Analyzer");
-  //t->Branch("run",&jets_.run,"run/I");
-  t->Branch("evt",&jets_.evt,"evt/I");
-  //t->Branch("lumi",&jets_.lumi,"lumi/I");
-  t->Branch("b",&jets_.b,"b/F");
-  if (useVtx_) {
-    t->Branch("vx",&jets_.vx,"vx/F");
-    t->Branch("vy",&jets_.vy,"vy/F");
-    t->Branch("vz",&jets_.vz,"vz/F");
-  }
-  if (useCentrality_) {
-    t->Branch("hf",&jets_.hf,"hf/F");
-    t->Branch("bin",&jets_.bin,"bin/I");
-  }
-
-  t->Branch("nref",&jets_.nref,"nref/I");
-  t->Branch("rawpt",jets_.rawpt,"rawpt[nref]/F");
-  if(!skipCorrections_) t->Branch("jtpt",jets_.jtpt,"jtpt[nref]/F");
-  t->Branch("jteta",jets_.jteta,"jteta[nref]/F");
-  t->Branch("jty",jets_.jty,"jty[nref]/F");
-  t->Branch("jtphi",jets_.jtphi,"jtphi[nref]/F");
-  t->Branch("jtpu",jets_.jtpu,"jtpu[nref]/F");
-  t->Branch("jtm",jets_.jtm,"jtm[nref]/F");
-
-  // jet ID information, jet composition
-  if(doHiJetID_){
-    t->Branch("discr_fr01", jets_.discr_fr01,"discr_fr01[nref]/F");
-
-    t->Branch("trackMax", jets_.trackMax,"trackMax[nref]/F");
-    t->Branch("trackSum", jets_.trackSum,"trackSum[nref]/F");
-    t->Branch("trackN", jets_.trackN,"trackN[nref]/I");
-    t->Branch("trackHardSum", jets_.trackHardSum,"trackHardSum[nref]/F");
-    t->Branch("trackHardN", jets_.trackHardN,"trackHardN[nref]/I");
-
-    t->Branch("chargedMax", jets_.chargedMax,"chargedMax[nref]/F");
-    t->Branch("chargedSum", jets_.chargedSum,"chargedSum[nref]/F");
-    t->Branch("chargedN", jets_.chargedN,"chargedN[nref]/I");
-    t->Branch("chargedHardSum", jets_.chargedHardSum,"chargedHardSum[nref]/F");
-    t->Branch("chargedHardN", jets_.chargedHardN,"chargedHardN[nref]/I");
-
-    t->Branch("photonMax", jets_.photonMax,"photonMax[nref]/F");
-    t->Branch("photonSum", jets_.photonSum,"photonSum[nref]/F");
-    t->Branch("photonN", jets_.photonN,"photonN[nref]/I");
-    t->Branch("photonHardSum", jets_.photonHardSum,"photonHardSum[nref]/F");
-    t->Branch("photonHardN", jets_.photonHardN,"photonHardN[nref]/I");
-
-    t->Branch("neutralMax", jets_.neutralMax,"neutralMax[nref]/F");
-    t->Branch("neutralSum", jets_.neutralSum,"neutralSum[nref]/F");
-    t->Branch("neutralN", jets_.neutralN,"neutralN[nref]/I");
-
-    t->Branch("hcalSum", jets_.hcalSum,"hcalSum[nref]/F");
-    t->Branch("ecalSum", jets_.ecalSum,"ecalSum[nref]/F");
-
-    t->Branch("eMax", jets_.eMax,"eMax[nref]/F");
-    t->Branch("eSum", jets_.eSum,"eSum[nref]/F");
-    t->Branch("eN", jets_.eN,"eN[nref]/I");
-
-    t->Branch("muMax", jets_.muMax,"muMax[nref]/F");
-    t->Branch("muSum", jets_.muSum,"muSum[nref]/F");
-    t->Branch("muN", jets_.muN,"muN[nref]/I");
-  }
-
-  if(doStandardJetID_){
-    t->Branch("fHPD",jets_.fHPD,"fHPD[nref]/F");
-    t->Branch("fRBX",jets_.fRBX,"fRBX[nref]/F");
-    t->Branch("n90",jets_.n90,"n90[nref]/I");
-    t->Branch("fSubDet1",jets_.fSubDet1,"fSubDet1[nref]/F");
-    t->Branch("fSubDet2",jets_.fSubDet2,"fSubDet2[nref]/F");
-    t->Branch("fSubDet3",jets_.fSubDet3,"fSubDet3[nref]/F");
-    t->Branch("fSubDet4",jets_.fSubDet4,"fSubDet4[nref]/F");
-    t->Branch("restrictedEMF",jets_.restrictedEMF,"restrictedEMF[nref]/F");
-    t->Branch("nHCAL",jets_.nHCAL,"nHCAL[nref]/I");
-    t->Branch("nECAL",jets_.nECAL,"nECAL[nref]/I");
-    t->Branch("apprHPD",jets_.apprHPD,"apprHPD[nref]/F");
-    t->Branch("apprRBX",jets_.apprRBX,"apprRBX[nref]/F");
-
-    //  t->Branch("hitsInN90",jets_.n90,"hitsInN90[nref]");
-    t->Branch("n2RPC",jets_.n2RPC,"n2RPC[nref]/I");
-    t->Branch("n3RPC",jets_.n3RPC,"n3RPC[nref]/I");
-    t->Branch("nRPC",jets_.nRPC,"nRPC[nref]/I");
-
-    t->Branch("fEB",jets_.fEB,"fEB[nref]/F");
-    t->Branch("fEE",jets_.fEE,"fEE[nref]/F");
-    t->Branch("fHB",jets_.fHB,"fHB[nref]/F");
-    t->Branch("fHE",jets_.fHE,"fHE[nref]/F");
-    t->Branch("fHO",jets_.fHO,"fHO[nref]/F");
-    t->Branch("fLong",jets_.fLong,"fLong[nref]/F");
-    t->Branch("fShort",jets_.fShort,"fShort[nref]/F");
-    t->Branch("fLS",jets_.fLS,"fLS[nref]/F");
-    t->Branch("fHFOOT",jets_.fHFOOT,"fHFOOT[nref]/F");
-  }
-
-  // Jet ID
-  if(doMatch_){
-    if(!skipCorrections_) t->Branch("matchedPt", jets_.matchedPt,"matchedPt[nref]/F");
-    t->Branch("matchedRawPt", jets_.matchedRawPt,"matchedRawPt[nref]/F");
-    t->Branch("matchedPu", jets_.matchedPu,"matchedPu[nref]/F");
-    t->Branch("matchedR", jets_.matchedR,"matchedR[nref]/F");
-  }
-
-  // b-jet discriminators
-  if (doLifeTimeTagging_) {
-
-    t->Branch("discr_ssvHighEff",jets_.discr_ssvHighEff,"discr_ssvHighEff[nref]/F");
-    t->Branch("discr_ssvHighPur",jets_.discr_ssvHighPur,"discr_ssvHighPur[nref]/F");
-
-    t->Branch("discr_csvMva",jets_.discr_csvMva,"discr_csvMva[nref]/F");
-    t->Branch("discr_csvSimple",jets_.discr_csvSimple,"discr_csvSimple[nref]/F");
-    t->Branch("discr_muByIp3",jets_.discr_muByIp3,"discr_muByIp3[nref]/F");
-    t->Branch("discr_muByPt",jets_.discr_muByPt,"discr_muByPt[nref]/F");
-    t->Branch("discr_prob",jets_.discr_prob,"discr_prob[nref]/F");
-    t->Branch("discr_probb",jets_.discr_probb,"discr_probb[nref]/F");
-    t->Branch("discr_tcHighEff",jets_.discr_tcHighEff,"discr_tcHighEff[nref]/F");
-    t->Branch("discr_tcHighPur",jets_.discr_tcHighPur,"discr_tcHighPur[nref]/F");
-
-    t->Branch("ndiscr_ssvHighEff",jets_.ndiscr_ssvHighEff,"ndiscr_ssvHighEff[nref]/F");
-    t->Branch("ndiscr_ssvHighPur",jets_.ndiscr_ssvHighPur,"ndiscr_ssvHighPur[nref]/F");
-    t->Branch("ndiscr_csvSimple",jets_.ndiscr_csvSimple,"ndiscr_csvSimple[nref]/F");
-    t->Branch("ndiscr_muByPt",jets_.ndiscr_muByPt,"ndiscr_muByPt[nref]/F");
-    t->Branch("ndiscr_prob",jets_.ndiscr_prob,"ndiscr_prob[nref]/F");
-    t->Branch("ndiscr_probb",jets_.ndiscr_probb,"ndiscr_probb[nref]/F");
-    t->Branch("ndiscr_tcHighEff",jets_.ndiscr_tcHighEff,"ndiscr_tcHighEff[nref]/F");
-    t->Branch("ndiscr_tcHighPur",jets_.ndiscr_tcHighPur,"ndiscr_tcHighPur[nref]/F");
-
-    t->Branch("pdiscr_csvSimple",jets_.pdiscr_csvSimple,"pdiscr_csvSimple[nref]/F");
-    t->Branch("pdiscr_prob",jets_.pdiscr_prob,"pdiscr_prob[nref]/F");
-    t->Branch("pdiscr_probb",jets_.pdiscr_probb,"pdiscr_probb[nref]/F");
-
-    t->Branch("nsvtx",    jets_.nsvtx,    "nsvtx[nref]/I");
-    t->Branch("svtxntrk", jets_.svtxntrk, "svtxntrk[nref]/I");
-    t->Branch("svtxdl",   jets_.svtxdl,   "svtxdl[nref]/F");
-    t->Branch("svtxdls",  jets_.svtxdls,  "svtxdls[nref]/F");
-    t->Branch("svtxm",    jets_.svtxm,    "svtxm[nref]/F");
-    t->Branch("svtxpt",   jets_.svtxpt,   "svtxpt[nref]/F");
-
-    t->Branch("nIPtrk",jets_.nIPtrk,"nIPtrk[nref]/I");
-    t->Branch("nselIPtrk",jets_.nselIPtrk,"nselIPtrk[nref]/I");
-
-    if (doLifeTimeTaggingExtras_) {
-      t->Branch("nIP",&jets_.nIP,"nIP/I");
-      t->Branch("ipJetIndex",jets_.ipJetIndex,"ipJetIndex[nIP]/I");
-      t->Branch("ipPt",jets_.ipPt,"ipPt[nIP]/F");
-      t->Branch("ipProb0",jets_.ipProb0,"ipProb0[nIP]/F");
-      t->Branch("ipProb1",jets_.ipProb1,"ipProb1[nIP]/F");
-      t->Branch("ip2d",jets_.ip2d,"ip2d[nIP]/F");
-      t->Branch("ip2dSig",jets_.ip2dSig,"ip2dSig[nIP]/F");
-      t->Branch("ip3d",jets_.ip3d,"ip3d[nIP]/F");
-      t->Branch("ip3dSig",jets_.ip3dSig,"ip3dSig[nIP]/F");
-      t->Branch("ipDist2Jet",jets_.ipDist2Jet,"ipDist2Jet[nIP]/F");
-      t->Branch("ipDist2JetSig",jets_.ipDist2JetSig,"ipDist2JetSig[nIP]/F");
-      t->Branch("ipClosest2Jet",jets_.ipClosest2Jet,"ipClosest2Jet[nIP]/F");
-
-    }
-
-    t->Branch("mue",     jets_.mue,     "mue[nref]/F");
-    t->Branch("mupt",    jets_.mupt,    "mupt[nref]/F");
-    t->Branch("mueta",   jets_.mueta,   "mueta[nref]/F");
-    t->Branch("muphi",   jets_.muphi,   "muphi[nref]/F");
-    t->Branch("mudr",    jets_.mudr,    "mudr[nref]/F");
-    t->Branch("muptrel", jets_.muptrel, "muptrel[nref]/F");
-    t->Branch("muchg",   jets_.muchg,   "muchg[nref]/I");
-  }
-
-
-  if(isMC_){
-    t->Branch("beamId1",&jets_.beamId1,"beamId1/I");
-    t->Branch("beamId2",&jets_.beamId2,"beamId2/I");
-
-    t->Branch("pthat",&jets_.pthat,"pthat/F");
-
-    // Only matched gen jets
-    t->Branch("refpt",jets_.refpt,"refpt[nref]/F");
-    t->Branch("refeta",jets_.refeta,"refeta[nref]/F");
-    t->Branch("refy",jets_.refy,"refy[nref]/F");
-    t->Branch("refphi",jets_.refphi,"refphi[nref]/F");
-    t->Branch("refdphijt",jets_.refdphijt,"refdphijt[nref]/F");
-    t->Branch("refdrjt",jets_.refdrjt,"refdrjt[nref]/F");
-    // matched parton
-    t->Branch("refparton_pt",jets_.refparton_pt,"refparton_pt[nref]/F");
-    t->Branch("refparton_flavor",jets_.refparton_flavor,"refparton_flavor[nref]/I");
-    t->Branch("refparton_flavorForB",jets_.refparton_flavorForB,"refparton_flavorForB[nref]/I");
-
-    t->Branch("genChargedSum", jets_.genChargedSum,"genChargedSum[nref]/F");
-    t->Branch("genHardSum", jets_.genHardSum,"genHardSum[nref]/F");
-    t->Branch("signalChargedSum", jets_.signalChargedSum,"signalChargedSum[nref]/F");
-    t->Branch("signalHardSum", jets_.signalHardSum,"signalHardSum[nref]/F");
-
-    if(doSubEvent_){
-      t->Branch("subid",jets_.subid,"subid[nref]/I");
-    }
-
-    if(fillGenJets_){
-      // For all gen jets, matched or unmatched
-      t->Branch("ngen",&jets_.ngen,"ngen/I");
-      t->Branch("genmatchindex",jets_.genmatchindex,"genmatchindex[ngen]/I");
-      t->Branch("genpt",jets_.genpt,"genpt[ngen]/F");
-      t->Branch("geneta",jets_.geneta,"geneta[ngen]/F");
-      t->Branch("geny",jets_.geny,"geny[ngen]/F");
-      t->Branch("genphi",jets_.genphi,"genphi[ngen]/F");
-      t->Branch("gendphijt",jets_.gendphijt,"gendphijt[ngen]/F");
-      t->Branch("gendrjt",jets_.gendrjt,"gendrjt[ngen]/F");
-
-      if(doSubEvent_){
-	t->Branch("gensubid",jets_.gensubid,"gensubid[ngen]/I");
-      }
-    }
-
-    if(saveBfragments_  ) {
-      t->Branch("bMult",&jets_.bMult,"bMult/I");
-      t->Branch("bJetIndex",jets_.bJetIndex,"bJetIndex[bMult]/I");
-      t->Branch("bStatus",jets_.bStatus,"bStatus[bMult]/I");
-      t->Branch("bVx",jets_.bVx,"bVx[bMult]/F");
-      t->Branch("bVy",jets_.bVy,"bVy[bMult]/F");
-      t->Branch("bVz",jets_.bVz,"bVz[bMult]/F");
-      t->Branch("bPt",jets_.bPt,"bPt[bMult]/F");
-      t->Branch("bEta",jets_.bEta,"bEta[bMult]/F");
-      t->Branch("bPhi",jets_.bPhi,"bPhi[bMult]/F");
-      t->Branch("bPdg",jets_.bPdg,"bPdg[bMult]/I");
-      t->Branch("bChg",jets_.bChg,"bChg[bMult]/I");
-    }
-
-  }
-  /*
-    if(!isMC_){
-    t->Branch("nL1TBit",&jets_.nL1TBit,"nL1TBit/I");
-    t->Branch("l1TBit",jets_.l1TBit,"l1TBit[nL1TBit]/O");
-
-    t->Branch("nL1ABit",&jets_.nL1ABit,"nL1ABit/I");
-    t->Branch("l1ABit",jets_.l1ABit,"l1ABit[nL1ABit]/O");
-
-    t->Branch("nHLTBit",&jets_.nHLTBit,"nHLTBit/I");
-    t->Branch("hltBit",jets_.hltBit,"hltBit[nHLTBit]/O");
-
-    }
-  */
   TH1D::SetDefaultSumw2();
-
-
 }
 
 
 void
-HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
+HiInclusiveJetAnalyzer::produce(Event& iEvent,
 				const EventSetup& iSetup) {
+
+  jets_.nref = std::auto_ptr<int>( new int);
+  jets_.run = std::auto_ptr<int>(new int);
+  jets_.evt = std::auto_ptr<int>(new int);
+  jets_.lumi = std::auto_ptr<int>(new int);
+  jets_.bin = std::auto_ptr<int>(new int);
+  jets_.vx = std::auto_ptr<float>(new float);
+  jets_.vy = std::auto_ptr<float>(new float);
+  jets_.vz = std::auto_ptr<float>(new float);
+  jets_.b = std::auto_ptr<float>(new float);
+  jets_.hf = std::auto_ptr<float>(new float);
+
+  jets_.rawpt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.jtpt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.jteta = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.jtphi = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.jty = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.jtpu = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.jtm = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.trackMax = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.trackSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.trackN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.chargedMax = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.chargedSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.chargedN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.photonMax = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.photonSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.photonN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.trackHardSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.chargedHardSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.photonHardSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.trackHardN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.chargedHardN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.photonHardN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.neutralMax = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.neutralSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.neutralN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.eMax = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.eSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.eN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.muMax = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.muSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.muN = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.genChargedSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.genHardSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.signalChargedSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.signalHardSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.hcalSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ecalSum = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+
+  jets_.fHPD = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fRBX = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.n90 = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.fSubDet1 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fSubDet2 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fSubDet3 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fSubDet4 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.restrictedEMF = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.nHCAL = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.nECAL = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.apprHPD = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.apprRBX = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  //    std::auto_ptr<std::vector<int> > n90;
+  jets_.n2RPC = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.n3RPC = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.nRPC = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.fEB = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fEE = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fHB = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fHE = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fHO = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fLong = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fShort = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fLS = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.fHFOOT = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+
+  jets_.subid = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.matchedPt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.matchedRawPt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.matchedR = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.matchedPu = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.discr_csvMva = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_csvSimple = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_muByIp3 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_muByPt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_prob = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_probb = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_tcHighEff = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_tcHighPur = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_ssvHighEff = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.discr_ssvHighPur = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.ndiscr_ssvHighEff = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_ssvHighPur = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_csvSimple = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_muByPt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_prob = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_probb = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_tcHighEff = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.ndiscr_tcHighPur = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.pdiscr_csvSimple = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.pdiscr_prob = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.pdiscr_probb = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.nsvtx = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.svtxntrk = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.svtxdl = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.svtxdls = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.svtxm = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.svtxpt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.svtxnormchi2 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.nIPtrk = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.nselIPtrk = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.nIP = std::auto_ptr<int>(new int);
+  jets_.ipJetIndex = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXTRACKS));
+  jets_.ipPt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipEta = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipDxy = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipDz = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipChi2 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipNHit = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXTRACKS));
+  jets_.ipNHitPixel = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXTRACKS));
+  jets_.ipNHitStrip = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXTRACKS));
+  jets_.ipIsHitL1 = std::auto_ptr<std::vector<bool> > (new std::vector<bool>(MAXTRACKS));
+  jets_.ipProb0 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipProb1 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ip2d = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ip2dSig = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ip3d = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ip3dSig = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipDist2Jet = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipDist2JetSig = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+  jets_.ipClosest2Jet = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXTRACKS));
+
+  jets_.mue = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.mupt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.mueta = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.muphi = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.mudr = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.muptrel = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.muchg = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.discr_fr01 = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+
+  jets_.refpt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refeta = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refphi = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refy = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refdphijt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refdrjt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refparton_pt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.refparton_flavor = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.refparton_flavorForB = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  jets_.pthat = std::auto_ptr<float>(new float);
+  jets_.beamId1 = std::auto_ptr<int>(new int);
+  jets_.beamId2 = std::auto_ptr<int>(new int);
+  jets_.ngen = std::auto_ptr<int>(new int);
+  jets_.genmatchindex = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.genpt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.geneta = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.genphi = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.geny = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.gendphijt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.gendrjt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.gensubid = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+
+  // hlt
+  jets_.nHLTBit = std::auto_ptr<int>(new int);
+  jets_.hltBit = std::auto_ptr<std::vector<bool> > (new std::vector<bool>(MAXHLTBITS));
+
+  // l1
+  jets_.nL1TBit = std::auto_ptr<int>(new int);
+  jets_.l1TBit = std::auto_ptr<std::vector<bool> > (new std::vector<bool>(MAXHLTBITS));
+  jets_.nL1ABit = std::auto_ptr<int>(new int);
+  jets_.l1ABit = std::auto_ptr<std::vector<bool> > (new std::vector<bool>(MAXHLTBITS));
+
+  jets_.bMult = std::auto_ptr<int>(new int);
+  jets_.bJetIndex = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.bStatus = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.bPdg = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.bChg = std::auto_ptr<std::vector<int> > (new std::vector<int>(MAXJETS));
+  jets_.bVx = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.bVy = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.bVz = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.bPt = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.bEta = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
+  jets_.bPhi = std::auto_ptr<std::vector<float> > (new std::vector<float>(MAXJETS));
 
   int event = iEvent.id().event();
   int run = iEvent.id().run();
   int lumi = iEvent.id().luminosityBlock();
 
-  jets_.run = run;
-  jets_.evt = event;
-  jets_.lumi = lumi;
+  *jets_.run = run;
+  *jets_.evt = event;
+  *jets_.lumi = lumi;
 
   LogDebug("HiInclusiveJetAnalyzer")<<"START event: "<<event<<" in run "<<run<<endl;
 
@@ -445,8 +616,8 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 
   // loop the events
 
-  jets_.bin = bin;
-  jets_.hf = hf;
+  *jets_.bin = bin;
+  *jets_.hf = hf;
 
   reco::Vertex::Point vtx(0,0,0);
   if (useVtx_) {
@@ -454,9 +625,9 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
     iEvent.getByLabel(vtxTag_, vertex);
 
     if(vertex->size()>0) {
-      jets_.vx=vertex->begin()->x();
-      jets_.vy=vertex->begin()->y();
-      jets_.vz=vertex->begin()->z();
+      *jets_.vx=vertex->begin()->x();
+      *jets_.vy=vertex->begin()->y();
+      *jets_.vz=vertex->begin()->z();
       vtx = vertex->begin()->position();
     }
   }
@@ -560,8 +731,8 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 
 
   // FILL JRA TREE
-  jets_.b = b;
-  jets_.nref = 0;
+  *jets_.b = b;
+  *jets_.nref = 0;
 
 
   if(doTrigger_){
@@ -574,110 +745,110 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 
     if(jet.pt() < jetPtMin_) continue;
     if (useJEC_ && usePat_){
-      jets_.rawpt[jets_.nref]=(*patjets)[j].correctedJet("Uncorrected").pt();
+      (*jets_.rawpt)[*jets_.nref]=(*patjets)[j].correctedJet("Uncorrected").pt();
     }
 
     if(doLifeTimeTagging_){
       int ith_tagged =    this->TaggedJet(jet,jetTags_SvtxHighEff);
       if(ith_tagged >= 0){
-	jets_.discr_ssvHighEff[jets_.nref] = (*jetTags_SvtxHighEff)[ith_tagged].second;
+	(*jets_.discr_ssvHighEff)[*jets_.nref] = (*jetTags_SvtxHighEff)[ith_tagged].second;
 	const SecondaryVertexTagInfo &tagInfoSV = (*tagInfoSVx)[ith_tagged];
-	jets_.nsvtx[jets_.nref]     = tagInfoSV.nVertices();
+	(*jets_.nsvtx)[*jets_.nref]     = tagInfoSV.nVertices();
 
-	if ( jets_.nsvtx[jets_.nref] > 0) {
+	if ( (*jets_.nsvtx)[*jets_.nref] > 0) {
 
-	  jets_.svtxntrk[jets_.nref]  = tagInfoSV.nVertexTracks(0);
+	  (*jets_.svtxntrk)[*jets_.nref]  = tagInfoSV.nVertexTracks(0);
 
 	  // this is the 3d flight distance, for 2-D use (0,true)
 	  Measurement1D m1D = tagInfoSV.flightDistance(0);
-	  jets_.svtxdl[jets_.nref]    = m1D.value();
-	  jets_.svtxdls[jets_.nref]   = m1D.significance();
+	  (*jets_.svtxdl)[*jets_.nref]    = m1D.value();
+	  (*jets_.svtxdls)[*jets_.nref]   = m1D.significance();
 	  const Vertex& svtx = tagInfoSV.secondaryVertex(0);
-	  jets_.svtxm[jets_.nref]    = svtx.p4().mass();
-	  jets_.svtxpt[jets_.nref]   = svtx.p4().pt();
-	  if(svtx.ndof()>0)jets_.svtxnormchi2[jets_.nref]  = svtx.chi2()/svtx.ndof();
+	  (*jets_.svtxm)[*jets_.nref]    = svtx.p4().mass();
+	  (*jets_.svtxpt)[*jets_.nref]   = svtx.p4().pt();
+	  if(svtx.ndof()>0)(*jets_.svtxnormchi2)[*jets_.nref]  = svtx.chi2()/svtx.ndof();
 	}
       }
       ith_tagged    = this->TaggedJet(jet,jetTags_negSvtxHighEff);
-      if(ith_tagged >= 0) jets_.ndiscr_ssvHighEff[jets_.nref]   = (*jetTags_negSvtxHighEff)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_ssvHighEff)[*jets_.nref]   = (*jetTags_negSvtxHighEff)[ith_tagged].second;
       ith_tagged    = this->TaggedJet(jet,jetTags_SvtxHighPur);
-      if(ith_tagged >= 0) jets_.discr_ssvHighPur[jets_.nref]  = (*jetTags_SvtxHighPur)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.discr_ssvHighPur)[*jets_.nref]  = (*jetTags_SvtxHighPur)[ith_tagged].second;
       ith_tagged    = this->TaggedJet(jet,jetTags_negSvtxHighPur);
-      if(ith_tagged >= 0) jets_.ndiscr_ssvHighPur[jets_.nref] = (*jetTags_negSvtxHighPur)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_ssvHighPur)[*jets_.nref] = (*jetTags_negSvtxHighPur)[ith_tagged].second;
 
       ith_tagged          = this->TaggedJet(jet,jetTags_CombinedSvtx);
-      if(ith_tagged >= 0) jets_.discr_csvSimple[jets_.nref]  = (*jetTags_CombinedSvtx)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.discr_csvSimple)[*jets_.nref]  = (*jetTags_CombinedSvtx)[ith_tagged].second;
       ith_tagged          = this->TaggedJet(jet,jetTags_negCombinedSvtx);
-      if(ith_tagged >= 0) jets_.ndiscr_csvSimple[jets_.nref] = (*jetTags_negCombinedSvtx)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_csvSimple)[*jets_.nref] = (*jetTags_negCombinedSvtx)[ith_tagged].second;
       ith_tagged  = this->TaggedJet(jet,jetTags_posCombinedSvtx);
-      if(ith_tagged >= 0) jets_.pdiscr_csvSimple[jets_.nref] = (*jetTags_posCombinedSvtx)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.pdiscr_csvSimple)[*jets_.nref] = (*jetTags_posCombinedSvtx)[ith_tagged].second;
 
       if(ith_tagged >= 0){
 	ith_tagged = this->TaggedJet(jet,jetTags_JP);
-	jets_.discr_prob[jets_.nref]  = (*jetTags_JP)[ith_tagged].second;
+	(*jets_.discr_prob)[*jets_.nref]  = (*jetTags_JP)[ith_tagged].second;
 
 	const TrackIPTagInfo& tagInfoIP= (*tagInfo)[ith_tagged];
 
-	jets_.nIPtrk[jets_.nref] = tagInfoIP.tracks().size();
-	jets_.nselIPtrk[jets_.nref] = tagInfoIP.selectedTracks().size();
+	(*jets_.nIPtrk)[*jets_.nref] = tagInfoIP.tracks().size();
+	(*jets_.nselIPtrk)[*jets_.nref] = tagInfoIP.selectedTracks().size();
 	if (doLifeTimeTaggingExtras_) {
 
 	  TrackRefVector selTracks=tagInfoIP.selectedTracks();
 
 	  GlobalPoint pv(tagInfoIP.primaryVertex()->position().x(),tagInfoIP.primaryVertex()->position().y(),tagInfoIP.primaryVertex()->position().z());
 
-	  for(int it=0;it<jets_.nselIPtrk[jets_.nref] ;it++)
+	  for(int it=0;it<(*jets_.nselIPtrk)[*jets_.nref] ;it++)
 	  {
-	    jets_.ipJetIndex[jets_.nIP + it]= jets_.nref;
+	    (*jets_.ipJetIndex)[*jets_.nIP + it]= *jets_.nref;
 	    TrackIPTagInfo::TrackIPData data = tagInfoIP.impactParameterData()[it];
-	    jets_.ipPt[jets_.nIP + it] = selTracks[it]->pt();
-	    jets_.ipEta[jets_.nIP + it] = selTracks[it]->eta();
-	    jets_.ipDxy[jets_.nIP + it] = selTracks[it]->dxy(tagInfoIP.primaryVertex()->position());
-	    jets_.ipDz[jets_.nIP + it] = selTracks[it]->dz(tagInfoIP.primaryVertex()->position());
-	    jets_.ipChi2[jets_.nIP + it] = selTracks[it]->normalizedChi2();
-	    jets_.ipNHit[jets_.nIP + it] = selTracks[it]->numberOfValidHits();
-	    jets_.ipNHitPixel[jets_.nIP + it] = selTracks[it]->hitPattern().numberOfValidPixelHits();
-	    jets_.ipNHitStrip[jets_.nIP + it] = selTracks[it]->hitPattern().numberOfValidStripHits();
-	    jets_.ipIsHitL1[jets_.nIP + it]  = selTracks[it]->hitPattern().hasValidHitInFirstPixelBarrel();
-	    jets_.ipProb0[jets_.nIP + it] = tagInfoIP.probabilities(0)[it];
-	    jets_.ip2d[jets_.nIP + it] = data.ip2d.value();
-	    jets_.ip2dSig[jets_.nIP + it] = data.ip2d.significance();
-	    jets_.ip3d[jets_.nIP + it] = data.ip3d.value();
-	    jets_.ip3dSig[jets_.nIP + it] = data.ip3d.significance();
-	    jets_.ipDist2Jet[jets_.nIP + it] = data.distanceToJetAxis.value();
-	    jets_.ipClosest2Jet[jets_.nIP + it] = (data.closestToJetAxis - pv).mag();  //decay length
+	    (*jets_.ipPt)[*jets_.nIP + it] = selTracks[it]->pt();
+	    (*jets_.ipEta)[*jets_.nIP + it] = selTracks[it]->eta();
+	    (*jets_.ipDxy)[*jets_.nIP + it] = selTracks[it]->dxy(tagInfoIP.primaryVertex()->position());
+	    (*jets_.ipDz)[*jets_.nIP + it] = selTracks[it]->dz(tagInfoIP.primaryVertex()->position());
+	    (*jets_.ipChi2)[*jets_.nIP + it] = selTracks[it]->normalizedChi2();
+	    (*jets_.ipNHit)[*jets_.nIP + it] = selTracks[it]->numberOfValidHits();
+	    (*jets_.ipNHitPixel)[*jets_.nIP + it] = selTracks[it]->hitPattern().numberOfValidPixelHits();
+	    (*jets_.ipNHitStrip)[*jets_.nIP + it] = selTracks[it]->hitPattern().numberOfValidStripHits();
+	    (*jets_.ipIsHitL1)[*jets_.nIP + it]  = selTracks[it]->hitPattern().hasValidHitInFirstPixelBarrel();
+	    (*jets_.ipProb0)[*jets_.nIP + it] = tagInfoIP.probabilities(0)[it];
+	    (*jets_.ip2d)[*jets_.nIP + it] = data.ip2d.value();
+	    (*jets_.ip2dSig)[*jets_.nIP + it] = data.ip2d.significance();
+	    (*jets_.ip3d)[*jets_.nIP + it] = data.ip3d.value();
+	    (*jets_.ip3dSig)[*jets_.nIP + it] = data.ip3d.significance();
+	    (*jets_.ipDist2Jet)[*jets_.nIP + it] = data.distanceToJetAxis.value();
+	    (*jets_.ipClosest2Jet)[*jets_.nIP + it] = (data.closestToJetAxis - pv).mag();  //decay length
 	  }
 
-	  jets_.nIP += jets_.nselIPtrk[jets_.nref];
+	  *jets_.nIP += (*jets_.nselIPtrk)[*jets_.nref];
 
 	}
       }
       ith_tagged = this->TaggedJet(jet,jetTags_PosJP);
-      if(ith_tagged >= 0) jets_.pdiscr_prob[jets_.nref] = (*jetTags_PosJP)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.pdiscr_prob)[*jets_.nref] = (*jetTags_PosJP)[ith_tagged].second;
       ith_tagged   = this->TaggedJet(jet,jetTags_NegJP);
-      if(ith_tagged >= 0) jets_.ndiscr_prob[jets_.nref] = (*jetTags_NegJP)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_prob)[*jets_.nref] = (*jetTags_NegJP)[ith_tagged].second;
 
       ith_tagged = this->TaggedJet(jet,jetTags_JB);
-      if(ith_tagged >= 0) jets_.discr_probb[jets_.nref]  = (*jetTags_JB)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.discr_probb)[*jets_.nref]  = (*jetTags_JB)[ith_tagged].second;
       ith_tagged = this->TaggedJet(jet,jetTags_NegJB);
-      if(ith_tagged >= 0) jets_.ndiscr_probb[jets_.nref] = (*jetTags_NegJB)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_probb)[*jets_.nref] = (*jetTags_NegJB)[ith_tagged].second;
       ith_tagged = this->TaggedJet(jet,jetTags_PosJB);
-      if(ith_tagged >= 0) jets_.pdiscr_probb[jets_.nref] = (*jetTags_PosJB)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.pdiscr_probb)[*jets_.nref] = (*jetTags_PosJB)[ith_tagged].second;
 
       ith_tagged    = this->TaggedJet(jet,jetTags_TCHighEff);
-      if(ith_tagged >= 0) jets_.discr_tcHighEff[jets_.nref]   = (*jetTags_TCHighEff)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.discr_tcHighEff)[*jets_.nref]   = (*jetTags_TCHighEff)[ith_tagged].second;
       ith_tagged    = this->TaggedJet(jet,jetTags_TCHighPur);
-      if(ith_tagged >= 0) jets_.discr_tcHighPur[jets_.nref]   = (*jetTags_TCHighPur)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.discr_tcHighPur)[*jets_.nref]   = (*jetTags_TCHighPur)[ith_tagged].second;
       ith_tagged    = this->TaggedJet(jet,jetTags_NegTCHighEff);
-      if(ith_tagged >= 0) jets_.ndiscr_tcHighEff[jets_.nref]   = (*jetTags_NegTCHighEff)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_tcHighEff)[*jets_.nref]   = (*jetTags_NegTCHighEff)[ith_tagged].second;
       ith_tagged    = this->TaggedJet(jet,jetTags_NegTCHighPur);
-      if(ith_tagged >= 0) jets_.ndiscr_tcHighPur[jets_.nref]   = (*jetTags_NegTCHighPur)[ith_tagged].second;
+      if(ith_tagged >= 0) (*jets_.ndiscr_tcHighPur)[*jets_.nref]   = (*jetTags_NegTCHighPur)[ith_tagged].second;
 
 
       ith_tagged = this->TaggedJet(jet,jetTags_softMu);
       if(ith_tagged >= 0){
 	if ( (*jetTags_softMu)[ith_tagged].second     > -100000 )
-	  jets_.discr_muByPt[jets_.nref]  = (*jetTags_softMu)[ith_tagged].second;
+	  (*jets_.discr_muByPt)[*jets_.nref]  = (*jetTags_softMu)[ith_tagged].second;
       }
       ith_tagged = this->TaggedJet(jet,jetTags_softMuneg);
       if(ith_tagged >= 0){
@@ -685,7 +856,7 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	if ( (*jetTags_softMuneg)[ith_tagged].second  > -100000 )
 	  SoftMN = ((*jetTags_softMuneg)[ith_tagged].second);
 	if ( SoftMN > 0 ) SoftMN = -SoftMN;
-	jets_.ndiscr_muByPt[jets_.nref] = SoftMN;
+	(*jets_.ndiscr_muByPt)[*jets_.nref] = SoftMN;
       }
       const PFCandidateCollection *pfCandidateColl = &(*pfCandidates);
       int pfMuonIndex = getPFJetMuon(jet, pfCandidateColl);
@@ -693,67 +864,67 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 
       if(pfMuonIndex >=0){
 	const reco::PFCandidate muon = pfCandidateColl->at(pfMuonIndex);
-	jets_.mupt[jets_.nref]    =  muon.pt();
-	jets_.mueta[jets_.nref]   =  muon.eta();
-	jets_.muphi[jets_.nref]   =  muon.phi();
-	jets_.mue[jets_.nref]     =  muon.energy();
-	jets_.mudr[jets_.nref]    =  reco::deltaR(jet,muon);
-	jets_.muptrel[jets_.nref] =  getPtRel(muon, jet);
-	jets_.muchg[jets_.nref]   =  muon.charge();
+	(*jets_.mupt)[*jets_.nref]    =  muon.pt();
+	(*jets_.mueta)[*jets_.nref]   =  muon.eta();
+	(*jets_.muphi)[*jets_.nref]   =  muon.phi();
+	(*jets_.mue)[*jets_.nref]     =  muon.energy();
+	(*jets_.mudr)[*jets_.nref]    =  reco::deltaR(jet,muon);
+	(*jets_.muptrel)[*jets_.nref] =  getPtRel(muon, jet);
+	(*jets_.muchg)[*jets_.nref]   =  muon.charge();
       }else{
-	jets_.mupt[jets_.nref]    =  0.0;
-	jets_.mueta[jets_.nref]   =  0.0;
-	jets_.muphi[jets_.nref]   =  0.0;
-	jets_.mue[jets_.nref]     =  0.0;
-	jets_.mudr[jets_.nref]    =  9.9;
-	jets_.muptrel[jets_.nref] =  0.0;
-	jets_.muchg[jets_.nref]   = 0;
+	(*jets_.mupt)[*jets_.nref]    =  0.0;
+	(*jets_.mueta)[*jets_.nref]   =  0.0;
+	(*jets_.muphi)[*jets_.nref]   =  0.0;
+	(*jets_.mue)[*jets_.nref]     =  0.0;
+	(*jets_.mudr)[*jets_.nref]    =  9.9;
+	(*jets_.muptrel)[*jets_.nref] =  0.0;
+	(*jets_.muchg)[*jets_.nref]   = 0;
       }
     }
 
     if(doHiJetID_){
       // Jet ID variables
 
-      jets_.muMax[jets_.nref] = 0;
-      jets_.muSum[jets_.nref] = 0;
-      jets_.muN[jets_.nref] = 0;
+      (*jets_.muMax)[*jets_.nref] = 0;
+      (*jets_.muSum)[*jets_.nref] = 0;
+      (*jets_.muN)[*jets_.nref] = 0;
 
-      jets_.eMax[jets_.nref] = 0;
-      jets_.eSum[jets_.nref] = 0;
-      jets_.eN[jets_.nref] = 0;
+      (*jets_.eMax)[*jets_.nref] = 0;
+      (*jets_.eSum)[*jets_.nref] = 0;
+      (*jets_.eN)[*jets_.nref] = 0;
 
-      jets_.neutralMax[jets_.nref] = 0;
-      jets_.neutralSum[jets_.nref] = 0;
-      jets_.neutralN[jets_.nref] = 0;
+      (*jets_.neutralMax)[*jets_.nref] = 0;
+      (*jets_.neutralSum)[*jets_.nref] = 0;
+      (*jets_.neutralN)[*jets_.nref] = 0;
 
-      jets_.photonMax[jets_.nref] = 0;
-      jets_.photonSum[jets_.nref] = 0;
-      jets_.photonN[jets_.nref] = 0;
-      jets_.photonHardSum[jets_.nref] = 0;
-      jets_.photonHardN[jets_.nref] = 0;
+      (*jets_.photonMax)[*jets_.nref] = 0;
+      (*jets_.photonSum)[*jets_.nref] = 0;
+      (*jets_.photonN)[*jets_.nref] = 0;
+      (*jets_.photonHardSum)[*jets_.nref] = 0;
+      (*jets_.photonHardN)[*jets_.nref] = 0;
 
-      jets_.chargedMax[jets_.nref] = 0;
-      jets_.chargedSum[jets_.nref] = 0;
-      jets_.chargedN[jets_.nref] = 0;
-      jets_.chargedHardSum[jets_.nref] = 0;
-      jets_.chargedHardN[jets_.nref] = 0;
+      (*jets_.chargedMax)[*jets_.nref] = 0;
+      (*jets_.chargedSum)[*jets_.nref] = 0;
+      (*jets_.chargedN)[*jets_.nref] = 0;
+      (*jets_.chargedHardSum)[*jets_.nref] = 0;
+      (*jets_.chargedHardN)[*jets_.nref] = 0;
 
-      jets_.trackMax[jets_.nref] = 0;
-      jets_.trackSum[jets_.nref] = 0;
-      jets_.trackN[jets_.nref] = 0;
-      jets_.trackHardSum[jets_.nref] = 0;
-      jets_.trackHardN[jets_.nref] = 0;
+      (*jets_.trackMax)[*jets_.nref] = 0;
+      (*jets_.trackSum)[*jets_.nref] = 0;
+      (*jets_.trackN)[*jets_.nref] = 0;
+      (*jets_.trackHardSum)[*jets_.nref] = 0;
+      (*jets_.trackHardN)[*jets_.nref] = 0;
 
-      jets_.hcalSum[jets_.nref] = 0;
-      jets_.ecalSum[jets_.nref] = 0;
+      (*jets_.hcalSum)[*jets_.nref] = 0;
+      (*jets_.ecalSum)[*jets_.nref] = 0;
 
-      jets_.genChargedSum[jets_.nref] = 0;
-      jets_.genHardSum[jets_.nref] = 0;
+      (*jets_.genChargedSum)[*jets_.nref] = 0;
+      (*jets_.genHardSum)[*jets_.nref] = 0;
 
-      jets_.signalChargedSum[jets_.nref] = 0;
-      jets_.signalHardSum[jets_.nref] = 0;
+      (*jets_.signalChargedSum)[*jets_.nref] = 0;
+      (*jets_.signalHardSum)[*jets_.nref] = 0;
 
-      jets_.subid[jets_.nref] = -1;
+      (*jets_.subid)[*jets_.nref] = -1;
 
       for(unsigned int icand = 0; icand < tracks->size(); ++icand){
 	const reco::Track& track = (*tracks)[icand];
@@ -765,15 +936,15 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	double dr = deltaR(jet,track);
 	if(dr < rParam){
 	  double ptcand = track.pt();
-	  jets_.trackSum[jets_.nref] += ptcand;
-	  jets_.trackN[jets_.nref] += 1;
+	  (*jets_.trackSum)[*jets_.nref] += ptcand;
+	  (*jets_.trackN)[*jets_.nref] += 1;
 
 	  if(ptcand > hardPtMin_){
-	    jets_.trackHardSum[jets_.nref] += ptcand;
-	    jets_.trackHardN[jets_.nref] += 1;
+	    (*jets_.trackHardSum)[*jets_.nref] += ptcand;
+	    (*jets_.trackHardN)[*jets_.nref] += 1;
 
 	  }
-	  if(ptcand > jets_.trackMax[jets_.nref]) jets_.trackMax[jets_.nref] = ptcand;
+	  if(ptcand > (*jets_.trackMax)[*jets_.nref]) (*jets_.trackMax)[*jets_.nref] = ptcand;
 
 	}
       }
@@ -788,41 +959,41 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	  switch(pfid){
 
 	  case 1:
-	    jets_.chargedSum[jets_.nref] += ptcand;
-	    jets_.chargedN[jets_.nref] += 1;
+	    (*jets_.chargedSum)[*jets_.nref] += ptcand;
+	    (*jets_.chargedN)[*jets_.nref] += 1;
 	    if(ptcand > hardPtMin_){
-	      jets_.chargedHardSum[jets_.nref] += ptcand;
-	      jets_.chargedHardN[jets_.nref] += 1;
+	      (*jets_.chargedHardSum)[*jets_.nref] += ptcand;
+	      (*jets_.chargedHardN)[*jets_.nref] += 1;
 	    }
-	    if(ptcand > jets_.chargedMax[jets_.nref]) jets_.chargedMax[jets_.nref] = ptcand;
+	    if(ptcand > (*jets_.chargedMax)[*jets_.nref]) (*jets_.chargedMax)[*jets_.nref] = ptcand;
 	    break;
 
 	  case 2:
-	    jets_.eSum[jets_.nref] += ptcand;
-	    jets_.eN[jets_.nref] += 1;
-	    if(ptcand > jets_.eMax[jets_.nref]) jets_.eMax[jets_.nref] = ptcand;
+	    (*jets_.eSum)[*jets_.nref] += ptcand;
+	    (*jets_.eN)[*jets_.nref] += 1;
+	    if(ptcand > (*jets_.eMax)[*jets_.nref]) (*jets_.eMax)[*jets_.nref] = ptcand;
 	    break;
 
 	  case 3:
-	    jets_.muSum[jets_.nref] += ptcand;
-	    jets_.muN[jets_.nref] += 1;
-	    if(ptcand > jets_.muMax[jets_.nref]) jets_.muMax[jets_.nref] = ptcand;
+	    (*jets_.muSum)[*jets_.nref] += ptcand;
+	    (*jets_.muN)[*jets_.nref] += 1;
+	    if(ptcand > (*jets_.muMax)[*jets_.nref]) (*jets_.muMax)[*jets_.nref] = ptcand;
 	    break;
 
 	  case 4:
-	    jets_.photonSum[jets_.nref] += ptcand;
-	    jets_.photonN[jets_.nref] += 1;
+	    (*jets_.photonSum)[*jets_.nref] += ptcand;
+	    (*jets_.photonN)[*jets_.nref] += 1;
 	    if(ptcand > hardPtMin_){
-	      jets_.photonHardSum[jets_.nref] += ptcand;
-	      jets_.photonHardN[jets_.nref] += 1;
+	      (*jets_.photonHardSum)[*jets_.nref] += ptcand;
+	      (*jets_.photonHardN)[*jets_.nref] += 1;
 	    }
-	    if(ptcand > jets_.photonMax[jets_.nref]) jets_.photonMax[jets_.nref] = ptcand;
+	    if(ptcand > (*jets_.photonMax)[*jets_.nref]) (*jets_.photonMax)[*jets_.nref] = ptcand;
 	    break;
 
 	  case 5:
-	    jets_.neutralSum[jets_.nref] += ptcand;
-	    jets_.neutralN[jets_.nref] += 1;
-	    if(ptcand > jets_.neutralMax[jets_.nref]) jets_.neutralMax[jets_.nref] = ptcand;
+	    (*jets_.neutralSum)[*jets_.nref] += ptcand;
+	    (*jets_.neutralN)[*jets_.nref] += 1;
+	    if(ptcand > (*jets_.neutralMax)[*jets_.nref]) (*jets_.neutralMax)[*jets_.nref] = ptcand;
 	    break;
 
 	  default:
@@ -839,7 +1010,7 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	math::XYZPoint pos = getPosition(hit.id(),vtx);
 	double dr = deltaR(jet.eta(),jet.phi(),pos.eta(),pos.phi());
 	if(dr < rParam){
-	  jets_.hcalSum[jets_.nref] += getEt(pos,hit.energy());
+	  (*jets_.hcalSum)[*jets_.nref] += getEt(pos,hit.energy());
 	}
       }
 
@@ -848,7 +1019,7 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	math::XYZPoint pos = getPosition(hit.id(),vtx);
 	double dr = deltaR(jet.eta(),jet.phi(),pos.eta(),pos.phi());
 	if(dr < rParam){
-	  jets_.hcalSum[jets_.nref] += getEt(pos,hit.energy());
+	  (*jets_.hcalSum)[*jets_.nref] += getEt(pos,hit.energy());
 	}
       }
 
@@ -858,7 +1029,7 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	math::XYZPoint pos = getPosition(hit.id(),vtx);
 	double dr = deltaR(jet.eta(),jet.phi(),pos.eta(),pos.phi());
 	if(dr < rParam){
-	  jets_.ecalSum[jets_.nref] += getEt(pos,hit.energy());
+	  (*jets_.ecalSum)[*jets_.nref] += getEt(pos,hit.energy());
 	}
       }
 
@@ -867,7 +1038,7 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	math::XYZPoint pos = getPosition(hit.id(),vtx);
 	double dr = deltaR(jet.eta(),jet.phi(),pos.eta(),pos.phi());
 	if(dr < rParam){
-	  jets_.ecalSum[jets_.nref] += getEt(pos,hit.energy());
+	  (*jets_.ecalSum)[*jets_.nref] += getEt(pos,hit.energy());
 	}
       }
 
@@ -886,14 +1057,14 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 
 	double dr = deltaR(jet,mjet);
 	if(dr < drMin){
-	  jets_.matchedPt[jets_.nref] = mjet.pt();
+	  (*jets_.matchedPt)[*jets_.nref] = mjet.pt();
 
 	  if(usePat_){
 	    const pat::Jet& mpatjet = (*patmatchedjets)[imatch];
-	    jets_.matchedRawPt[jets_.nref] = mpatjet.correctedJet("Uncorrected").pt();
-	    jets_.matchedPu[jets_.nref] = mpatjet.pileup();
+	    (*jets_.matchedRawPt)[*jets_.nref] = mpatjet.correctedJet("Uncorrected").pt();
+	    (*jets_.matchedPu)[*jets_.nref] = mpatjet.pileup();
 	  }
-	  jets_.matchedR[jets_.nref] = dr;
+	  (*jets_.matchedR)[*jets_.nref] = dr;
 	  drMin = dr;
 	}
       }
@@ -909,11 +1080,11 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
       // Edited by Yue Shi Lai <ylai@mit.edu>
 
       // Initial value is 0
-      jets_.discr_fr01[jets_.nref] = 0;
+      (*jets_.discr_fr01)[*jets_.nref] = 0;
       // Start with no directional adaption, i.e. the fake rejection
       // axis is the jet axis
-      float pseudorapidity_adapt = jets_.jteta[jets_.nref];
-      float azimuth_adapt = jets_.jtphi[jets_.nref];
+      float pseudorapidity_adapt = (*jets_.jteta)[*jets_.nref];
+      float azimuth_adapt = (*jets_.jtphi)[*jets_.nref];
 
       // Unadapted discriminant with adaption search
       for (size_t iteration = 0; iteration < 2; iteration++) {
@@ -959,52 +1130,52 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	  }
 	}
 	// Update the fake rejection value
-	jets_.discr_fr01[jets_.nref] = std::max(
-	  jets_.discr_fr01[jets_.nref], perp_square_sum);
+	(*jets_.discr_fr01)[*jets_.nref] = std::max(
+	  (*jets_.discr_fr01)[*jets_.nref], perp_square_sum);
 	// Update the directional adaption
 	pseudorapidity_adapt = pseudorapidity_adapt_new;
 	azimuth_adapt = azimuth_adapt_new;
       }
     }
 
-    jets_.jtpt[jets_.nref] = jet.pt();
-    jets_.jteta[jets_.nref] = jet.eta();
-    jets_.jtphi[jets_.nref] = jet.phi();
-    jets_.jty[jets_.nref] = jet.eta();
-    jets_.jtpu[jets_.nref] = jet.pileup();
-    jets_.jtm[jets_.nref] = jet.mass();
+    (*jets_.jtpt)[*jets_.nref] = jet.pt();
+    (*jets_.jteta)[*jets_.nref] = jet.eta();
+    (*jets_.jtphi)[*jets_.nref] = jet.phi();
+    (*jets_.jty)[*jets_.nref] = jet.eta();
+    (*jets_.jtpu)[*jets_.nref] = jet.pileup();
+    (*jets_.jtm)[*jets_.nref] = jet.mass();
 
     if(usePat_){
 
       if(doStandardJetID_){
-	jets_.fHPD[jets_.nref] = (*patjets)[j].jetID().fHPD;
-	jets_.fRBX[jets_.nref] = (*patjets)[j].jetID().fRBX;
-	jets_.n90[jets_.nref] = (*patjets)[j].n90();
+	(*jets_.fHPD)[*jets_.nref] = (*patjets)[j].jetID().fHPD;
+	(*jets_.fRBX)[*jets_.nref] = (*patjets)[j].jetID().fRBX;
+	(*jets_.n90)[*jets_.nref] = (*patjets)[j].n90();
 
-	jets_.fSubDet1[jets_.nref] = (*patjets)[j].jetID().fSubDetector1;
-	jets_.fSubDet2[jets_.nref] = (*patjets)[j].jetID().fSubDetector2;
-	jets_.fSubDet3[jets_.nref] = (*patjets)[j].jetID().fSubDetector3;
-	jets_.fSubDet4[jets_.nref] = (*patjets)[j].jetID().fSubDetector4;
-	jets_.restrictedEMF[jets_.nref] = (*patjets)[j].jetID().restrictedEMF;
-	jets_.nHCAL[jets_.nref] = (*patjets)[j].jetID().nHCALTowers;
-	jets_.nECAL[jets_.nref] = (*patjets)[j].jetID().nECALTowers;
-	jets_.apprHPD[jets_.nref] = (*patjets)[j].jetID().approximatefHPD;
-	jets_.apprRBX[jets_.nref] = (*patjets)[j].jetID().approximatefRBX;
+	(*jets_.fSubDet1)[*jets_.nref] = (*patjets)[j].jetID().fSubDetector1;
+	(*jets_.fSubDet2)[*jets_.nref] = (*patjets)[j].jetID().fSubDetector2;
+	(*jets_.fSubDet3)[*jets_.nref] = (*patjets)[j].jetID().fSubDetector3;
+	(*jets_.fSubDet4)[*jets_.nref] = (*patjets)[j].jetID().fSubDetector4;
+	(*jets_.restrictedEMF)[*jets_.nref] = (*patjets)[j].jetID().restrictedEMF;
+	(*jets_.nHCAL)[*jets_.nref] = (*patjets)[j].jetID().nHCALTowers;
+	(*jets_.nECAL)[*jets_.nref] = (*patjets)[j].jetID().nECALTowers;
+	(*jets_.apprHPD)[*jets_.nref] = (*patjets)[j].jetID().approximatefHPD;
+	(*jets_.apprRBX)[*jets_.nref] = (*patjets)[j].jetID().approximatefRBX;
 
-	//       jets_.n90[jets_.nref] = (*patjets)[j].jetID().hitsInN90;
-	jets_.n2RPC[jets_.nref] = (*patjets)[j].jetID().numberOfHits2RPC;
-	jets_.n3RPC[jets_.nref] = (*patjets)[j].jetID().numberOfHits3RPC;
-	jets_.nRPC[jets_.nref] = (*patjets)[j].jetID().numberOfHitsRPC;
+	//       (*jets_.n90)[*jets_.nref] = (*patjets)[j].jetID().hitsInN90;
+	(*jets_.n2RPC)[*jets_.nref] = (*patjets)[j].jetID().numberOfHits2RPC;
+	(*jets_.n3RPC)[*jets_.nref] = (*patjets)[j].jetID().numberOfHits3RPC;
+	(*jets_.nRPC)[*jets_.nref] = (*patjets)[j].jetID().numberOfHitsRPC;
 
-	jets_.fEB[jets_.nref] = (*patjets)[j].jetID().fEB;
-	jets_.fEE[jets_.nref] = (*patjets)[j].jetID().fEE;
-	jets_.fHB[jets_.nref] = (*patjets)[j].jetID().fHB;
-	jets_.fHE[jets_.nref] = (*patjets)[j].jetID().fHE;
-	jets_.fHO[jets_.nref] = (*patjets)[j].jetID().fHO;
-	jets_.fLong[jets_.nref] = (*patjets)[j].jetID().fLong;
-	jets_.fShort[jets_.nref] = (*patjets)[j].jetID().fShort;
-	jets_.fLS[jets_.nref] = (*patjets)[j].jetID().fLS;
-	jets_.fHFOOT[jets_.nref] = (*patjets)[j].jetID().fHFOOT;
+	(*jets_.fEB)[*jets_.nref] = (*patjets)[j].jetID().fEB;
+	(*jets_.fEE)[*jets_.nref] = (*patjets)[j].jetID().fEE;
+	(*jets_.fHB)[*jets_.nref] = (*patjets)[j].jetID().fHB;
+	(*jets_.fHE)[*jets_.nref] = (*patjets)[j].jetID().fHE;
+	(*jets_.fHO)[*jets_.nref] = (*patjets)[j].jetID().fHO;
+	(*jets_.fLong)[*jets_.nref] = (*patjets)[j].jetID().fLong;
+	(*jets_.fShort)[*jets_.nref] = (*patjets)[j].jetID().fShort;
+	(*jets_.fLS)[*jets_.nref] = (*patjets)[j].jetID().fLS;
+	(*jets_.fHFOOT)[*jets_.nref] = (*patjets)[j].jetID().fHFOOT;
       }
 
     }
@@ -1018,11 +1189,11 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	double dr = deltaR(jet,p);
 	if(dr < rParam){
 	  double ppt = p.pt();
-	  jets_.genChargedSum[jets_.nref] += ppt;
-	  if(ppt > hardPtMin_) jets_.genHardSum[jets_.nref] += ppt;
+	  (*jets_.genChargedSum)[*jets_.nref] += ppt;
+	  if(ppt > hardPtMin_) (*jets_.genHardSum)[*jets_.nref] += ppt;
 	  if(p.collisionId() == 0){
-	    jets_.signalChargedSum[jets_.nref] += ppt;
-	    if(ppt > hardPtMin_) jets_.signalHardSum[jets_.nref] += ppt;
+	    (*jets_.signalChargedSum)[*jets_.nref] += ppt;
+	    if(ppt > hardPtMin_) (*jets_.signalHardSum)[*jets_.nref] += ppt;
 	  }
 
 	}
@@ -1036,37 +1207,37 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
       const reco::GenJet * genjet = (*patjets)[j].genJet();
 
       if(genjet){
-	jets_.refpt[jets_.nref] = genjet->pt();
-	jets_.refeta[jets_.nref] = genjet->eta();
-	jets_.refphi[jets_.nref] = genjet->phi();
-	jets_.refy[jets_.nref] = genjet->eta();
-	jets_.refdphijt[jets_.nref] = reco::deltaPhi(jet.phi(), genjet->phi());
-	jets_.refdrjt[jets_.nref] = reco::deltaR(jet.eta(),jet.phi(),genjet->eta(),genjet->phi());
+	(*jets_.refpt)[*jets_.nref] = genjet->pt();
+	(*jets_.refeta)[*jets_.nref] = genjet->eta();
+	(*jets_.refphi)[*jets_.nref] = genjet->phi();
+	(*jets_.refy)[*jets_.nref] = genjet->eta();
+	(*jets_.refdphijt)[*jets_.nref] = reco::deltaPhi(jet.phi(), genjet->phi());
+	(*jets_.refdrjt)[*jets_.nref] = reco::deltaR(jet.eta(),jet.phi(),genjet->eta(),genjet->phi());
 
 	if(doSubEvent_){
 	  const GenParticle* gencon = genjet->getGenConstituent(0);
-	  jets_.subid[jets_.nref] = gencon->collisionId();
+	  (*jets_.subid)[*jets_.nref] = gencon->collisionId();
 	}
 
       }else{
-	jets_.refpt[jets_.nref] = -999.;
-	jets_.refeta[jets_.nref] = -999.;
-	jets_.refphi[jets_.nref] = -999.;
-	jets_.refy[jets_.nref] = -999.;
-	jets_.refdphijt[jets_.nref] = -999.;
-	jets_.refdrjt[jets_.nref] = -999.;
+	(*jets_.refpt)[*jets_.nref] = -999.;
+	(*jets_.refeta)[*jets_.nref] = -999.;
+	(*jets_.refphi)[*jets_.nref] = -999.;
+	(*jets_.refy)[*jets_.nref] = -999.;
+	(*jets_.refdphijt)[*jets_.nref] = -999.;
+	(*jets_.refdrjt)[*jets_.nref] = -999.;
       }
 
-      jets_.refparton_flavorForB[jets_.nref] = (*patjets)[j].partonFlavour();
+      (*jets_.refparton_flavorForB)[*jets_.nref] = (*patjets)[j].partonFlavour();
 
       // matched partons
       const reco::GenParticle & parton = *(*patjets)[j].genParton();
 
       if((*patjets)[j].genParton()){
-	jets_.refparton_pt[jets_.nref] = parton.pt();
-	jets_.refparton_flavor[jets_.nref] = parton.pdgId();
+	(*jets_.refparton_pt)[*jets_.nref] = parton.pt();
+	(*jets_.refparton_flavor)[*jets_.nref] = parton.pdgId();
 
-	if(saveBfragments_ && abs(jets_.refparton_flavorForB[jets_.nref])==5){
+	if(saveBfragments_ && abs((*jets_.refparton_flavorForB)[*jets_.nref])==5){
 
 	  usedStringPts.clear();
 
@@ -1074,30 +1245,30 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 	  //if(jet.pt() > 50 &&abs(parton.pdgId())!=5 && parton.pdgId()!=21)
 	  // cout<<" Identified as a b, but doesn't match b or gluon, id = "<<parton.pdgId()<<endl;
 
-	  jets_.bJetIndex[jets_.bMult] = jets_.nref;
-	  jets_.bStatus[jets_.bMult] = parton.status();
-	  jets_.bVx[jets_.bMult] = parton.vx();
-	  jets_.bVy[jets_.bMult] = parton.vy();
-	  jets_.bVz[jets_.bMult] = parton.vz();
-	  jets_.bPt[jets_.bMult] = parton.pt();
-	  jets_.bEta[jets_.bMult] = parton.eta();
-	  jets_.bPhi[jets_.bMult] = parton.phi();
-	  jets_.bPdg[jets_.bMult] = parton.pdgId();
-	  jets_.bChg[jets_.bMult] = parton.charge();
-	  jets_.bMult++;
+	  (*jets_.bJetIndex)[*jets_.bMult] = *jets_.nref;
+	  (*jets_.bStatus)[*jets_.bMult] = parton.status();
+	  (*jets_.bVx)[*jets_.bMult] = parton.vx();
+	  (*jets_.bVy)[*jets_.bMult] = parton.vy();
+	  (*jets_.bVz)[*jets_.bMult] = parton.vz();
+	  (*jets_.bPt)[*jets_.bMult] = parton.pt();
+	  (*jets_.bEta)[*jets_.bMult] = parton.eta();
+	  (*jets_.bPhi)[*jets_.bMult] = parton.phi();
+	  (*jets_.bPdg)[*jets_.bMult] = parton.pdgId();
+	  (*jets_.bChg)[*jets_.bMult] = parton.charge();
+	  (*jets_.bMult)++;
 	  saveDaughters(parton);
 	}
 
 
       } else {
-	jets_.refparton_pt[jets_.nref] = -999;
-	jets_.refparton_flavor[jets_.nref] = -999;
+	(*jets_.refparton_pt)[*jets_.nref] = -999;
+	(*jets_.refparton_flavor)[*jets_.nref] = -999;
       }
 
 
     }
 
-    jets_.nref++;
+    (*jets_.nref)++;
 
 
   }
@@ -1110,20 +1281,20 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
     const HepMC::GenEvent* MCEvt = hepMCProduct->GetEvent();
 
     std::pair<HepMC::GenParticle*,HepMC::GenParticle*> beamParticles = MCEvt->beam_particles();
-    if(beamParticles.first != 0)jets_.beamId1 = beamParticles.first->pdg_id();
-    if(beamParticles.second != 0)jets_.beamId2 = beamParticles.second->pdg_id();
+    if(beamParticles.first != 0)*jets_.beamId1 = beamParticles.first->pdg_id();
+    if(beamParticles.second != 0)*jets_.beamId2 = beamParticles.second->pdg_id();
 
     edm::Handle<GenEventInfoProduct> hEventInfo;
     iEvent.getByLabel(eventInfoTag_,hEventInfo);
-    //jets_.pthat = hEventInfo->binningValues()[0];
+    //*jets_.pthat = hEventInfo->binningValues()[0];
 
     // binning values and qscale appear to be equivalent, but binning values not always present
-    jets_.pthat = hEventInfo->qScale();
+    *jets_.pthat = hEventInfo->qScale();
 
     edm::Handle<vector<reco::GenJet> >genjets;
     iEvent.getByLabel(genjetTag_, genjets);
 
-    jets_.ngen = 0;
+    *jets_.ngen = 0;
     for(unsigned int igen = 0 ; igen < genjets->size(); ++igen){
       const reco::GenJet & genjet = (*genjets)[igen];
 
@@ -1133,46 +1304,263 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
       if(genjet_pt>genPtMin_){
 
 
-	jets_.genpt[jets_.ngen] = genjet_pt;
-	jets_.geneta[jets_.ngen] = genjet.eta();
-	jets_.genphi[jets_.ngen] = genjet.phi();
-	jets_.geny[jets_.ngen] = genjet.eta();
+	(*jets_.genpt)[*jets_.ngen] = genjet_pt;
+	(*jets_.geneta)[*jets_.ngen] = genjet.eta();
+	(*jets_.genphi)[*jets_.ngen] = genjet.phi();
+	(*jets_.geny)[*jets_.ngen] = genjet.eta();
 
 	if(doSubEvent_){
 	  const GenParticle* gencon = genjet.getGenConstituent(0);
-	  jets_.gensubid[jets_.ngen] = gencon->collisionId();
+	  (*jets_.gensubid)[*jets_.ngen] = gencon->collisionId();
 	}
 
 	// find matching patJet if there is one
 
-	jets_.gendrjt[jets_.ngen] = -1.0;
-	jets_.genmatchindex[jets_.ngen] = -1;
+	(*jets_.gendrjt)[*jets_.ngen] = -1.0;
+	(*jets_.genmatchindex)[*jets_.ngen] = -1;
 
-	for(int ijet = 0 ; ijet < jets_.nref; ++ijet){
+	for(int ijet = 0 ; ijet < *jets_.nref; ++ijet){
 	  // poor man's matching, someone fix please
-	  if(fabs(genjet.pt()-jets_.refpt[ijet])<0.00001 &&
-	     fabs(genjet.eta()-jets_.refeta[ijet])<0.00001){
+	  if(fabs(genjet.pt()-(*jets_.refpt)[ijet])<0.00001 &&
+	     fabs(genjet.eta()-(*jets_.refeta)[ijet])<0.00001){
 
-	    jets_.genmatchindex[jets_.ngen] = (int)ijet;
-	    jets_.gendphijt[jets_.ngen] = reco::deltaPhi(jets_.refphi[ijet],genjet.phi());
-	    jets_.gendrjt[jets_.ngen] = sqrt(pow(jets_.gendphijt[jets_.ngen],2)+pow(fabs(genjet.eta()-jets_.refeta[ijet]),2));
+	    (*jets_.genmatchindex)[*jets_.ngen] = (int)ijet;
+	    (*jets_.gendphijt)[*jets_.ngen] = reco::deltaPhi((*jets_.refphi)[ijet],genjet.phi());
+	    (*jets_.gendrjt)[*jets_.ngen] = sqrt(pow((*jets_.gendphijt)[*jets_.ngen],2)+pow(fabs(genjet.eta()-(*jets_.refeta)[ijet]),2));
 
 	    break;
 	  }
 	}
       }
 
-      jets_.ngen++;
+      (*jets_.ngen)++;
     }
 
   }
 
 
+  iEvent.put(jets_.evt,"evt");
+  iEvent.put(jets_.lumi,"lumi");
+  iEvent.put(jets_.b,"b");
+  if (useVtx_) {
+    iEvent.put(jets_.vx,"vx");
+    iEvent.put(jets_.vy,"vy");
+    iEvent.put(jets_.vz,"vz");
+  }
+  if (useCentrality_) {
+    iEvent.put(jets_.hf,"hf");
+    iEvent.put(jets_.bin,"bin");
+  }
+
+  iEvent.put(jets_.nref,"nref");
+  iEvent.put(jets_.rawpt,"rawpt");
+  if(!skipCorrections_) iEvent.put(jets_.jtpt,"jtpt");
+  iEvent.put(jets_.jteta,"jteta");
+  iEvent.put(jets_.jty,"jty");
+  iEvent.put(jets_.jtphi,"jtphi");
+  iEvent.put(jets_.jtpu,"jtpu");
+  iEvent.put(jets_.jtm,"jtm");
+
+  // jet ID information jet composition
+  if(doHiJetID_){
+    iEvent.put( jets_.discr_fr01,"discrfr01");
+
+    iEvent.put( jets_.trackMax,"trackMax");
+    iEvent.put( jets_.trackSum,"trackSum");
+    iEvent.put( jets_.trackN,"trackN");
+    iEvent.put( jets_.trackHardSum,"trackHardSum");
+    iEvent.put( jets_.trackHardN,"trackHardN");
+
+    iEvent.put( jets_.chargedMax,"chargedMax");
+    iEvent.put( jets_.chargedSum,"chargedSum");
+    iEvent.put( jets_.chargedN,"chargedN");
+    iEvent.put( jets_.chargedHardSum,"chargedHardSum");
+    iEvent.put( jets_.chargedHardN,"chargedHardN");
+
+    iEvent.put( jets_.photonMax,"photonMax");
+    iEvent.put( jets_.photonSum,"photonSum");
+    iEvent.put( jets_.photonN,"photonN");
+    iEvent.put( jets_.photonHardSum,"photonHardSum");
+    iEvent.put( jets_.photonHardN,"photonHardN");
+
+    iEvent.put( jets_.neutralMax,"neutralMax");
+    iEvent.put( jets_.neutralSum,"neutralSum");
+    iEvent.put( jets_.neutralN,"neutralN");
+
+    iEvent.put( jets_.hcalSum,"hcalSum");
+    iEvent.put( jets_.ecalSum,"ecalSum");
+
+    iEvent.put( jets_.eMax,"eMax");
+    iEvent.put( jets_.eSum,"eSum");
+    iEvent.put( jets_.eN,"eN");
+
+    iEvent.put( jets_.muMax,"muMax");
+    iEvent.put( jets_.muSum,"muSum");
+    iEvent.put( jets_.muN,"muN");
+  }
+
+  if(doStandardJetID_){
+    iEvent.put(jets_.fHPD,"fHPD");
+    iEvent.put(jets_.fRBX,"fRBX");
+    iEvent.put(jets_.n90,"n90");
+    iEvent.put(jets_.fSubDet1,"fSubDet1");
+    iEvent.put(jets_.fSubDet2,"fSubDet2");
+    iEvent.put(jets_.fSubDet3,"fSubDet3");
+    iEvent.put(jets_.fSubDet4,"fSubDet4");
+    iEvent.put(jets_.restrictedEMF,"restrictedEMF");
+    iEvent.put(jets_.nHCAL,"nHCAL");
+    iEvent.put(jets_.nECAL,"nECAL");
+    iEvent.put(jets_.apprHPD,"apprHPD");
+    iEvent.put(jets_.apprRBX,"apprRBX");
+
+    //  iEvent.put(jets_.n90);
+    iEvent.put(jets_.n2RPC,"n2RPC");
+    iEvent.put(jets_.n3RPC,"n3RPC");
+    iEvent.put(jets_.nRPC,"nRPC");
+
+    iEvent.put(jets_.fEB,"fEB");
+    iEvent.put(jets_.fEE,"fEE");
+    iEvent.put(jets_.fHB,"fHB");
+    iEvent.put(jets_.fHE,"fHE");
+    iEvent.put(jets_.fHO,"fHO");
+    iEvent.put(jets_.fLong,"fLong");
+    iEvent.put(jets_.fShort,"fShort");
+    iEvent.put(jets_.fLS,"fLS");
+    iEvent.put(jets_.fHFOOT,"fHFOOT");
+  }
+
+  // Jet ID
+  if(doMatch_){
+    if(!skipCorrections_) iEvent.put( jets_.matchedPt,"matchedPt");
+    iEvent.put( jets_.matchedRawPt,"matchedRawPt");
+    iEvent.put( jets_.matchedPu,"matchedPu");
+    iEvent.put( jets_.matchedR,"matchedR");
+  }
+
+  // b-jet discriminators
+  if (doLifeTimeTagging_) {
+
+    iEvent.put(jets_.discr_ssvHighEff,"discrssvHighEff");
+    iEvent.put(jets_.discr_ssvHighPur,"discrssvHighPur");
+
+    iEvent.put(jets_.discr_csvMva,"discrcsvMva");
+    iEvent.put(jets_.discr_csvSimple,"discrcsvSimple");
+    iEvent.put(jets_.discr_muByIp3,"discrmuByIp3");
+    iEvent.put(jets_.discr_muByPt,"discrmuByPt");
+    iEvent.put(jets_.discr_prob,"discrprob");
+    iEvent.put(jets_.discr_probb,"discrprobb");
+    iEvent.put(jets_.discr_tcHighEff,"discrtcHighEff");
+    iEvent.put(jets_.discr_tcHighPur,"discrtcHighPur");
+
+    iEvent.put(jets_.ndiscr_ssvHighEff,"ndiscrssvHighEff");
+    iEvent.put(jets_.ndiscr_ssvHighPur,"ndiscrssvHighPur");
+    iEvent.put(jets_.ndiscr_csvSimple,"ndiscrcsvSimple");
+    iEvent.put(jets_.ndiscr_muByPt,"ndiscrmuByPt");
+    iEvent.put(jets_.ndiscr_prob,"ndiscrprob");
+    iEvent.put(jets_.ndiscr_probb,"ndiscrprobb");
+    iEvent.put(jets_.ndiscr_tcHighEff,"ndiscrtcHighEff");
+    iEvent.put(jets_.ndiscr_tcHighPur,"ndiscrtcHighPur");
+
+    iEvent.put(jets_.pdiscr_csvSimple,"pdiscrcsvSimple");
+    iEvent.put(jets_.pdiscr_prob,"pdiscrprob");
+    iEvent.put(jets_.pdiscr_probb,"pdiscrprobb");
+
+    iEvent.put(    jets_.nsvtx,"nsvtx"    );
+    iEvent.put( jets_.svtxntrk,"svtxntrk" );
+    iEvent.put(   jets_.svtxdl,"svtxdl"   );
+    iEvent.put(  jets_.svtxdls,"svtxdls"  );
+    iEvent.put(    jets_.svtxm,"svtxm"    );
+    iEvent.put(   jets_.svtxpt,"svtxpt"   );
+
+    iEvent.put(jets_.nIPtrk,"nIPtrk");
+    iEvent.put(jets_.nselIPtrk,"nselIPtrk");
+
+    if (doLifeTimeTaggingExtras_) {
+      iEvent.put(jets_.nIP,"nIP");
+      iEvent.put(jets_.ipJetIndex,"ipJetIndex");
+      iEvent.put(jets_.ipPt,"ipPt");
+      iEvent.put(jets_.ipProb0,"ipProb0");
+      iEvent.put(jets_.ipProb1,"ipProb1");
+      iEvent.put(jets_.ip2d,"ip2d");
+      iEvent.put(jets_.ip2dSig,"ip2dSig");
+      iEvent.put(jets_.ip3d,"ip3d");
+      iEvent.put(jets_.ip3dSig,"ip3dSig");
+      iEvent.put(jets_.ipDist2Jet,"ipDist2Jet");
+      iEvent.put(jets_.ipDist2JetSig,"ipDist2JetSig");
+      iEvent.put(jets_.ipClosest2Jet,"ipClosest2Jet");
+
+    }
+
+    iEvent.put(     jets_.mue,"mue"     );
+    iEvent.put(    jets_.mupt,"mupt"    );
+    iEvent.put(   jets_.mueta,"mueta"   );
+    iEvent.put(   jets_.muphi,"muphi"   );
+    iEvent.put(    jets_.mudr,"mudr"    );
+    iEvent.put( jets_.muptrel,"muptrel" );
+    iEvent.put(   jets_.muchg,"muchg"   );
+  }
 
 
+  if(isMC_){
+    iEvent.put(jets_.beamId1,"beamId1");
+    iEvent.put(jets_.beamId2,"beamId2");
 
-  t->Fill();
-  memset(&jets_,0,sizeof jets_);
+    iEvent.put(jets_.pthat,"pthat");
+
+    // Only matched gen jets
+    iEvent.put(jets_.refpt,"refpt");
+    iEvent.put(jets_.refeta,"refeta");
+    iEvent.put(jets_.refy,"refy");
+    iEvent.put(jets_.refphi,"refphi");
+    iEvent.put(jets_.refdphijt,"refdphijt");
+    iEvent.put(jets_.refdrjt,"refdrjt");
+    // matched parton
+    iEvent.put(jets_.refparton_pt,"refpartonpt");
+    iEvent.put(jets_.refparton_flavor,"refpartonflavor");
+    iEvent.put(jets_.refparton_flavorForB,"refpartonflavorForB");
+
+    iEvent.put( jets_.genChargedSum,"genChargedSum");
+    iEvent.put( jets_.genHardSum,"genHardSum");
+    iEvent.put( jets_.signalChargedSum,"signalChargedSum");
+    iEvent.put( jets_.signalHardSum,"signalHardSum");
+
+    if(doSubEvent_){
+      iEvent.put(jets_.subid,"subid");
+    }
+
+    if(fillGenJets_){
+      // For all gen jets matched or unmatched
+      iEvent.put(jets_.ngen,"ngen");
+      iEvent.put(jets_.genmatchindex,"genmatchindex");
+      iEvent.put(jets_.genpt,"genpt");
+      iEvent.put(jets_.geneta,"geneta");
+      iEvent.put(jets_.geny,"geny");
+      iEvent.put(jets_.genphi,"genphi");
+      iEvent.put(jets_.gendphijt,"gendphijt");
+      iEvent.put(jets_.gendrjt,"gendrjt");
+
+      if(doSubEvent_){
+	iEvent.put(jets_.gensubid,"gensubid");
+      }
+    }
+
+    if(saveBfragments_  ) {
+      iEvent.put(jets_.bMult,"bMult");
+      iEvent.put(jets_.bJetIndex,"bJetIndex");
+      iEvent.put(jets_.bStatus,"bStatus");
+      iEvent.put(jets_.bVx,"bVx");
+      iEvent.put(jets_.bVy,"bVy");
+      iEvent.put(jets_.bVz,"bVz");
+      iEvent.put(jets_.bPt,"bPt");
+      iEvent.put(jets_.bEta,"bEta");
+      iEvent.put(jets_.bPhi,"bPhi");
+      iEvent.put(jets_.bPdg,"bPdg");
+      iEvent.put(jets_.bChg,"bChg");
+    }
+
+  }
+
+  //memset(&jets_,0,sizeof jets_);
 
 }
 
@@ -1189,21 +1577,21 @@ void HiInclusiveJetAnalyzer::fillL1Bits(const edm::Event &iEvent)
 
   for (int i=0; i<64;i++)
   {
-    jets_.l1TBit[i] = technicalTriggerWordBeforeMask.at(i);
+    (*jets_.l1TBit)[i] = technicalTriggerWordBeforeMask.at(i);
   }
-  jets_.nL1TBit = 64;
+  *jets_.nL1TBit = 64;
 
   int ntrigs = L1GlobalTrigger->decisionWord().size();
-  jets_.nL1ABit = ntrigs;
+  *jets_.nL1ABit = ntrigs;
 
   for (int i=0; i != ntrigs; i++) {
     bool accept = L1GlobalTrigger->decisionWord()[i];
     //jets_.l1ABit[i] = (accept == true)? 1:0;
     if(accept== true){
-      jets_.l1ABit[i] = 1;
+      (*jets_.l1ABit)[i] = 1;
     }
     else{
-      jets_.l1ABit[i] = 0;
+      (*jets_.l1ABit)[i] = 0;
     }
 
   }
@@ -1219,7 +1607,7 @@ void HiInclusiveJetAnalyzer::fillHLTBits(const edm::Event &iEvent)
   const TriggerResults *hltResults = triggerResultsHLT.product();
   const TriggerNames & triggerNames = iEvent.triggerNames(*hltResults);
 
-  jets_.nHLTBit = hltTrgNames_.size();
+  *jets_.nHLTBit = hltTrgNames_.size();
 
   for(size_t i=0;i<hltTrgNames_.size();i++){
 
@@ -1230,7 +1618,7 @@ void HiInclusiveJetAnalyzer::fillHLTBits(const edm::Event &iEvent)
 	//cout <<"hltTrgNames_(i) "<<hltTrgNames_[i]<<endl;
 	//cout <<"triggerName(j) "<<triggerNames.triggerName(j)<<endl;
 	//cout<<" result "<<triggerResultsHLT->accept(j)<<endl;
-	jets_.hltBit[i] = triggerResultsHLT->accept(j);
+	(*jets_.hltBit)[i] = triggerResultsHLT->accept(j);
       }
 
     }
@@ -1347,17 +1735,17 @@ HiInclusiveJetAnalyzer::saveDaughters(const reco::GenParticle &gen){
       }
       usedStringPts.push_back(daughter.pt());
     }
-    jets_.bJetIndex[jets_.bMult] = jets_.nref;
-    jets_.bStatus[jets_.bMult] = daughterStatus;
-    jets_.bVx[jets_.bMult] = daughter.vx();
-    jets_.bVy[jets_.bMult] = daughter.vy();
-    jets_.bVz[jets_.bMult] = daughter.vz();
-    jets_.bPt[jets_.bMult] = daughterPt;
-    jets_.bEta[jets_.bMult] = daughterEta;
-    jets_.bPhi[jets_.bMult] = daughter.phi();
-    jets_.bPdg[jets_.bMult] = daughterPdgId;
-    jets_.bChg[jets_.bMult] = daughter.charge();
-    jets_.bMult++;
+    (*jets_.bJetIndex)[*jets_.bMult] = *jets_.nref;
+    (*jets_.bStatus)[*jets_.bMult] = daughterStatus;
+    (*jets_.bVx)[*jets_.bMult] = daughter.vx();
+    (*jets_.bVy)[*jets_.bMult] = daughter.vy();
+    (*jets_.bVz)[*jets_.bMult] = daughter.vz();
+    (*jets_.bPt)[*jets_.bMult] = daughterPt;
+    (*jets_.bEta)[*jets_.bMult] = daughterEta;
+    (*jets_.bPhi)[*jets_.bMult] = daughter.phi();
+    (*jets_.bPdg)[*jets_.bMult] = daughterPdgId;
+    (*jets_.bChg)[*jets_.bMult] = daughter.charge();
+    (*jets_.bMult)++;
     saveDaughters(daughter);
   }
 }
@@ -1385,17 +1773,17 @@ HiInclusiveJetAnalyzer::saveDaughters(const reco::Candidate &gen){
       usedStringPts.push_back(daughter.pt());
     }
 
-    jets_.bJetIndex[jets_.bMult] = jets_.nref;
-    jets_.bStatus[jets_.bMult] = daughterStatus;
-    jets_.bVx[jets_.bMult] = daughter.vx();
-    jets_.bVy[jets_.bMult] = daughter.vy();
-    jets_.bVz[jets_.bMult] = daughter.vz();
-    jets_.bPt[jets_.bMult] = daughterPt;
-    jets_.bEta[jets_.bMult] = daughterEta;
-    jets_.bPhi[jets_.bMult] = daughter.phi();
-    jets_.bPdg[jets_.bMult] = daughterPdgId;
-    jets_.bChg[jets_.bMult] = daughter.charge();
-    jets_.bMult++;
+    (*jets_.bJetIndex)[*jets_.bMult] = *jets_.nref;
+    (*jets_.bStatus)[*jets_.bMult] = daughterStatus;
+    (*jets_.bVx)[*jets_.bMult] = daughter.vx();
+    (*jets_.bVy)[*jets_.bMult] = daughter.vy();
+    (*jets_.bVz)[*jets_.bMult] = daughter.vz();
+    (*jets_.bPt)[*jets_.bMult] = daughterPt;
+    (*jets_.bEta)[*jets_.bMult] = daughterEta;
+    (*jets_.bPhi)[*jets_.bMult] = daughter.phi();
+    (*jets_.bPdg)[*jets_.bMult] = daughterPdgId;
+    (*jets_.bChg)[*jets_.bMult] = daughter.charge();
+    (*jets_.bMult)++;
     saveDaughters(daughter);
   }
 }
@@ -1426,6 +1814,5 @@ int HiInclusiveJetAnalyzer::TaggedJet(Jet calojet, Handle<JetTagCollection > jet
   }
   return result;
 }
-
 
 DEFINE_FWK_MODULE(HiInclusiveJetAnalyzer);
