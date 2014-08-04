@@ -64,7 +64,12 @@ process.HeavyIonGlobalParameters = cms.PSet(
 # Output definition
 process.output = cms.OutputModule("PoolOutputModule",
                                   outputCommands = cms.untracked.vstring('drop *',
-                                           'keep *_*_*_HiForest'),
+                                                                         'keep float_*_*_HiForest',
+                                                                         'keep int_*_*_HiForest',
+                                                                         'keep bool_*_*_HiForest',
+                                                                         'keep floats_*_*_HiForest',
+                                                                         'keep ints_*_*_HiForest',
+                                                                         'keep bools_*_*_HiForest'),
                                   fileName = cms.untracked.string('EDMForest.root'),
 )
 
