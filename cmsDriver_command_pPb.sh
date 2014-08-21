@@ -10,11 +10,16 @@ cmsDriver.py Configuration/genproductions/HI/photon_analysis/Pyquen_Unquenched_A
 cmsRun -e -j cfg_forward_1_rt.xml cfg_forward_1.py
 
 # Second Step is DIGI2RAW
-cmsDriver.py step1 --filein file:pPb_forward_AllQCDPhoton120_GENSIM.root --fileout file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --eventcontent RAWDEBUG --datatier GEN-SIM-RAW --step DIGI,L1,DIGI2RAW,HLT:PIon --conditions  STARTHI53_V27::All --himix --no_exec --python_filename cfg_forward_2.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
+cmsDriver.py step1 --filein file:pPb_forward_AllQCDPhoton120_GENSIM.root --fileout file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --eventcontent RAWSIM --datatier GEN-SIM-RAW --step DIGI,L1,DIGI2RAW,HLT:PIon --conditions  STARTHI53_V27::All --himix --no_exec --python_filename cfg_forward_2.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
 cmsRun -e -j cfg_forward_2_rt.xml cfg_forward_2.py
 
 # Third Step is RECO/validation
-cmsDriver.py step2 --filein file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --fileout file:pPb_forward_AllQCDPhoton120RECO.root --eventcontent RECODEBUG --datatier GEN-SIM-RECO --step GEN:pgen,RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --customize_commands 'process.genParticles.src="hiSignal"' --conditions STARTHI53_V27::All --himix --no_exec --python_filename cfg_forward_3.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
+#bad version
+#cmsDriver.py step2 --filein file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --fileout file:pPb_forward_AllQCDPhoton120_RECO.root --eventcontent RECODEBUG,DQM --datatier GEN-SIM-RECO,DQM --step GEN:pgen,RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --customise_commands 'process.genParticles.src="hiSignal" \n process.basicGenParticleValidation.hepmcCollection = cms.InputTag("hiSignal")' --conditions STARTHI53_V27::All --no_exec --python_filename cfg_forward_3.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
+
+# good version
+cmsDriver.py step2 --filein file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --fileout file:pPb_forward_AllQCDPhoton120_RECO.root --eventcontent RECOSIM,DQM --datatier GEN-SIM-RECO,DQM --step RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --himix --conditions STARTHI53_V27::All --no_exec --python_filename cfg_forward_3.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
+
 cmsRun -e -j cfg_forward_3_rt.xml cfg_forward_3.py
 
 echo GEN-SIM step
