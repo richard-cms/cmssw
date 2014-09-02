@@ -2,7 +2,7 @@
 
 # First Step is GEN-SIM
 #specific to forward
-cmsDriver.py Configuration/genproductions/HI/photon_analysis/Pyquen_Unquenched_AllQCDPhoton120_PhotonFilter35GeV_eta3_TuneZ2_pPb_5020GeV_cfi --filein="dbs:/Hijing_PPb502_MinimumBias/HiWinter13-pa-START53_V10-v1/GEN-SIM" --fileout file:pPb_forward_AllQCDPhoton120_GENSIM.root --eventcontent=RAWSIM --datatier GEN-SIM --step GEN,SIM --conditions  STARTHI53_V27::All --himix --processName HISIGNAL --python_filename cfg_forward_1.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 20 --beamspot Match8TeVCollisionPPbBoost
+cmsDriver.py Configuration/genproductions/HI/photon_analysis/Pyquen_Unquenched_AllQCDPhoton120_PhotonFilter35GeV_eta3_TuneZ2_pPb_5020GeV_cfi --filein="dbs:/Hijing_PPb502_MinimumBias/HiWinter13-pa-START53_V10-v1/GEN-SIM" --fileout file:pPb_forward_AllQCDPhoton120_GENSIM.root --eventcontent=RAWSIM --datatier GEN-SIM --step GEN,SIM --conditions  STARTHI53_V27::All --himix --processName HISIGNAL --customise_commands 'process.genParticles.src=cms.InputTag("hiSignal")' --python_filename cfg_forward_1.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 20 --beamspot Match8TeVCollisionPPbBoost
 
 #specific to reverse
 #cmsDriver.py Configuration/genproductions/HI/photon_analysis/Pyquen_Unquenched_AllQCDPhoton120_PhotonFilter35GeV_eta3_TuneZ2_reversepPb_5020GeV_cfi --filein="dbs:/Hijing_PPb502_MinimumBias/HiWinter13-pa-START53_V10-v2/GEN-SIM" --fileout file:pPb_forward_AllQCDPhoton120_GENSIM.root --eventcontent=RAWSIM --datatier GEN-SIM --step GEN,SIM --conditions  STARTHI53_V27::All --himix --processName HISIGNAL --python_filename cfg_forward_1.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 20 --beamspot Match8TeVCollisionPPbBoost --customise_commands 'process.VtxSmeared.Beta=cms.double(0.434)'
@@ -18,7 +18,7 @@ cmsRun -e -j cfg_forward_2_rt.xml cfg_forward_2.py
 #cmsDriver.py step2 --filein file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --fileout file:pPb_forward_AllQCDPhoton120_RECO.root --eventcontent RECODEBUG,DQM --datatier GEN-SIM-RECO,DQM --step GEN:pgen,RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --customise_commands 'process.genParticles.src="hiSignal" \n process.basicGenParticleValidation.hepmcCollection = cms.InputTag("hiSignal")' --conditions STARTHI53_V27::All --no_exec --python_filename cfg_forward_3.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
 
 # good version
-cmsDriver.py step2 --filein file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --fileout file:pPb_forward_AllQCDPhoton120_RECO.root --eventcontent RECOSIM,DQM --datatier GEN-SIM-RECO,DQM --step RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --himix --conditions STARTHI53_V27::All --no_exec --python_filename cfg_forward_3.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
+cmsDriver.py step2 --filein file:pPb_forward_AllQCDPhoton120_GENSIMRAW.root --fileout file:pPb_forward_AllQCDPhoton120_RECO.root --eventcontent RECOSIM,DQM --datatier GEN-SIM-RECO,DQM --step RAW2DIGI,L1Reco,RECO,VALIDATION:validation_prod,DQM:DQMOfflinePOGMC --himix --conditions STARTHI53_V27::All --customise_commands 'process.basicGenParticleValidation.hepmcCollection = cms.InputTag("hiSignal")' --no_exec --python_filename cfg_forward_3.py --customise Configuration/DataProcessing/Utils.addMonitoring -n 20
 
 cmsRun -e -j cfg_forward_3_rt.xml cfg_forward_3.py
 
