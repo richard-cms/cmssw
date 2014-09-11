@@ -97,13 +97,13 @@ float EcalClusterTools::recHitEnergy(DetId id, const EcalRecHitCollection *recHi
 	  //if your flag was found to be one which is excluded, zero out
 	  //this energy.
 	  if ( vit != flagsexcl.end() ) return 0;
-	    
+
 	  int severityFlag =  sevLv->severityLevel( it->id(), *recHits);
 	  std::vector<int>::const_iterator sit = std::find(severitiesexcl.begin(), severitiesexcl.end(), severityFlag);
 	  //if you were flagged by some condition (kWeird etc.)
 	  //zero out this energy.
 	  if (sit!= severitiesexcl.end())
-	    return 0; 
+	    return 0;
 	  //If we make it here, you're a found, clean hit.
 	  return (*it).energy();
         } else {
@@ -306,7 +306,7 @@ float EcalClusterTools::e2nd( const reco::BasicCluster &cluster, const EcalRecHi
     for ( size_t i = 0; i < v_id.size(); ++i ) {
         energies.push_back( recHitEnergy( v_id[i].first, recHits ) * v_id[i].second );
     }
-    energies.sort(); 	         
+    energies.sort();
     return *--(--energies.end());
 
 
@@ -320,7 +320,7 @@ float EcalClusterTools::e2nd( const reco::BasicCluster &cluster, const EcalRecHi
     for ( size_t i = 0; i < v_id.size(); ++i ) {
         energies.push_back( recHitEnergy( v_id[i].first, recHits,flagsexcl, severitiesexcl, sevLv ) * v_id[i].second );
     }
-    energies.sort(); 	         
+    energies.sort();
     return *--(--energies.end());
 
 
@@ -355,7 +355,7 @@ float EcalClusterTools::e2x5Left( const reco::BasicCluster &cluster, const EcalR
 }
 
 
-// 
+//
 float EcalClusterTools::e2x5Top( const reco::BasicCluster &cluster, const EcalRecHitCollection *recHits, const CaloTopology* topology )
 {
     DetId id = getMaximum( cluster.hitsAndFractions(), recHits ).first;
@@ -618,7 +618,7 @@ std::vector<EcalClusterTools::EcalClusterEnergyDeposition> EcalClusterTools::get
 
                 double weight = std::max(0.0, w0 + log(fabs(clEdep.deposited_energy)/cluster.energy()) );
                 if(weight==0) {
-                    LogDebug("ClusterShapeAlgo") << "Crystal has insufficient energy: E = " 
+                    LogDebug("ClusterShapeAlgo") << "Crystal has insufficient energy: E = "
                         << clEdep.deposited_energy << " GeV; skipping... ";
                     continue;
                 }
@@ -642,7 +642,7 @@ std::vector<EcalClusterTools::EcalClusterEnergyDeposition> EcalClusterTools::get
             if(DigiVect.dot(phi_axis)<0) clEdep.phi = 2 * M_PI - clEdep.phi;
             energyDistribution.push_back(clEdep);
         }
-    } 
+    }
     return energyDistribution;
 }
 
@@ -660,30 +660,30 @@ std::vector<float> EcalClusterTools::lat( const reco::BasicCluster &cluster, con
     int clusterSize=energyDistribution.size();
     float etaLat_, phiLat_, lat_;
     if (clusterSize<3) {
-        etaLat_ = 0.0 ; 
+        etaLat_ = 0.0 ;
         lat_ = 0.0;
         lat.push_back(0.);
         lat.push_back(0.);
         lat.push_back(0.);
-        return lat; 
+        return lat;
     }
 
     n1=0; n2=1;
-    if (energyDistribution[1].deposited_energy > 
-            energyDistribution[0].deposited_energy) 
+    if (energyDistribution[1].deposited_energy >
+            energyDistribution[0].deposited_energy)
     {
         tmp=n2; n2=n1; n1=tmp;
     }
     for (int i=2; i<clusterSize; i++) {
         n=i;
-        if (energyDistribution[i].deposited_energy > 
-                energyDistribution[n1].deposited_energy) 
+        if (energyDistribution[i].deposited_energy >
+                energyDistribution[n1].deposited_energy)
         {
             tmp = n2;
             n2 = n1; n1 = i; n=tmp;
         } else {
-            if (energyDistribution[i].deposited_energy > 
-                    energyDistribution[n2].deposited_energy) 
+            if (energyDistribution[i].deposited_energy >
+                    energyDistribution[n2].deposited_energy)
             {
                 tmp=n2; n2=i; n=tmp;
             }
@@ -695,7 +695,7 @@ std::vector<float> EcalClusterTools::lat( const reco::BasicCluster &cluster, con
         phiRedmoment += rphi * rphi * energyDistribution[n].deposited_energy;
         double reta = r * sin (energyDistribution[n].phi) ;
         etaRedmoment += reta * reta * energyDistribution[n].deposited_energy;
-    } 
+    }
     double e1 = energyDistribution[n1].deposited_energy;
     double e2 = energyDistribution[n2].deposited_energy;
 
@@ -755,11 +755,11 @@ std::pair<float,float>  EcalClusterTools::mean5x5PositionInLocalCrysCoord(const 
     float energySum=0.;
 
     std::vector<DetId> v_id = matrixDetId( topology,seedId, -2, 2, -2, 2 );
-    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {  
+    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {
         float energy = recHitEnergy(*it,recHits);
         if(energy<0.) continue;//skipping negative energy crystals
         meanDEta += energy * getNrCrysDiffInEta(*it,seedId);
-        meanDPhi += energy * getNrCrysDiffInPhi(*it,seedId);	
+        meanDPhi += energy * getNrCrysDiffInPhi(*it,seedId);
         energySum +=energy;
     }
     meanDEta /=energySum;
@@ -775,11 +775,11 @@ std::pair<float,float>  EcalClusterTools::mean5x5PositionInLocalCrysCoord(const 
     float energySum=0.;
 
     std::vector<DetId> v_id = matrixDetId( topology,seedId, -2, 2, -2, 2 );
-    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {  
+    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {
         float energy = recHitEnergy(*it,recHits,flagsexcl, severitiesexcl, sevLv);
         if(energy<0.) continue;//skipping negative energy crystals
         meanDEta += energy * getNrCrysDiffInEta(*it,seedId);
-        meanDPhi += energy * getNrCrysDiffInPhi(*it,seedId);	
+        meanDPhi += energy * getNrCrysDiffInPhi(*it,seedId);
         energySum +=energy;
     }
     meanDEta /=energySum;
@@ -803,7 +803,7 @@ std::pair<float,float> EcalClusterTools::mean5x5PositionInXY(const reco::BasicCl
     float energySum=0.;
 
     std::vector<DetId> v_id = matrixDetId( topology,seedId, -2, 2, -2, 2 );
-    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {  
+    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {
         float energy = recHitEnergy(*it,recHits);
         if(energy<0.) continue;//skipping negative energy crystals
         meanXY.first += energy * getNormedIX(*it);
@@ -825,7 +825,7 @@ std::pair<float,float> EcalClusterTools::mean5x5PositionInXY(const reco::BasicCl
     float energySum=0.;
 
     std::vector<DetId> v_id = matrixDetId( topology,seedId, -2, 2, -2, 2 );
-    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {  
+    for ( std::vector<DetId>::const_iterator it = v_id.begin(); it != v_id.end(); ++it ) {
         float energy = recHitEnergy(*it,recHits,flagsexcl, severitiesexcl, sevLv);
         if(energy<0.) continue;//skipping negative energy crystals
         meanXY.first += energy * getNormedIX(*it);
@@ -872,6 +872,9 @@ std::vector<float> EcalClusterTools::covariances(const reco::BasicCluster &clust
                 double dEta = position.eta() - meanPosition.eta();
                 double w = 0.;
                 w = std::max(0.0, w0 + log( energy / e_5x5 ));
+
+		std::cout << "w0 = " << w0 << std::endl;
+		std::cout << "log(energy/e_5x5) = " << log( energy / e_5x5 ) << std::endl;
 
                 denominator += w;
                 numeratorEtaEta += w * dEta * dEta;
@@ -977,7 +980,7 @@ std::vector<float> EcalClusterTools::covariances(const reco::BasicCluster &clust
 
 
 //for covIEtaIEta,covIEtaIPhi and covIPhiIPhi are defined but only covIEtaIEta has been actively studied
-//instead of using absolute eta/phi it counts crystals normalised so that it gives identical results to normal covariances except near the cracks where of course its better 
+//instead of using absolute eta/phi it counts crystals normalised so that it gives identical results to normal covariances except near the cracks where of course its better
 //it also does not require any eta correction function in the endcap
 //it is multipled by an approprate crystal size to ensure it gives similar values to covariances(...)
 std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &cluster, const EcalRecHitCollection* recHits,const CaloTopology *topology,float w0)
@@ -998,7 +1001,7 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
         double numeratorPhiPhi = 0;
         double denominator     = 0;
 
-        //these allow us to scale the localCov by the crystal size 
+        //these allow us to scale the localCov by the crystal size
         //so that the localCovs have the same average value as the normal covs
         const double barrelCrysSize = 0.01745; //approximate size of crystal in eta,phi in barrel
         const double endcapCrysSize = 0.0447; //the approximate crystal size sigmaEtaEta was corrected to in the endcap
@@ -1080,7 +1083,7 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
         double numeratorPhiPhi = 0;
         double denominator     = 0;
 
-        //these allow us to scale the localCov by the crystal size 
+        //these allow us to scale the localCov by the crystal size
         //so that the localCovs have the same average value as the normal covs
         const double barrelCrysSize = 0.01745; //approximate size of crystal in eta,phi in barrel
         const double endcapCrysSize = 0.0447; //the approximate crystal size sigmaEtaEta was corrected to in the endcap
@@ -1180,7 +1183,7 @@ double EcalClusterTools::fast_AbsZernikeMoment(const reco::BasicCluster &cluster
     if(clusterSize < 3) return 0.0;
 
     for (int i=0; i<clusterSize; i++)
-    { 
+    {
         r = energyDistribution[i].r / R0;
         if (r<1) {
             std::vector<double> pol;
@@ -1216,14 +1219,14 @@ double EcalClusterTools::calc_AbsZernikeMoment(const reco::BasicCluster &cluster
     if(clusterSize<3) return 0.0;
 
     for (int i = 0; i < clusterSize; ++i)
-    { 
+    {
         r = energyDistribution[i].r / R0;
         if (r < 1) {
             ph = energyDistribution[i].phi;
             e = energyDistribution[i].deposited_energy;
             f_nm = 0;
             for (int s=0; s<=(n-m)/2; s++) {
-                if (s%2==0) { 
+                if (s%2==0) {
                     f_nm = f_nm + factorial(n-s)*pow(r,(double) (n-2*s))/(factorial(s)*factorial((n+m)/2-s)*factorial((n-m)/2-s));
                 } else {
                     f_nm = f_nm - factorial(n-s)*pow(r,(double) (n-2*s))/(factorial(s)*factorial((n+m)/2-s)*factorial((n-m)/2-s));
@@ -1253,14 +1256,14 @@ float  EcalClusterTools::getIEta(const DetId& id)
             return std::sqrt(iXNorm*iXNorm+iYNorm*iYNorm);
         }
     }
-    return 0.;    
+    return 0.;
 }
 
 
 //returns the crystal 'phi' from the det id
 //it is defined as the number of crystals from the centre in the phi direction
 //for the barrel with its eta/phi geometry it is always integer
-//for the endcap it is not defined 
+//for the endcap it is not defined
 float  EcalClusterTools::getIPhi(const DetId& id)
 {
     if(id.det()==DetId::Ecal){
@@ -1269,14 +1272,14 @@ float  EcalClusterTools::getIPhi(const DetId& id)
             return ebId.iphi();
         }
     }
-    return 0.;    
+    return 0.;
 }
 
 //want to map 1=-50,50=-1,51=1 and 100 to 50 so sub off one if zero or neg
 float EcalClusterTools::getNormedIX(const DetId& id)
 {
     if(id.det()==DetId::Ecal && id.subdetId()==EcalEndcap){
-        EEDetId eeId(id);      
+        EEDetId eeId(id);
         int iXNorm  = eeId.ix()-50;
         if(iXNorm<=0) iXNorm--;
         return iXNorm;
@@ -1288,7 +1291,7 @@ float EcalClusterTools::getNormedIX(const DetId& id)
 float EcalClusterTools::getNormedIY(const DetId& id)
 {
     if(id.det()==DetId::Ecal && id.subdetId()==EcalEndcap){
-        EEDetId eeId(id);      
+        EEDetId eeId(id);
         int iYNorm  = eeId.iy()-50;
         if(iYNorm<=0) iYNorm--;
         return iYNorm;
@@ -1307,7 +1310,7 @@ float EcalClusterTools::getNrCrysDiffInEta(const DetId& crysId,const DetId& orgi
 
     //no iEta=0 in barrel, so if go from positive to negative
     //need to reduce abs(detEta) by 1
-    if(isBarrel){ 
+    if(isBarrel){
         if(crysIEta*orginIEta<0){ // -1 to 1 transition
             if(crysIEta>0) nrCrysDiff--;
             else nrCrysDiff++;
@@ -1325,7 +1328,7 @@ float EcalClusterTools::getNrCrysDiffInPhi(const DetId& crysId,const DetId& orgi
 
     float nrCrysDiff = crysIPhi-orginIPhi;
 
-    if(isBarrel){ //if barrel, need to map into 0-180 
+    if(isBarrel){ //if barrel, need to map into 0-180
         if (nrCrysDiff > + 180) { nrCrysDiff = nrCrysDiff - 360; }
         if (nrCrysDiff < - 180) { nrCrysDiff = nrCrysDiff + 360; }
     }
@@ -1373,7 +1376,7 @@ std::vector<float> EcalClusterTools::scLocalCovariances(const reco::SuperCluster
         const double barrelCrysSize = 0.01745; //approximate size of crystal in eta,phi in barrel
         const double endcapCrysSize = 0.0447; //the approximate crystal size sigmaEtaEta was corrected to in the endcap
 
-        DetId seedId = getMaximum(v_id, recHits).first;  
+        DetId seedId = getMaximum(v_id, recHits).first;
         bool isBarrel=seedId.subdetId()==EcalBarrel;
 
         const double crysSize = isBarrel ? barrelCrysSize : endcapCrysSize;
@@ -1450,7 +1453,7 @@ std::vector<float> EcalClusterTools::scLocalCovariances(const reco::SuperCluster
         const double barrelCrysSize = 0.01745; //approximate size of crystal in eta,phi in barrel
         const double endcapCrysSize = 0.0447; //the approximate crystal size sigmaEtaEta was corrected to in the endcap
 
-        DetId seedId = getMaximum(v_id, recHits).first;  
+        DetId seedId = getMaximum(v_id, recHits).first;
         bool isBarrel=seedId.subdetId()==EcalBarrel;
 
         const double crysSize = isBarrel ? barrelCrysSize : endcapCrysSize;
@@ -1506,8 +1509,8 @@ std::vector<float> EcalClusterTools::scLocalCovariances(const reco::SuperCluster
 
 // compute cluster second moments with respect to principal axes (eigenvectors of sEtaEta, sPhiPhi, sEtaPhi matrix)
 // store also angle alpha between major axis and phi.
-// takes into account shower elongation in phi direction due to magnetic field effect: 
-// default value of 0.8 ensures sMaj = sMin for unconverted photons 
+// takes into account shower elongation in phi direction due to magnetic field effect:
+// default value of 0.8 ensures sMaj = sMin for unconverted photons
 // (if phiCorrectionFactor=1 sMaj > sMin and alpha=0 also for unconverted photons)
 
 
@@ -1519,16 +1522,16 @@ Cluster2ndMoments EcalClusterTools::cluster2ndMoments( const reco::BasicCluster 
   returnMoments.alpha = 0.;
 
   // for now implemented only for EB:
-  //  if( fabs( basicCluster.eta() ) < 1.479 ) { 
+  //  if( fabs( basicCluster.eta() ) < 1.479 ) {
 
     std::vector<const EcalRecHit*> RH_ptrs;
-    
+
     std::vector< std::pair<DetId, float> > myHitsPair = basicCluster.hitsAndFractions();
     std::vector<DetId> usedCrystals;
     for(unsigned int i=0; i< myHitsPair.size(); i++){
       usedCrystals.push_back(myHitsPair[i].first);
     }
-    
+
     for(unsigned int i=0; i<usedCrystals.size(); i++){
       //get pointer to recHit object
       EcalRecHitCollection::const_iterator myRH = recHits.find(usedCrystals[i]);
@@ -1553,7 +1556,7 @@ Cluster2ndMoments EcalClusterTools::cluster2ndMoments( const reco::SuperCluster 
   returnMoments.alpha = 0.;
 
   // for now implemented only for EB:
-  //  if( fabs( superCluster.eta() ) < 1.479 ) { 
+  //  if( fabs( superCluster.eta() ) < 1.479 ) {
     returnMoments = EcalClusterTools::cluster2ndMoments( *(superCluster.seed()), recHits, phiCorrectionFactor, w0, useLogWeights);
     //  }
 
@@ -1565,19 +1568,19 @@ Cluster2ndMoments EcalClusterTools::cluster2ndMoments( const reco::SuperCluster 
 Cluster2ndMoments EcalClusterTools::cluster2ndMoments( std::vector<const EcalRecHit*> RH_ptrs, double phiCorrectionFactor, double w0, bool useLogWeights) {
 
   double mid_eta(0),mid_phi(0),mid_x(0),mid_y(0);
-  
+
   double Etot = EcalClusterTools::getSumEnergy(  RH_ptrs  );
- 
+
   double max_phi=-10.;
   double min_phi=100.;
-  
-  
+
+
   std::vector<double> etaDetId;
   std::vector<double> phiDetId;
   std::vector<double> xDetId;
   std::vector<double> yDetId;
   std::vector<double> wiDetId;
- 
+
   unsigned int nCry=0;
   double denominator=0.;
   bool isBarrel(1);
@@ -1588,19 +1591,19 @@ Cluster2ndMoments EcalClusterTools::cluster2ndMoments( std::vector<const EcalRec
     //get iEta, iPhi
     double temp_eta(0),temp_phi(0),temp_x(0),temp_y(0);
     isBarrel = (*rh_ptr)->detid().subdetId()==EcalBarrel;
-    
+
     if(isBarrel) {
       temp_eta = (getIEta((*rh_ptr)->detid()) > 0. ? getIEta((*rh_ptr)->detid()) + 84.5 : getIEta((*rh_ptr)->detid()) + 85.5);
       temp_phi= getIPhi((*rh_ptr)->detid()) - 0.5;
     }
     else {
-      temp_eta = getIEta((*rh_ptr)->detid());  
+      temp_eta = getIEta((*rh_ptr)->detid());
       temp_x =  getNormedIX((*rh_ptr)->detid());
       temp_y =  getNormedIY((*rh_ptr)->detid());
-    }	  
+    }
 
     double temp_ene=(*rh_ptr)->energy();
-    
+
     double temp_wi=((useLogWeights) ?
                     std::max(0., w0 + log( fabs(temp_ene)/Etot ))
                     :  temp_ene);
@@ -1619,9 +1622,9 @@ Cluster2ndMoments EcalClusterTools::cluster2ndMoments( std::vector<const EcalRec
 
   if(isBarrel){
     // correct phi wrap-around:
-    if(max_phi==359.5 && min_phi==0.5){ 
+    if(max_phi==359.5 && min_phi==0.5){
       for(unsigned int i=0; i<nCry; i++){
-	if(phiDetId[i] - 179. > 0.) phiDetId[i]-=360.; 
+	if(phiDetId[i] - 179. > 0.) phiDetId[i]-=360.;
 	mid_phi+=phiDetId[i]*wiDetId[i];
 	mid_eta+=etaDetId[i]*wiDetId[i];
       }
@@ -1633,12 +1636,12 @@ Cluster2ndMoments EcalClusterTools::cluster2ndMoments( std::vector<const EcalRec
     }
   }else{
     for(unsigned int i=0; i<nCry; i++){
-      mid_eta+=etaDetId[i]*wiDetId[i];      
+      mid_eta+=etaDetId[i]*wiDetId[i];
       mid_x+=xDetId[i]*wiDetId[i];
       mid_y+=yDetId[i]*wiDetId[i];
     }
   }
-  
+
   mid_eta/=denominator;
   mid_phi/=denominator;
   mid_x/=denominator;
@@ -1709,7 +1712,7 @@ std::vector<float> EcalClusterTools::roundnessBarrelSuperClusters( const reco::S
             RH_ptrs.push_back(  &(*myRH)  );
         }
     }
-    std::vector<float> temp = EcalClusterTools::roundnessSelectedBarrelRecHits(RH_ptrs,weightedPositionMethod); 
+    std::vector<float> temp = EcalClusterTools::roundnessSelectedBarrelRecHits(RH_ptrs,weightedPositionMethod);
     return temp;
 }
 
@@ -1805,7 +1808,7 @@ std::vector<float> EcalClusterTools::roundnessSelectedBarrelRecHits( std::vector
             weight = std::max(0.0, 4.2 + log((*rh_ptr)->energy()/energyTotal));
         }
         denominator += weight;
-        centerIEta += weight*deltaIEta(seedPosition[0],EBdetIdi.ieta()); 
+        centerIEta += weight*deltaIEta(seedPosition[0],EBdetIdi.ieta());
         centerIPhi += weight*deltaIPhi(seedPosition[1],EBdetIdi.iphi());
     }
     if(fabs(denominator) < 0.0001){
