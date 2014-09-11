@@ -853,6 +853,8 @@ std::vector<float> EcalClusterTools::covariances(const reco::BasicCluster &clust
         double numeratorPhiPhi = 0;
         double denominator     = 0;
 
+	std::cout << "e5x5 = " << e_5x5 << std::endl;
+
         DetId id = getMaximum( v_id, recHits ).first;
         CaloNavigator<DetId> cursor = CaloNavigator<DetId>( id, topology->getSubdetectorTopology( id ) );
         for ( int i = -2; i <= 2; ++i ) {
@@ -873,8 +875,10 @@ std::vector<float> EcalClusterTools::covariances(const reco::BasicCluster &clust
                 double w = 0.;
                 w = std::max(0.0, w0 + log( energy / e_5x5 ));
 
-		std::cout << "w0 = " << w0 << std::endl;
-		std::cout << "log(energy/e_5x5) = " << log( energy / e_5x5 ) << std::endl;
+		//std::cout << "w0 = " << w0 << std::endl;
+		std::cout << "energy = " << energy << std::endl;
+		//std::cout << "log(energy/e_5x5) = " << log( energy / e_5x5 ) << std::endl;
+		std::cout << "w = " << w << std::endl;
 
                 denominator += w;
                 numeratorEtaEta += w * dEta * dEta;
@@ -888,10 +892,12 @@ std::vector<float> EcalClusterTools::covariances(const reco::BasicCluster &clust
             covEtaPhi =  numeratorEtaPhi / denominator;
             covPhiPhi =  numeratorPhiPhi / denominator;
         } else {
+	  std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
             covEtaEta = 999.9;
             covEtaPhi = 999.9;
             covPhiPhi = 999.9;
         }
+	std::cout << "sigmaIetaIeta2 = " << covEtaEta << std::endl;
 
     } else {
         // Warn the user if there was no energy in the cells and return zeroes.
@@ -900,6 +906,7 @@ std::vector<float> EcalClusterTools::covariances(const reco::BasicCluster &clust
         covEtaPhi = 0;
         covPhiPhi = 0;
     }
+
     std::vector<float> v;
     v.push_back( covEtaEta );
     v.push_back( covEtaPhi );
