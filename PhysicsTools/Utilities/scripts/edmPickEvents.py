@@ -297,4 +297,3 @@ https://twiki.cern.ch/twiki/bin/view/CMS/PickEvents ''')
         print "\n%s" % command
         if options.runInteractive and not options.printInteractive:
             os.system (command)
-
