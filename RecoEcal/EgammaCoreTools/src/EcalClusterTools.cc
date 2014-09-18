@@ -987,7 +987,7 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
     float e_5x5 = e5x5( cluster, recHits, topology );
     float covEtaEta, covEtaPhi, covPhiPhi;
 
-    std::cout << "e5x5 = " << e_5x5 << std::endl;
+    //std::cout << "e5x5 = " << e_5x5 << std::endl;
 
     if (e_5x5 >= 0.) {
         //double w0_ = parameterMap_.find("W0")->second;
@@ -1029,10 +1029,10 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
 
                 double w = std::max(0.0, w0 + log( energy / e_5x5 ));
 
-		std::cout << "w0 = " << w0 << std::endl;
-		std::cout << "energy = " << energy << std::endl;
-		std::cout << "log(energy/e_5x5) = " << log( energy / e_5x5 ) << std::endl;
-		std::cout << "w = " << w << std::endl;
+		//std::cout << "w0 = " << w0 << std::endl;
+		//std::cout << "energy = " << energy << std::endl;
+		//std::cout << "log(energy/e_5x5) = " << log( energy / e_5x5 ) << std::endl;
+		//std::cout << "w = " << w << std::endl;
 
                 denominator += w;
                 numeratorEtaEta += w * dEta * dEta;
@@ -1052,7 +1052,7 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
             covEtaPhi = 999.9;
             covPhiPhi = 999.9;
         }
-	std::cout << "sigmaIetaIeta2 = " << covEtaEta << std::endl;
+	//std::cout << "sigmaIetaIeta2 = " << covEtaEta << std::endl;
 
     } else {
         // Warn the user if there was no energy in the cells and return zeroes.
@@ -1075,6 +1075,9 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
 
     float e_5x5 = e5x5( cluster, recHits, topology,flagsexcl, severitiesexcl, sevLv );
     float covEtaEta, covEtaPhi, covPhiPhi;
+
+    std::cout << "####################  BEGIN PHOTON ####################" << std::endl;
+    std::cout << "e5x5 = " << e_5x5 << std::endl;
 
     if (e_5x5 >= 0.) {
         //double w0_ = parameterMap_.find("W0")->second;
@@ -1099,6 +1102,7 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
         const double crysSize = isBarrel ? barrelCrysSize : endcapCrysSize;
 
         CaloNavigator<DetId> cursor = CaloNavigator<DetId>( seedId, topology->getSubdetectorTopology( seedId ) );
+	double totalEnergy = 0;
 
         for ( int eastNr = -2; eastNr <= 2; ++eastNr ) { //east is eta in barrel
             for ( int northNr = -2; northNr <= 2; ++northNr ) { //north is phi in barrel
@@ -1116,12 +1120,20 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
 
                 double w = std::max(0.0, w0 + log( energy / e_5x5 ));
 
+		totalEnergy += energy;
+		//std::cout << "w0 = " << w0 << std::endl;
+		std::cout << "energy = " << energy << std::endl;
+		//std::cout << "log(energy/e_5x5) = " << log( energy / e_5x5 ) << std::endl;
+		std::cout << "w = " << w << std::endl;
+
                 denominator += w;
                 numeratorEtaEta += w * dEta * dEta;
                 numeratorEtaPhi += w * dEta * dPhi;
                 numeratorPhiPhi += w * dPhi * dPhi;
             } //end east loop
         }//end north loop
+
+	std::cout << "totalEnergy/e_5x5: " << totalEnergy/e_5x5 << std::endl;
 
 
         //multiplying by crysSize to make the values compariable to normal covariances
@@ -1135,7 +1147,6 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
             covPhiPhi = 999.9;
         }
 
-
     } else {
         // Warn the user if there was no energy in the cells and return zeroes.
         //       std::cout << "\ClusterShapeAlgo::Calculate_Covariances:  no energy in supplied cells.\n";
@@ -1143,6 +1154,8 @@ std::vector<float> EcalClusterTools::localCovariances(const reco::BasicCluster &
         covEtaPhi = 0;
         covPhiPhi = 0;
     }
+    std::cout << "sigmaIetaIeta2 = " << covEtaEta << std::endl;
+
     std::vector<float> v;
     v.push_back( covEtaEta );
     v.push_back( covEtaPhi );
