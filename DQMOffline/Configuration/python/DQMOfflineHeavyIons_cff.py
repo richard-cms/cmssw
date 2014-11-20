@@ -38,7 +38,19 @@ from DQM.Physics.DQMPhysics_cff import *
 from DQM.TrackingMonitorSource.TrackingSourceConfig_Tier0_HeavyIons_cff import *
 
 
-triggerOfflineDQMSource.remove(jetMETHLTOfflineAnalyzer)
+#triggerOfflineDQMSource.remove(jetMETHLTOfflineAnalyzer)
+#ak4CaloL1FastjetCorrector.srcRho = cms.InputTag("hltAK4CaloJets:rho")
+#ak4PFL1FastjetCorrector.srcRho = cms.InputTag("hltAK4PFJets:rho")
+triggerOfflineDQMSource.remove(ak4CaloL1FastjetCorrector)
+triggerOfflineDQMSource.remove(ak4CaloL1FastjetCorrector)
+ak4CaloL1FastL2L3Corrector.correctors = cms.VInputTag("ak4CaloL2RelativeCorrector", "ak4CaloL3AbsoluteCorrector")
+ak4CaloL1FastL2L3ResidualCorrector.correctors = cms.VInputTag("ak4CaloL2RelativeCorrector", "ak4CaloL3AbsoluteCorrector")
+triggerOfflineDQMSource.remove(ak4PFL1FastjetCorrector)
+triggerOfflineDQMSource.remove(ak4PFL1FastjetCorrector)
+ak4PFL1FastL2L3Corrector.correctors = cms.VInputTag("ak4PFL2RelativeCorrector", "ak4PFL3AbsoluteCorrector")
+ak4PFL1FastL2L3ResidualCorrector.correctors = cms.VInputTag("ak4PFL2RelativeCorrector", "ak4PFL3AbsoluteCorrector")
+
+
 
 egammaDQMOffline.remove(electronAnalyzerSequence)
 egammaDQMOffline.remove(zmumugammaAnalysis)
@@ -57,7 +69,7 @@ tightAnalyzer.inputTags.offlinePVs = cms.InputTag("hiSelectedVertex")
 looseAnalyzer.inputTags.offlinePVs = cms.InputTag("hiSelectedVertex")
 
 
-DQMOfflineHeavyIonsPrePOG = cms.Sequence( muonMonitors 
+DQMOfflineHeavyIonsPrePOG = cms.Sequence( muonMonitors
                                           * TrackMonDQMTier0_hi
                                           * jetMETDQMOfflineSource
                                           * egammaDQMOffline
@@ -73,5 +85,5 @@ DQMOfflineHeavyIonsPOG = cms.Sequence( DQMOfflineHeavyIonsPrePOG *
 DQMOfflineHeavyIons = cms.Sequence( DQMOfflineHeavyIonsPreDPG *
                                     DQMOfflineHeavyIonsPrePOG *
                                     DQMMessageLogger )
-    
+
 #DQMOfflineHeavyIonsPhysics = cms.Sequence( dqmPhysics )
