@@ -20,6 +20,8 @@
 // system include files
 #include <memory>
 
+#define EDM_ML_DEBUG 1
+
 // user include files
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -245,10 +247,12 @@ MP7BufferDumpToRaw::getBlocks(int iBoard)
 
     if (size==0) continue;
 
-    std::vector<uint32_t> data(size);
-    for (unsigned iFrame=txIndex_; iFrame<size; ++iFrame) {
+    std::vector<uint32_t> data;
+    for (unsigned iFrame=txIndex_; iFrame<txIndex_ + size; ++iFrame) {
       if (!packetisedData_) {
-	data.push_back( txFileReader_.get(iBoard).link(link).at(iFrame) );
+        auto word = txFileReader_.get(iBoard).link(link).at(iFrame);
+        if (word >> 32)
+          data.push_back(word);
       }
     }
     

@@ -76,7 +76,7 @@ process.TFileService.fileName = cms.string('l1t.root')
 # raw data from MP card
 process.load('EventFilter.L1TRawToDigi.stage1MP7BufferRaw_cfi')
 process.stage1Raw.nFramesOffset    = cms.untracked.int32(0)
-process.stage1Raw.nFramesLatency   = cms.untracked.int32(0)
+process.stage1Raw.nFramesLatency   = cms.untracked.int32(90)
 process.stage1Raw.rxFile = cms.untracked.string("stage1_rx_summary.txt")
 process.stage1Raw.txFile = cms.untracked.string("stage1_tx_summary.txt")
 
@@ -97,7 +97,7 @@ process.load('L1Trigger.L1TCalorimeter.l1tStage2CaloAnalyzer_cfi')
 process.l1tStage2CaloAnalyzer.towerToken = cms.InputTag("None")
 process.l1tStage2CaloAnalyzer.clusterToken = cms.InputTag("None")
 process.l1tStage2CaloAnalyzer.egToken = cms.InputTag("caloStage1Digis")
-process.l1tStage2CaloAnalyzer.tauToken = cms.InputTag("caloStage1Digis")
+process.l1tStage2CaloAnalyzer.tauToken = cms.InputTag("caloStage1Digis", "rlxTaus")
 process.l1tStage2CaloAnalyzer.jetToken = cms.InputTag("caloStage1Digis")
 process.l1tStage2CaloAnalyzer.etSumToken = cms.InputTag("caloStage1Digis")
 
