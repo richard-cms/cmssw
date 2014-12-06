@@ -45,7 +45,14 @@ namespace l1t {
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
-                
+        
+        std::cout<<"uint word 0"<<uint[0]<<std::endl;
+        std::cout<<"uint word 1"<<uint[1]<<std::endl;
+        std::cout<<"uint word 2"<<uint[2]<<std::endl;
+        std::cout<<"uint word 3"<<uint[3]<<std::endl;
+        std::cout<<"uint word 4"<<uint[4]<<std::endl;
+        std::cout<<"uint word 5"<<uint[5]<<std::endl;
+
       }
         return true;
 
