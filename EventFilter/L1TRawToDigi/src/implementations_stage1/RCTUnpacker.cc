@@ -43,6 +43,14 @@ namespace l1t {
       } else {
         lastBX = ceil((double)nBX/2.);
       }
+      
+      
+        //auto resRCTRegions_ = static_cast<CaloCollections*>(coll)->getRCTRegions();
+        //resRCTRegions_->setBXRange(firstBX, lastBX);
+
+        //auto resRCTEMCands_ = static_cast<CaloCollections*>(coll)->getRCTEMCands();
+        //resRCTEMCands_->setBXRange(firstBX, lastBX);
+
 
       // Initialise index
       int unsigned i = 0;
@@ -86,6 +94,7 @@ namespace l1t {
             L1CaloEmCand em = L1CaloEmCand(rctInfo.neRank[j],rctInfo.neRegn[j],rctInfo.neCard[j],rctInfo.crateID,false);
             ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
             CaloEmCand EmCand(*p4,(int) em.rank(),(int) em.regionId().ieta(),(int) em.regionId().iphi(),0);
+            //resRCTEMCands_->push_back(bx,EmCand);
           }
 
           for(int j = 0; j < 4; j++) {
@@ -94,7 +103,7 @@ namespace l1t {
             L1CaloEmCand em = L1CaloEmCand(rctInfo.ieRank[j],rctInfo.ieRegn[j],rctInfo.ieCard[j],rctInfo.crateID,true);
             ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
             CaloEmCand EmCand(*p4,(int) em.rank(),(int) em.regionId().ieta(),(int) em.regionId().iphi(),0);
-
+            //resRCTEMCands_->push_back(bx,EmCand);
           }
 
           for(int j = 0; j < 2; j++) {
@@ -103,7 +112,7 @@ namespace l1t {
               L1CaloRegion rgn = L1CaloRegion(rctInfo.hfEt[j][k], 0,  rctInfo.crateID , (j * 2 +  k));
               ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
               CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0.,0.);
-
+              //resRCTRegions_->push_back(bx,region);
             }
           }
         }// end if odd
@@ -121,7 +130,7 @@ namespace l1t {
               L1CaloRegion rgn = L1CaloRegion(rctInfo.rgnEt[j][k],o,t,m,q,rctInfo.crateID,j,k);     
               ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();	     
               CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0,0);
-
+              //resRCTRegions_->push_back(bx,region);
             }
           }
         }// end if even
