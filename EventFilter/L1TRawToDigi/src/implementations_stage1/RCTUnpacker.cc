@@ -48,18 +48,21 @@ namespace l1t {
       for (int bx=firstBX; bx<lastBX; bx++){
 
         unsigned int crate;
-        bool even;
+        bool even=0;
 
         RCTInfoFactory rctInfoFactory;
-
         std::vector<RCTInfo> rctInfo;
-        rctInfoFactory.decodeCapturedLinkID(block.header().getID(), crate, counter_, even);
-        
-        
-        std::cout<<"block.header().getID()"<<block.header().getID()<<std::endl;
-
         std::vector <uint32_t> uint;
         uint.reserve(6);
+        
+        int mp7link=(int)(block.header().getID()/2);
+        int indexfromMP7tooRSC[36]={0,1,18,19,16,17,34,35,2,3,20,21,14,15,32,33,4,5,22,23,12,13,30,31,6,7,24,25,10,11,28,29,8,9,26,27};
+
+        int oRSClink=indexfromMP7tooRSC[mp7link];
+        crate=(int)(oRSClink/2);
+        if (oRSClink%2==0) even=true;
+        else even=false;
+
 
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
@@ -69,17 +72,17 @@ namespace l1t {
         uint.push_back(block.payload()[i++]);
 
 
-        std::cout<<"uint word 0="<<std::hex<<uint[0]<<std::endl;
-        std::cout<<"uint word 1="<<std::hex<<uint[1]<<std::endl;
-        std::cout<<"uint word 2="<<std::hex<<uint[2]<<std::endl;
-        std::cout<<"uint word 3="<<std::hex<<uint[3]<<std::endl;
-        std::cout<<"uint word 4="<<std::hex<<uint[4]<<std::endl;
-        std::cout<<"uint word 5="<<std::hex<<uint[5]<<std::endl;
+        //std::cout<<"uint word 0="<<std::hex<<uint[0]<<std::endl;
+        //std::cout<<"uint word 1="<<std::hex<<uint[1]<<std::endl;
+        //std::cout<<"uint word 2="<<std::hex<<uint[2]<<std::endl;
+        //std::cout<<"uint word 3="<<std::hex<<uint[3]<<std::endl;
+        //std::cout<<"uint word 4="<<std::hex<<uint[4]<<std::endl;
+        //std::cout<<"uint word 5="<<std::hex<<uint[5]<<std::endl;
 
         rctInfoFactory.produce(uint,uint,rctInfo);
-
-
-        std::cout<<"--------------- crate id="<<crate<<", is even="<<even<<std::endl;
+        
+        std::cout<<"mp7link"<<mp7link<<std::endl;
+        std::cout<<"--------------- mp7 link ="<<mp7link<<"RCT crate id="<<crate<<", RCT crate even="<<even<<std::endl;
 
         if(!even) {
 
