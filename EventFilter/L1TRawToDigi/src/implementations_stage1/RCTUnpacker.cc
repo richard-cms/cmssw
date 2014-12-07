@@ -63,23 +63,17 @@ namespace l1t {
         if (oRSClink%2==0) even=true;
         else even=false;
 
-
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
-
-
-        //std::cout<<"uint word 0="<<std::hex<<uint[0]<<std::endl;
-        //std::cout<<"uint word 1="<<std::hex<<uint[1]<<std::endl;
-        //std::cout<<"uint word 2="<<std::hex<<uint[2]<<std::endl;
-        //std::cout<<"uint word 3="<<std::hex<<uint[3]<<std::endl;
-        //std::cout<<"uint word 4="<<std::hex<<uint[4]<<std::endl;
-        //std::cout<<"uint word 5="<<std::hex<<uint[5]<<std::endl;
-
+        
         rctInfoFactory.produce(uint,uint,rctInfo);
+        rctInfoFactory.setRCTInfoCrateID(rctInfo, crate);
+        
+        RCTInfo myrctInfo=rctInfo.at(0);
         
         std::cout<<"mp7link"<<mp7link<<std::endl;
         std::cout<<"--------------- mp7 link ="<<mp7link<<"RCT crate id="<<crate<<", RCT crate even="<<even<<std::endl;
@@ -88,13 +82,13 @@ namespace l1t {
 
           for(int j = 0; j < 4; j++) {
 
-            std::cout <<"index="<<j<<", neRank="<<rctInfo.at(0).neRank[j]<<", neRegn="<<rctInfo.at(0).neRegn[j]<<", neCard="<<rctInfo.at(0).neCard[j]<<std::endl;
-            std::cout <<"index="<<j<<", ieRank="<<rctInfo.at(0).ieRank[j]<<", neRegn="<<rctInfo.at(0).ieRegn[j]<<", neCard="<<rctInfo.at(0).ieCard[j]<<std::endl;
+            std::cout <<"index="<<j<<", neRank="<<myrctInfo.neRank[j]<<", neRegn="<<myrctInfo.neRegn[j]<<", neCard="<<myrctInfo.neCard[j]<<std::endl;
+            std::cout <<"index="<<j<<", ieRank="<<myrctInfo.ieRank[j]<<", neRegn="<<myrctInfo.ieRegn[j]<<", neCard="<<myrctInfo.ieCard[j]<<std::endl;
 
           }
           for(int j = 0; j < 2; j++) {
             for(int k = 0; k < 4; k++) {
-              std::cout <<"region HF ="<<j<<", card="<<k<<", rgnEt="<<rctInfo.at(0).hfEt[j][k]<<std::endl;
+              std::cout <<"region HF ="<<j<<", card="<<k<<", rgnEt="<<myrctInfo.hfEt[j][k]<<std::endl;
             }
           }
         }// end if odd
@@ -102,7 +96,7 @@ namespace l1t {
         else{
           for(int j = 0; j < 7; j++) {
             for(int k = 0; k < 2; k++) {
-              std::cout <<"region="<<j<<", card="<<k<<", rgnEt="<<rctInfo.at(0).rgnEt[j][k]<<std::endl;
+              std::cout <<"region="<<j<<", card="<<k<<", rgnEt="<<myrctInfo.rgnEt[j][k]<<std::endl;
             }
           }
         }// end if even
