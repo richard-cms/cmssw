@@ -4,7 +4,9 @@
 #include "EventFilter/L1TRawToDigi/interface/RCTInfoFactory.hh"
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloEmCand.h"
+#include "DataFormats/L1TCalorimeter/interface/CaloEmCand.h"
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegion.h"
+#include "DataFormats/L1TCalorimeter/interface/CaloRegion.h"
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
 #include "DataFormats/L1CaloTrigger/interface/L1CaloCollections.h"
 
@@ -51,10 +53,10 @@ namespace l1t {
         bool even=0;
 
         RCTInfoFactory rctInfoFactory;
-        std::vector<RCTInfo> rctInfo;
+        std::vector<RCTInfo> rctInfoArray;
         std::vector <uint32_t> uint;
         uint.reserve(6);
-        
+
         int mp7link=(int)(block.header().getID()/2);
         int indexfromMP7tooRSC[36]={0,1,18,19,16,17,34,35,2,3,20,21,14,15,32,33,4,5,22,23,12,13,30,31,6,7,24,25,10,11,28,29,8,9,26,27};
 
@@ -69,26 +71,39 @@ namespace l1t {
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
-        
-        rctInfoFactory.produce(uint,uint,rctInfo);
-        rctInfoFactory.setRCTInfoCrateID(rctInfo, crate);
-        
-        RCTInfo myrctInfo=rctInfo.at(0);
-        
-        std::cout<<"mp7link"<<mp7link<<std::endl;
+
+        rctInfoFactory.produce(uint,uint,rctInfoArray);
+        rctInfoFactory.setRCTInfoCrateID(rctInfoArray, crate);
+        RCTInfo rctInfo=rctInfoArray.at(0);
+
         std::cout<<"--------------- mp7 link ="<<mp7link<<"RCT crate id="<<crate<<", RCT crate even="<<even<<std::endl;
 
         if(!even) {
 
           for(int j = 0; j < 4; j++) {
 
-            std::cout <<"index="<<j<<", neRank="<<myrctInfo.neRank[j]<<", neRegn="<<myrctInfo.neRegn[j]<<", neCard="<<myrctInfo.neCard[j]<<std::endl;
-            std::cout <<"index="<<j<<", ieRank="<<myrctInfo.ieRank[j]<<", neRegn="<<myrctInfo.ieRegn[j]<<", neCard="<<myrctInfo.ieCard[j]<<std::endl;
+            std::cout <<"index="<<j<<", neRank="<<rctInfo.neRank[j]<<", neRegn="<<rctInfo.neRegn[j]<<", neCard="<<rctInfo.neCard[j]<<std::endl;
+            L1CaloEmCand em = L1CaloEmCand(rctInfo.neRank[j],rctInfo.neRegn[j],rctInfo.neCard[j],rctInfo.crateID,false);
+            ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
+            CaloEmCand EmCand(*p4,(int) em.rank(),(int) em.regionId().ieta(),(int) em.regionId().iphi(),0);
+          }
+
+          for(int j = 0; j < 4; j++) {
+
+            std::cout <<"index="<<j<<", ieRank="<<rctInfo.ieRank[j]<<", neRegn="<<rctInfo.ieRegn[j]<<", neCard="<<rctInfo.ieCard[j]<<std::endl;
+            L1CaloEmCand em = L1CaloEmCand(rctInfo.ieRank[j],rctInfo.ieRegn[j],rctInfo.ieCard[j],rctInfo.crateID,true);
+            ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
+            CaloEmCand EmCand(*p4,(int) em.rank(),(int) em.regionId().ieta(),(int) em.regionId().iphi(),0);
 
           }
+
           for(int j = 0; j < 2; j++) {
             for(int k = 0; k < 4; k++) {
-              std::cout <<"region HF ="<<j<<", card="<<k<<", rgnEt="<<myrctInfo.hfEt[j][k]<<std::endl;
+              std::cout <<"region HF ="<<j<<", card="<<k<<", rgnEt="<<rctInfo.hfEt[j][k]<<std::endl;
+              L1CaloRegion rgn = L1CaloRegion(rctInfo.hfEt[j][k], 0,  rctInfo.crateID , (j * 2 +  k));
+              ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
+              CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0.,0.);
+
             }
           }
         }// end if odd
@@ -96,7 +111,17 @@ namespace l1t {
         else{
           for(int j = 0; j < 7; j++) {
             for(int k = 0; k < 2; k++) {
-              std::cout <<"region="<<j<<", card="<<k<<", rgnEt="<<myrctInfo.rgnEt[j][k]<<std::endl;
+
+              std::cout <<"region="<<j<<", card="<<k<<", rgnEt="<<rctInfo.rgnEt[j][k]<<std::endl;
+              bool o = (((rctInfo.oBits >> (j * 7 + k)) && 0x1) == 0x1);
+              bool t = (((rctInfo.tBits >> (j * 7 + k)) && 0x1) == 0x1);
+              bool m = (((rctInfo.mBits >> (j * 7 + k)) && 0x1) == 0x1);
+              bool q = (((rctInfo.qBits >> (j * 7 + k)) && 0x1) == 0x1);
+
+              L1CaloRegion rgn = L1CaloRegion(rctInfo.rgnEt[j][k],o,t,m,q,rctInfo.crateID,j,k);     
+              ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();	     
+              CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0,0);
+
             }
           }
         }// end if even
