@@ -35,8 +35,10 @@ namespace l1t {
             };
 
             virtual void registerProducts(edm::one::EDProducerBase& prod) override {
+               prod.produces<CaloEmCandBxCollection>();
                prod.produces<CaloSpareBxCollection>("HFBitCounts");
                prod.produces<CaloSpareBxCollection>("HFRingSums");
+               prod.produces<CaloRegionBxCollection>();
                prod.produces<CaloTowerBxCollection>();
                prod.produces<EGammaBxCollection>();
                prod.produces<EtSumBxCollection>();
@@ -50,6 +52,7 @@ namespace l1t {
             };
 
             virtual UnpackerMap getUnpackers(int fed, int amc, int fw) override {
+               auto rct_unp = UnpackerFactory::get()->make("stage1::RCTUnpacker");
                auto iegamma_unp = UnpackerFactory::get()->make("stage1::IsoEGammaUnpacker");
                auto niegamma_unp = UnpackerFactory::get()->make("stage1::NonIsoEGammaUnpacker");
                auto cjet_unp = UnpackerFactory::get()->make("stage1::CentralJetUnpacker");
@@ -60,14 +63,17 @@ namespace l1t {
                auto ring_unp = UnpackerFactory::get()->make("stage1::HFRingUnpacker");
 
                UnpackerMap res;
-               res[1] = iegamma_unp;
-               res[2] = niegamma_unp;
-               res[3] = cjet_unp;
-               res[4] = fjet_unp;
-               res[5] = tau_unp;
-               res[6] = etsum_unp;
-               res[7] = ring_unp;
-               res[8] = isotau_unp;
+               /* res[1] = iegamma_unp; */
+               /* res[2] = niegamma_unp; */
+               /* res[3] = cjet_unp; */
+               /* res[4] = fjet_unp; */
+               /* res[5] = tau_unp; */
+               /* res[6] = etsum_unp; */
+               /* res[7] = ring_unp; */
+               /* res[8] = isotau_unp; */
+               for (int m=0;m<36;m++) res[m*2] = rct_unp;
+               res[105] = cjet_unp;
+               res[107] = fjet_unp;
 
                return res;
             };
