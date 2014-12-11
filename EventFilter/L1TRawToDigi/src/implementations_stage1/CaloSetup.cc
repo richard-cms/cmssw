@@ -72,8 +72,8 @@ namespace l1t {
                /* res[7] = ring_unp; */
                /* res[8] = isotau_unp; */
                for (int m=0;m<36;m++) res[m*2] = rct_unp;
-               res[105] = cjet_unp;
-               res[107] = fjet_unp;
+               //res[105] = cjet_unp;
+               //res[107] = fjet_unp;
 
                return res;
             };

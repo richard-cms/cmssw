@@ -33,7 +33,7 @@ namespace l1t {
   namespace stage1 {
     bool RCTUnpacker::unpack(const Block& block, UnpackerCollections *coll){
 
-      int nBX = int(ceil(block.header().getSize() / 6.)); 
+      int nBX = int(ceil(block.header().getSize() / 6.));
 
       // Find the first and last BXs
       int firstBX = -(ceil((double)nBX/2.)-1);
@@ -43,8 +43,8 @@ namespace l1t {
       } else {
         lastBX = ceil((double)nBX/2.);
       }
-      
-      
+
+
         auto resRCTRegions_ = static_cast<CaloCollections*>(coll)->getCaloRegions();
         resRCTRegions_->setBXRange(firstBX, lastBX);
 
@@ -80,6 +80,15 @@ namespace l1t {
         uint.push_back(block.payload()[i++]);
         uint.push_back(block.payload()[i++]);
 
+	// std::cout << "Alex printout: " << std::endl;
+	// std::cout << std::hex << uint[0] << std::endl;
+	// std::cout << std::hex << uint[1] << std::endl;
+	// std::cout << std::hex << uint[2] << std::endl;
+	// std::cout << std::hex << uint[3] << std::endl;
+	// std::cout << std::hex << uint[4] << std::endl;
+	// std::cout << std::hex << uint[5] << std::endl;
+
+
         rctInfoFactory.produce(uint,uint,rctInfoArray);
         rctInfoFactory.setRCTInfoCrateID(rctInfoArray, crate);
         RCTInfo rctInfo=rctInfoArray.at(0);
@@ -111,7 +120,7 @@ namespace l1t {
               std::cout <<"region HF ="<<j<<", card="<<k<<", rgnEt="<<rctInfo.hfEt[j][k]<<std::endl;
               L1CaloRegion rgn = L1CaloRegion(rctInfo.hfEt[j][k], 0,  rctInfo.crateID , (j * 2 +  k));
               ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
-              CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0.,0.);
+              CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0.,0.);
               resRCTRegions_->push_back(bx,region);
             }
           }
@@ -127,9 +136,9 @@ namespace l1t {
               bool m = (((rctInfo.mBits >> (j * 7 + k)) && 0x1) == 0x1);
               bool q = (((rctInfo.qBits >> (j * 7 + k)) && 0x1) == 0x1);
 
-              L1CaloRegion rgn = L1CaloRegion(rctInfo.rgnEt[j][k],o,t,m,q,rctInfo.crateID,j,k);     
-              ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();	     
-              CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0,0);
+              L1CaloRegion rgn = L1CaloRegion(rctInfo.rgnEt[j][k],o,t,m,q,rctInfo.crateID,j,k);
+              ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > *p4 =new ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> >();
+              CaloRegion region(*p4,0.,0.,(int) rgn.et(),(int) rgn.id().ieta(),(int) rgn.id().iphi(),0,0);
               resRCTRegions_->push_back(bx,region);
             }
           }

@@ -1,7 +1,7 @@
 # Auto generated configuration file
-# using: 
-# Revision: 1.19 
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
+# using:
+# Revision: 1.19
+# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
 # with command line options: SingleElectronPt10_cfi.py -s GEN,SIM,DIGI,L1 --pileup=NoPileUp --geometry DB --conditions=auto:startup -n 1 --no_exec
 import FWCore.ParameterSet.Config as cms
 
@@ -53,7 +53,7 @@ process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:startup', '')
 # enable debug message logging for our modules
 process.MessageLogger = cms.Service(
     "MessageLogger",
-    threshold  = cms.untracked.string('DEBUG'),
+    threshold  = cms.untracked.string('ERROR'),
     categories = cms.untracked.vstring('L1T'),
 #    l1t   = cms.untracked.PSet(
 #	threshold  = cms.untracked.string('DEBUG')
@@ -77,38 +77,38 @@ process.TFileService.fileName = cms.string('l1t.root')
 process.load('EventFilter.L1TRawToDigi.stage1MP7BufferRaw_cfi')
 process.stage1Raw.nFramesOffset    = cms.untracked.int32(0)
 process.stage1Raw.nFramesLatency   = cms.untracked.int32(90)
-process.stage1Raw.rxFile = cms.untracked.string("test/rx_summary.txt")
-process.stage1Raw.txFile = cms.untracked.string("test/tx_summary.txt")
+process.stage1Raw.rxFile = cms.untracked.string("test/rx_summary_new.txt")
+process.stage1Raw.txFile = cms.untracked.string("test/tx_summary_new.txt")
 
 
 
 # dump raw data
-process.dumpRaw = cms.EDAnalyzer( 
-    "DumpFEDRawDataProduct",
-    label = cms.untracked.string("stage1Raw"),
-    feds = cms.untracked.vint32 ( 1300 ),
-    dumpPayload = cms.untracked.bool ( True )
-)
+# process.dumpRaw = cms.EDAnalyzer(
+#     "DumpFEDRawDataProduct",
+#     label = cms.untracked.string("stage1Raw"),
+#     feds = cms.untracked.vint32 ( 1300 ),
+#     dumpPayload = cms.untracked.bool ( True )
+# )
 
 # raw to digi
 process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
 process.caloStage1Digis.InputLabel = cms.InputTag('stage1Raw')
 
 
-process.load('L1Trigger.L1TCalorimeter.l1tStage2CaloAnalyzer_cfi')
-process.l1tStage2CaloAnalyzer.towerToken = cms.InputTag("None")
-process.l1tStage2CaloAnalyzer.clusterToken = cms.InputTag("None")
-process.l1tStage2CaloAnalyzer.egToken = cms.InputTag("caloStage1Digis")
-process.l1tStage2CaloAnalyzer.tauToken = cms.InputTag("caloStage1Digis", "rlxTaus")
-process.l1tStage2CaloAnalyzer.jetToken = cms.InputTag("caloStage1Digis")
-process.l1tStage2CaloAnalyzer.etSumToken = cms.InputTag("caloStage1Digis")
+# process.load('L1Trigger.L1TCalorimeter.l1tStage2CaloAnalyzer_cfi')
+# process.l1tStage2CaloAnalyzer.towerToken = cms.InputTag("None")
+# process.l1tStage2CaloAnalyzer.clusterToken = cms.InputTag("None")
+# process.l1tStage2CaloAnalyzer.egToken = cms.InputTag("caloStage1Digis")
+# process.l1tStage2CaloAnalyzer.tauToken = cms.InputTag("caloStage1Digis", "rlxTaus")
+# process.l1tStage2CaloAnalyzer.jetToken = cms.InputTag("caloStage1Digis")
+# process.l1tStage2CaloAnalyzer.etSumToken = cms.InputTag("caloStage1Digis")
 
 # Path and EndPath definitions
 process.path = cms.Path(
     process.stage1Raw
-    +process.dumpRaw
+    #+process.dumpRaw
     +process.caloStage1Digis
-    +process.l1tStage2CaloAnalyzer
+    #+process.l1tStage2CaloAnalyzer
 )
 
 process.out = cms.EndPath(

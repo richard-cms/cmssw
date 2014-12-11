@@ -38,6 +38,13 @@
 #include "EventFilter/L1TRawToDigi/interface/Block.h"
 #include "EventFilter/L1TRawToDigi/interface/PackingSetup.h"
 
+//HACK
+#include "TTree.h"
+#include "TFile.h"
+#include "DataFormats/L1TCalorimeter/interface/CaloRegion.h"
+#include "EventFilter/L1TRawToDigi/src/implementations_stage1/CaloCollections.h"
+#include "DataFormats/L1Trigger/interface/BXVector.h"
+
 namespace l1t {
    class L1TRawToDigi : public edm::one::EDProducer<edm::one::SharedResources, edm::one::WatchRuns, edm::one::WatchLuminosityBlocks> {
       public:
@@ -49,8 +56,8 @@ namespace l1t {
       private:
          virtual void produce(edm::Event&, const edm::EventSetup&) override;
 
-         virtual void beginRun(edm::Run const&, edm::EventSetup const&) override {};
-         virtual void endRun(edm::Run const&, edm::EventSetup const&) override {};
+     virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;// {};
+     virtual void endRun(edm::Run const&, edm::EventSetup const&) override;// {};
          virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override {};
          virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override {};
 
@@ -70,6 +77,20 @@ namespace l1t {
          int amc13TrailerSize_;
 
          bool ctp7_mode_;
+
+     TFile *outFile_;
+     TTree *outTree_;
+
+     int evt;
+     int rn;
+     int lumi;
+     int nRegions;
+      int *region_hwPt;
+      int *region_hwEta;
+      int *region_hwPhi;
+     //  int *region_tauVeto;
+     // int *region_crate;
+     // int *region_index;
    };
 }
 
@@ -100,6 +121,8 @@ namespace l1t {
 
    L1TRawToDigi::~L1TRawToDigi()
    {
+     // if(outFile_) delete outFile_;
+     // if(outTree_) delete outTree_;
    }
 
 
@@ -208,6 +231,31 @@ namespace l1t {
             }
          }
       }
+
+      evt = event.id().event();
+      rn = event.id().run();
+      lumi = event.id().luminosityBlock();
+      BXVector<l1t::CaloRegion> *bxregions = static_cast<l1t::stage1::CaloCollections*>(&*coll)->getCaloRegions();
+      int bx = bxregions->getFirstBX();
+      std::vector<l1t::CaloRegion> *regions = new std::vector<l1t::CaloRegion>;
+      for(std::vector<CaloRegion>::const_iterator region = bxregions->begin(bx);
+	  region != bxregions->end(bx); ++region)
+	regions->push_back(*region);
+
+      nRegions = regions->size();
+      for(int i = 0; i < nRegions; ++i)
+      {
+	region_hwPt[i] = regions->at(i).hwPt();
+	region_hwEta[i] = regions->at(i).hwEta();
+	region_hwPhi[i] = regions->at(i).hwPhi();
+	// region_tauVeto[i] = regions.at(i)->tauVeto();
+	// region_hwPt[i] = regions.at(i)->hwPt();
+	// region_hwPt[i] = regions.at(i)->hwPt();
+	// region_hwPt[i] = regions.at(i)->hwPt();
+	// region_hwPt[i] = regions.at(i)->hwPt();
+      }
+      outTree_->Fill();
+      delete regions;
    }
 
    // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
@@ -219,6 +267,47 @@ namespace l1t {
      desc.setUnknown();
      descriptions.addDefault(desc);
    }
+
+  void L1TRawToDigi::beginRun(edm::Run const& run, edm::EventSetup const& iSetup)
+  {
+    const int MAXSIZE  = 1000;
+    outFile_ = TFile::Open("rctTreeDump.root","RECREATE");
+    outTree_ = new TTree("rctDump","empty title");
+
+  region_hwPt = new int[MAXSIZE];
+  region_hwEta = new int[MAXSIZE];
+  region_hwPhi = new int[MAXSIZE];
+  // region_tauVeto = new int[MAXSIZE];
+  // region_crate = new int[MAXSIZE];
+  // region_index = new int[MAXSIZE];
+  outTree_->Branch("event",&evt,"event/I");
+  outTree_->Branch("run",&rn,"run/I");
+  outTree_->Branch("lumi",&lumi,"lumi/I");
+
+  outTree_->Branch("nRegions",&nRegions,"nRegions/I");
+  outTree_->Branch("region_hwPt",region_hwPt,"region_hwPt[nRegions]/I");
+  outTree_->Branch("region_hwEta",region_hwEta,"region_hwEta[nRegions]/I");
+  outTree_->Branch("region_hwPhi",region_hwPhi,"region_hwPhi[nRegions]/I");
+  // outTree_->Branch("region_tauVeto",region_tauVeto,"region_tauVeto[nRegions]/I");
+  // outTree_->Branch("region_crate",region_crate,"region_crate[nRegions]/I");
+  // outTree_->Branch("region_index",region_index,"region_index[nRegions]/I");
+
+
+
+  };
+  void L1TRawToDigi::endRun(edm::Run const& run, edm::EventSetup const& iSetup)
+  {
+    outTree_->Write();
+    outFile_->Close();
+
+    delete region_hwPt;
+    delete region_hwEta;
+    delete region_hwPhi;
+    // delete region_tauVeto;
+    // delete region_crate;
+    // delete region_index;
+  };
+
 }
 
 using namespace l1t;
