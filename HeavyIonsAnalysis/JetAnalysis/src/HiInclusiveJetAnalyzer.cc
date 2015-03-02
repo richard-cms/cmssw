@@ -445,10 +445,10 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
   if(usePat_)iEvent.getByLabel(jetTag_, patjets);
 
   edm::Handle<pat::JetCollection> patmatchedjets;
-  iEvent.getByLabel(matchTag_, patmatchedjets);
+  if(usePat_)iEvent.getByLabel(matchTag_, patmatchedjets);
 
   edm::Handle<reco::JetView> matchedjets;
-  iEvent.getByLabel(matchTag_, matchedjets);
+  if(doMatch_)iEvent.getByLabel(matchTag_, matchedjets);
 
   edm::Handle<reco::JetView> jets;
   iEvent.getByLabel(jetTag_, jets);
@@ -1085,13 +1085,13 @@ HiInclusiveJetAnalyzer::analyze(const Event& iEvent,
 
   if(isMC_){
 
-    edm::Handle<HepMCProduct> hepMCProduct;
-    iEvent.getByLabel(eventInfoTag_,hepMCProduct);
-    const HepMC::GenEvent* MCEvt = hepMCProduct->GetEvent();
+    // edm::Handle<HepMCProduct> hepMCProduct;
+    // iEvent.getByLabel(eventInfoTag_,hepMCProduct);
+    // const HepMC::GenEvent* MCEvt = hepMCProduct->GetEvent();
 
-    std::pair<HepMC::GenParticle*,HepMC::GenParticle*> beamParticles = MCEvt->beam_particles();
-    if(beamParticles.first != 0)jets_.beamId1 = beamParticles.first->pdg_id();
-    if(beamParticles.second != 0)jets_.beamId2 = beamParticles.second->pdg_id();
+    // std::pair<HepMC::GenParticle*,HepMC::GenParticle*> beamParticles = MCEvt->beam_particles();
+    // if(beamParticles.first != 0)jets_.beamId1 = beamParticles.first->pdg_id();
+    // if(beamParticles.second != 0)jets_.beamId2 = beamParticles.second->pdg_id();
 
     edm::Handle<GenEventInfoProduct> hEventInfo;
     iEvent.getByLabel(eventInfoTag_,hEventInfo);
