@@ -106,7 +106,7 @@ def customiseSimL1EmulatorForPostLS1_HI(process):
     process = customiseSimL1EmulatorForStage1(process)
     # set the Stage 1 heavy ions-specific parameters
     # all of these should eventually end up in a GT
-    process.load("L1TriggerConfig.RCTConfigProducers.L1RCTConfig_cfi")
+    process.load("L1Trigger.L1TCalorimeter.caloStage1RCTLuts_cff")
     if hasattr(process,'RCTConfigProducers'):
         process.RCTConfigProducers.eicIsolationThreshold = cms.uint32(7)
         process.RCTConfigProducers.hOeCut = cms.double(999)
