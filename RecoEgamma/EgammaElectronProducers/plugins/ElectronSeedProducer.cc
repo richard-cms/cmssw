@@ -17,6 +17,8 @@
 //
 //
 
+#include <vector>
+
 #include "ElectronSeedProducer.h"
 
 #include "RecoEgamma/EgammaIsolationAlgos/interface/EgammaHcalIsolation.h"
@@ -43,6 +45,9 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+
+#include "DataFormats/EgammaCandidates/interface/GsfElectron.h"
+#include "RecoEcal/EgammaCoreTools/interface/EcalClusterLazyTools.h"
 
 #include <string>
 
@@ -89,9 +94,22 @@ ElectronSeedProducer::ElectronSeedProducer( const edm::ParameterSet& iConfig )
 //    hOverEHFMinE_=conf_.getParameter<double>("hOverEHFMinE") ;
    }
 
-  matcher_ = new ElectronSeedGenerator(conf_) ;
+  applySigmaIEtaIEtaCut_ = conf_.getParameter<bool>("applySigmaIEtaIEtaCut");
+
+  // apply sigma_ieta_ieta cut
+  if (applySigmaIEtaIEtaCut_ == true)
+    {
+      maxSigmaIEtaIEtaBarrel_ = conf_.getParameter<double>("maxSigmaIEtaIEtaBarrel");
+      maxSigmaIEtaIEtaEndcaps_ = conf_.getParameter<double>("maxSigmaIEtaIEtaEndcaps");
+    }
+
+  matcher_ = new ElectronSeedGenerator(conf_,esg_tokens) ;
 
   //  get collections from config'
+  if (applySigmaIEtaIEtaCut_ == true) {
+    ebRecHitCollection_ = iConfig.getParameter<edm::InputTag>("ebRecHitCollection");
+    eeRecHitCollection_ = iConfig.getParameter<edm::InputTag>("eeRecHitCollection");
+  }
   superClusters_[0]=iConfig.getParameter<edm::InputTag>("barrelSuperClusters") ;
   superClusters_[1]=iConfig.getParameter<edm::InputTag>("endcapSuperClusters") ;
 
@@ -207,6 +225,10 @@ void ElectronSeedProducer::filterClusters
    /*HBHERecHitMetaCollection * mhbhe,*/ SuperClusterRefVector & sclRefs,
    std::vector<float> & hoe1s, std::vector<float> & hoe2s )
  {
+
+   std::vector<float> sigmaIEtaIEtaEB_;
+   std::vector<float> sigmaIEtaIEtaEE_;
+
   for (unsigned int i=0;i<superClusters->size();++i)
    {
     const SuperCluster & scl = (*superClusters)[i] ;
@@ -217,6 +239,7 @@ void ElectronSeedProducer::filterClusters
 //       { continue ; }
 //      sclRefs.push_back(edm::Ref<reco::SuperClusterCollection>(superClusters,i)) ;
        double had1, had2, had, scle ;
+
        bool HoeVeto = false ;
        if (applyHOverECut_==true)
         {
@@ -241,6 +264,15 @@ void ElectronSeedProducer::filterClusters
          hoe2s.push_back(std::numeric_limits<float>::infinity()) ;
         }
      }
+
+    if (applySigmaIEtaIEtaCut_ == true)
+      {
+	noZS::EcalClusterLazyTools lazyTool_noZS(event, setup, ebRecHitCollection_, eeRecHitCollection_);
+	std::vector<float> vCov = lazyTool_noZS.localCovariances(*(scl.seed()));
+	int detector = scl.seed()->hitsAndFractions()[0].first.subdetId() ;
+	if (detector==EcalBarrel) sigmaIEtaIEtaEB_ .push_back(isnan(vCov[0]) ? 0. : sqrt(vCov[0]));
+	if (detector==EcalEndcap) sigmaIEtaIEtaEE_ .push_back(isnan(vCov[0]) ? 0. : sqrt(vCov[0]));
+      }
    }
   LogDebug("ElectronSeedProducer")<<"Filtered out "<<sclRefs.size()<<" superclusters from "<<superClusters->size() ;
  }

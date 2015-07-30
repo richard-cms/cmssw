@@ -36,6 +36,7 @@ namespace edm
 #include "DataFormats/BeamSpot/interface/BeamSpot.h"
 #include "DataFormats/Common/interface/Handle.h"
 
+#include "RecoEcal/EgammaCoreTools/interface/EcalClusterLazyTools.h"
 
 class ElectronSeedProducer : public edm::EDProducer
  {
@@ -62,6 +63,8 @@ class ElectronSeedProducer : public edm::EDProducer
     edm::InputTag superClusters_[2] ;
     edm::InputTag initialSeeds_ ;
     edm::InputTag beamSpotTag_ ;
+    edm::InputTag ebRecHitCollection_;
+    edm::InputTag eeRecHitCollection_;
 
     edm::ParameterSet conf_ ;
     ElectronSeedGenerator * matcher_ ;
@@ -96,6 +99,9 @@ class ElectronSeedProducer : public edm::EDProducer
     // super cluster Et cut
     double SCEtCut_;
 
+    bool applySigmaIEtaIEtaCut_;
+    double maxSigmaIEtaIEtaBarrel_;
+    double maxSigmaIEtaIEtaEndcaps_;
 
     bool fromTrackerSeeds_;
     bool prefilteredSeeds_;
@@ -103,6 +109,3 @@ class ElectronSeedProducer : public edm::EDProducer
  } ;
 
 #endif
-
-
-

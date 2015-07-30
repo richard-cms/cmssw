@@ -14,7 +14,7 @@ ecalDrivenElectronSeeds = cms.EDProducer("ElectronSeedProducer",
         ecalDrivenElectronSeedsParameters,
 #        OrderedHitsFactoryPSet = cms.PSet(
 #            ComponentName = cms.string('StandardHitPairGenerator'),
-#            SeedingLayers = cms.string('MixedLayerPairs') 
+#            SeedingLayers = cms.string('MixedLayerPairs')
 #        ),
 #        TTRHBuilder = cms.string('WithTrackAngle'),
 #        # eta-phi region
