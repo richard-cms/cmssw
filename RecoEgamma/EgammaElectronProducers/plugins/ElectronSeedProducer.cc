@@ -103,7 +103,7 @@ ElectronSeedProducer::ElectronSeedProducer( const edm::ParameterSet& iConfig )
       maxSigmaIEtaIEtaEndcaps_ = conf_.getParameter<double>("maxSigmaIEtaIEtaEndcaps");
     }
 
-  matcher_ = new ElectronSeedGenerator(conf_,esg_tokens) ;
+  matcher_ = new ElectronSeedGenerator(conf_) ;
 
   //  get collections from config'
   if (applySigmaIEtaIEtaCut_ == true) {
@@ -188,7 +188,7 @@ void ElectronSeedProducer::produce(edm::Event& e, const edm::EventSetup& iSetup)
      {
       SuperClusterRefVector clusterRefs ;
       std::vector<float> hoe1s, hoe2s ;
-      filterClusters(*theBeamSpot,clusters,/*mhbhe_,*/clusterRefs,hoe1s,hoe2s) ;
+      filterClusters(*theBeamSpot,clusters,/*mhbhe_,*/clusterRefs,hoe1s,hoe2s,e,iSetup) ;
       if ((fromTrackerSeeds_) && (prefilteredSeeds_))
        { filterSeeds(e,iSetup,clusterRefs) ; }
       matcher_->run(e,iSetup,clusterRefs,hoe1s,hoe2s,theInitialSeedColl,*seeds) ;
@@ -223,7 +223,8 @@ void ElectronSeedProducer::filterClusters
  ( const reco::BeamSpot & bs,
    const edm::Handle<reco::SuperClusterCollection> & superClusters,
    /*HBHERecHitMetaCollection * mhbhe,*/ SuperClusterRefVector & sclRefs,
-   std::vector<float> & hoe1s, std::vector<float> & hoe2s )
+   std::vector<float> & hoe1s, std::vector<float> & hoe2s,
+   edm::Event& event, const edm::EventSetup& setup)
  {
 
    std::vector<float> sigmaIEtaIEtaEB_;
@@ -267,8 +268,8 @@ void ElectronSeedProducer::filterClusters
 
     if (applySigmaIEtaIEtaCut_ == true)
       {
-	noZS::EcalClusterLazyTools lazyTool_noZS(event, setup, ebRecHitCollection_, eeRecHitCollection_);
-	std::vector<float> vCov = lazyTool_noZS.localCovariances(*(scl.seed()));
+	EcalClusterLazyTools lazyTool(event, setup, ebRecHitCollection_, eeRecHitCollection_);
+	std::vector<float> vCov = lazyTool.localCovariances(*(scl.seed()));
 	int detector = scl.seed()->hitsAndFractions()[0].first.subdetId() ;
 	if (detector==EcalBarrel) sigmaIEtaIEtaEB_ .push_back(isnan(vCov[0]) ? 0. : sqrt(vCov[0]));
 	if (detector==EcalEndcap) sigmaIEtaIEtaEE_ .push_back(isnan(vCov[0]) ? 0. : sqrt(vCov[0]));

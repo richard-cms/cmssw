@@ -57,7 +57,8 @@ class ElectronSeedProducer : public edm::EDProducer
      ( const reco::BeamSpot & bs,
        const edm::Handle<reco::SuperClusterCollection> & superClusters,
        /*HBHERecHitMetaCollection*mhbhe,*/ reco::SuperClusterRefVector &sclRefs,
-       std::vector<float> & hoe1s, std::vector<float> & hoe2s ) ;
+       std::vector<float> & hoe1s, std::vector<float> & hoe2s,
+       edm::Event &, const edm::EventSetup &) ;
     void filterSeeds(edm::Event& e, const edm::EventSetup& setup, reco::SuperClusterRefVector &sclRefs);
 
     edm::InputTag superClusters_[2] ;
