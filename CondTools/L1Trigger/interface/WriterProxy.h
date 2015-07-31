@@ -10,10 +10,12 @@
 #include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
 //#include "CondCore/DBCommon/interface/DbSession.h"
 //#include "CondCore/DBCommon/interface/DbScopedTransaction.h"
-
+#include "CondCore/CondDB/interface/Utils.h"
 #include "CondTools/L1Trigger/interface/Exception.h"
 
 #include <string>
+#include <typeinfo>
+#include <iostream>
 
 namespace l1t
 {
@@ -53,34 +55,53 @@ class WriterProxyT : public WriterProxy
         /* This method requires that Record and Type supports copy constructor */
         virtual std::string save (const edm::EventSetup & setup) const
         {
-            // load record and type from EventSetup and save them in db
-            edm::ESHandle<Type> handle;
 
-	    try
-	      {
-		setup.get<Record> ().get (handle);
-	      }
-	    catch( l1t::DataAlreadyPresentException& ex )
-	      {
-		return std::string() ;
-	      }
+	  std::cout << "WriterProxyT::save() called for record type" << cond::demangledName(typeid(Record)) << "\n";
 
+	  // load record and type from EventSetup and save them in db
+	  edm::ESHandle<Type> handle;
+
+	  try
+	    { 	  
+	      std::cout << "breadcrumb 1\n";
+	      setup.get<Record> ().get (handle);
+	      std::cout << "breadcrumb 2\n";
+	    }
+	  catch( l1t::DataAlreadyPresentException& ex )
+	    {
+	      std::cout << "caught DataAlreadyPresentException...\n";
+	      return std::string() ;
+	    }
+
+	  std::cout << "breadcrumb 3\n";
 	    // If handle is invalid, then data is already in DB
-       
 	    edm::Service<cond::service::PoolDBOutputService> poolDb;
 	    if (!poolDb.isAvailable())
 	      {
+		std::cout << "breadcrumb 4\n";
 		throw cond::Exception( "DataWriter: PoolDBOutputService not available."
-				       ) ;
+			       ) ;
 	      }
+ 	  std::cout << "breadcrumb 5\n";
+
+	    // A hack to ensure that the poolDB session is started if not already...
+	    //std::string record_str = cond::demangledName(typeid(Record));
+	    //record_str = "L1TriggerKeyListRcd"; // It's complicated...
+	    //poolDb->isNewTagRequest(record_str);
+
+
 	    cond::persistency::Session session = poolDb->session();
-	    cond::persistency::TransactionScope tr(session.transaction());
+	    //cond::persistency::TransactionScope tr(session.transaction());
 	    // if throw transaction will unroll
-	    tr.start(false);
+	    //tr.start(false);
+	    std::cout << "INFO:  calling the forceInit business...\n";
+
+	    poolDb->forceInit();
 
 	    boost::shared_ptr<Type> pointer(new Type (*(handle.product ())));
 	    std::string payloadToken =  session.storePayload( *pointer );
-	    tr.commit();
+	    //tr.commit();
+	    //tr.close();
 	    return payloadToken ;
         }
 };

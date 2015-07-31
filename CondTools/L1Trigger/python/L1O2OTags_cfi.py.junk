@@ -1,0 +1,56 @@
+def initL1O2OTags():
+
+    import FWCore.ParameterSet.Config as cms
+    from CondTools.L1Trigger.L1CondEnum_cfi import L1CondEnum
+
+    initL1O2OTags.tagBaseVec = [None] * L1CondEnum.NumL1Cond
+
+
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1TriggerKeyList ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1TriggerKey ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1JetEtScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1EmEtScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1HtMissScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1HfRingEtScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuTriggerScales ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuTriggerPtScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuGMTScales ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuCSCTFConfiguration ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuCSCTFAlignment ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuCSCPtLut ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuCSCPtLut ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTEtaPatternLut ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTExtLut ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTPhiLut ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTPtaLut ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTQualPatternLut ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTTFParameters ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RPCConfig ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RPCConeDefinition ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RPCHsbConfig ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RPCBxOrConfig ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuGMTParameters ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RCTParameters ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1CaloEcalScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1CaloHcalScale ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GctJetFinderParams ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtBoardMaps ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtParameters ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtStableParameters ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtTriggerMaskVetoAlgoTrig ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtTriggerMenu ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtPsbSetup ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1CaloGeometry ] = "CRAFT09_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuDTTFMasks ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1MuGMTChannelMask ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RCTChannelMask ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1RCTNoisyChannelMask ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GctChannelMask ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtPrescaleFactorsAlgoTrig ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtPrescaleFactorsTechTrig ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtTriggerMaskAlgoTrig ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtTriggerMaskTechTrig ] = "DEVEL15_hlt"
+    initL1O2OTags.tagBaseVec[ L1CondEnum.L1GtTriggerMaskVetoTechTrig ] = "DEVEL15_hlt"
+    
+#    for i in range( 0, L1CondEnum.NumL1Cond ):
+#        print i, initL1O2OTags.tagBaseVec[ i ]

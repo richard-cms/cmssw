@@ -30,6 +30,9 @@
 #include "CondFormats/L1TObjects/interface/L1TriggerKeyList.h"
 #include "CondFormats/DataRecord/interface/L1TriggerKeyListRcd.h"
 
+#include <iostream>
+using std::cout;
+
 //
 // class declaration
 //
@@ -77,6 +80,8 @@ L1CondDBPayloadWriter::analyze(const edm::Event& iEvent,
 {
    using namespace edm;
 
+   cout << "INFO:  L1CondDBPayloadWriter::analyze method called...\n";
+
    // Get L1TriggerKeyList and make a copy
    L1TriggerKeyList oldKeyList ;
 
@@ -84,8 +89,8 @@ L1CondDBPayloadWriter::analyze(const edm::Event& iEvent,
      {
        if( !m_writer.fillLastTriggerKeyList( oldKeyList ) )
 	 {
-	   edm::LogError( "L1-O2O" )
-	     << "Problem getting last L1TriggerKeyList" ;
+	   cout
+	     << "Problem getting last L1TriggerKeyList\n" ;
 	 }
      }
 
@@ -112,14 +117,17 @@ L1CondDBPayloadWriter::analyze(const edm::Event& iEvent,
    catch( l1t::DataAlreadyPresentException& ex )
      {
        triggerKeyOK = false ;
-       edm::LogVerbatim( "L1-O2O" ) << ex.what() ;
+       cout << ex.what() ;
+       cout << "\n";
      }
 
    if( triggerKeyOK && m_writeL1TriggerKey )
      {
-       edm::LogVerbatim( "L1-O2O" )
+       cout
          << "Object key for L1TriggerKeyRcd@L1TriggerKey: "
          << key->tscKey() ;
+       cout << "\n";
+       cout << "INFO:  as requested calling writePayload fors L1TriggerKey record...\n";
        token = m_writer.writePayload( iSetup,
 				      "L1TriggerKeyRcd@L1TriggerKey" ) ;
      }
@@ -153,12 +161,23 @@ L1CondDBPayloadWriter::analyze(const edm::Event& iEvent,
 
 	  for( ; it != end ; ++it )
 	    {
+	      cout << "-------------------------------------------------------------------------\n";
+	      cout << "INFO:  recordToKeyMap:  " << it->first << ":  " << it->second << "\n"; 
+	      cout << "-------------------------------------------------------------------------\n";
+
+	      // skip some problematic tables to see where we are...
+	      //if (it->first == "L1MuDTEtaPatternLutRcd@L1MuDTEtaPatternLut") { cout << "skipping!\n"; continue; }
+	      //if (it->first == "L1MuDTExtLutRcd@L1MuDTExtLut") { cout << "skipping!\n"; continue; }
+	      //if (it->second == "091022_v1") { cout << "skipping!\n"; continue; } 	      
+              //if (it->second == "LHC8_12BX") { cout << "skipping!\n"; continue; } 	      
+
 	      // Do nothing if object key is null.
 	      if( it->second == L1TriggerKey::kNullKey )
 		{
-		  edm::LogVerbatim( "L1-O2O" )
+		  cout
 		    << "L1CondDBPayloadWriter: null object key for "
 		    << it->first << "; skipping this record." ;
+		  cout << "\n";
 		}
 	      else
 		{
@@ -169,26 +188,30 @@ L1CondDBPayloadWriter::analyze(const edm::Event& iEvent,
 		      // Write data to ORCON with no IOV
 		      if( oldKeyList.token( it->first, it->second ) != "" )
 			{
-			  edm::LogVerbatim( "L1-O2O" )
+			  cout
 			    << "*** Overwriting payload: object key for "
 			    << it->first << ": " << it->second ;
+			  cout << "\n";
 			}
 		      else
 			{
-			  edm::LogVerbatim( "L1-O2O" )
+			  cout
 			    << "object key for "
 			    << it->first << ": " << it->second ;
+			  cout << "\n";
 			}
 
 		      try
 			{
+			  cout << "Calling write payload for " << it->first << "\n";
 			  token = m_writer.writePayload( iSetup, it->first ) ;
 			}
 		      catch( l1t::DataInvalidException& ex )
 			{
-			  edm::LogVerbatim( "L1-O2O" )
+			  cout
 			    << ex.what()
 			    << " Skipping to next record." ;
+			  cout << "\n";
 
 			  throwException = true ;
 
@@ -219,10 +242,11 @@ L1CondDBPayloadWriter::analyze(const edm::Event& iEvent,
 		    }
 		  else
 		    {
-		      edm::LogVerbatim( "L1-O2O" )
+		      cout
 			<< "L1CondDBPayloadWriter: object key "
 			<< it->second << " for " << it->first
 			<< " already in L1TriggerKeyList" ;
+		      cout << "\n";
 		    }
 		}
 	    }
