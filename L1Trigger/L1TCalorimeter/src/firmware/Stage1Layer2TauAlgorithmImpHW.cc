@@ -173,7 +173,7 @@ void l1t::Stage1Layer2TauAlgorithmImpHW::processEvent(const std::vector<l1t::Cal
   delete preSortIsoTaus;
   delete sortedIsoTaus;
 
-  const bool verbose = false;
+  const bool verbose = true;
   if(verbose)
   {
     std::cout << "Taus" << std::endl;

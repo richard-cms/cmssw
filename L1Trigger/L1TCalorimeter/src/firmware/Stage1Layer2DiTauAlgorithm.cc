@@ -92,7 +92,7 @@ void l1t::Stage1Layer2DiTauAlgorithm::processEvent(const std::vector<l1t::CaloRe
   delete isoTaus;
 
 
-  const bool verbose = false;
+  const bool verbose = true;
   if(verbose)
   {
     std::cout << "HF Ring Sums (Isolated Taus)" << std::endl;
