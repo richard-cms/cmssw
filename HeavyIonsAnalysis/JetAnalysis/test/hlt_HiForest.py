@@ -8955,10 +8955,10 @@ process.HLTSchedule = cms.Schedule( *(process.HLTriggerFirstPath, process.HLT_Ph
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-                                "root://xrootd.unl.edu//store/user/richard/MBHydjet5020/Hydjet_Quenched_MinBias_5020GeV/HydjetMB5020_750_75X_mcRun2_HeavyIon_v1_RealisticHICollisions2011_STARTHI50_mc_RECOSIM_v3/150729_144407/0000/step3_101.root"
+                                "file:/mnt/hadoop/cms/store/user/richard/MBHydjet5020/Hydjet_Quenched_MinBias_5020GeV/HydjetMB5020_750_75X_mcRun2_HeavyIon_v1_RealisticHICollisions2011_STARTHI50_mc_RECOSIM_v3/150729_144407/0000/step3_101.root"
 
     ),
-                            secondaryFileNames = cms.untracked.vstring("root://xrootd.unl.edu//store/user/mnguyen/Hydjet_Quenched_MinBias_5020GeV/HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI-RAW/6da45e4e90741bc03dbd9aec5f36c050/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_571_1_Nqu.root"),
+                            secondaryFileNames = cms.untracked.vstring("file:/mnt/hadoop/cms/store/user/mnguyen/Hydjet_Quenched_MinBias_5020GeV/HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI-RAW/6da45e4e90741bc03dbd9aec5f36c050/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_571_1_Nqu.root"),
                             firstEvent = cms.untracked.uint32(62))
 
 # adapt HLT modules to the correct process name
@@ -9049,20 +9049,8 @@ if 'MessageLogger' in process.__dict__:
 #process.DQMOutput = cms.EndPath( process.dqmOutput )
 
 # add specific customizations
-_customInfo = {}
-_customInfo['menuType'  ]= "GRun"
-_customInfo['globalTags']= {}
-_customInfo['globalTags'][True ] = "auto:run2_hlt_GRun"
-_customInfo['globalTags'][False] = "auto:run2_mc_GRun"
-_customInfo['inputFiles']={}
-_customInfo['inputFiles'][True]  = "file:RelVal_Raw_GRun_DATA.root"
-_customInfo['inputFiles'][False] = "file:RelVal_Raw_GRun_MC.root"
-_customInfo['maxEvents' ]=  12
-_customInfo['globalTag' ]= "auto:run2_mc_HIon"
-_customInfo['inputFile' ]=  ['root://xrootd.unl.edu//store/user/mnguyen/Hydjet_Quenched_MinBias_5020GeV/HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI-RAW/6da45e4e90741bc03dbd9aec5f36c050/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_571_1_Nqu.root']
-_customInfo['realData'  ]=  False
 from HLTrigger.Configuration.customizeHLTforALL import customizeHLTforAll
-process = customizeHLTforAll(process,_customInfo)
+process = customizeHLTforAll(process)
 
 from L1Trigger.L1TCommon.customsPostLS1 import customiseSimL1EmulatorForPostLS1_HI
 customiseSimL1EmulatorForPostLS1_HI(process)
