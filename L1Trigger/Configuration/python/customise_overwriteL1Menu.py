@@ -158,10 +158,9 @@ def L1Menu_Collisions2015_lowPU_v4(process):
 def L1Menu_CollisionsHeavyIons2015_v0(process):
     process.load( 'L1TriggerConfig.L1GtConfigProducers.l1GtTriggerMenuXml_cfi' )
     process.l1GtTriggerMenuXml.TriggerMenuLuminosity = 'startup'
-    process.l1GtTriggerMenuXml.DefXmlFile            = 'L1Menu_CollisionsHeavyIons2011_v0_nobsc_notau_centrality_q2_singletrack.v1.xml'
+    process.l1GtTriggerMenuXml.DefXmlFile            = 'L1Menu_CollisionsHeavyIons2015.v3_KKHecked.xml'
 
     process.load( 'L1TriggerConfig.L1GtConfigProducers.L1GtTriggerMenuConfig_cff' )
     process.es_prefer_l1GtParameters = cms.ESPrefer( 'L1GtTriggerMenuXmlProducer','l1GtTriggerMenuXml' )
 
     return process
-
