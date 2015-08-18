@@ -8958,8 +8958,7 @@ process.source = cms.Source("PoolSource",
                                 "file:/mnt/hadoop/cms/store/user/richard/MBHydjet5020/Hydjet_Quenched_MinBias_5020GeV/HydjetMB5020_750_75X_mcRun2_HeavyIon_v1_RealisticHICollisions2011_STARTHI50_mc_RECOSIM_v3/150729_144407/0000/step3_101.root"
 
     ),
-                            secondaryFileNames = cms.untracked.vstring("file:/mnt/hadoop/cms/store/user/mnguyen/Hydjet_Quenched_MinBias_5020GeV/HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI-RAW/6da45e4e90741bc03dbd9aec5f36c050/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_571_1_Nqu.root"),
-                            firstEvent = cms.untracked.uint32(62))
+                            secondaryFileNames = cms.untracked.vstring("file:/mnt/hadoop/cms/store/user/mnguyen/Hydjet_Quenched_MinBias_5020GeV/HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI-RAW/6da45e4e90741bc03dbd9aec5f36c050/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_571_1_Nqu.root"))
 
 # adapt HLT modules to the correct process name
 if 'hltTrigReport' in process.__dict__:
@@ -8995,7 +8994,7 @@ if 'hltDQML1SeedLogicScalers' in process.__dict__:
 
 # limit the number of events to be processed
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32( 1 )
+    input = cms.untracked.int32( 20 )
 )
 
 # enable the TrigReport and TimeReport
@@ -9032,11 +9031,11 @@ import HLTrigger.Configuration.customizeHLTforL1Emulator
 process = HLTrigger.Configuration.customizeHLTforL1Emulator.switchToL1Emulator( process )
 process = HLTrigger.Configuration.customizeHLTforL1Emulator.switchToSimStage1Digis( process )
 
-if 'MessageLogger' in process.__dict__:
-    process.MessageLogger.categories.append('TriggerSummaryProducerAOD')
-    process.MessageLogger.categories.append('L1GtTrigReport')
-    process.MessageLogger.categories.append('HLTrigReport')
-    process.MessageLogger.categories.append('FastReport')
+# if 'MessageLogger' in process.__dict__:
+#     process.MessageLogger.categories.append('TriggerSummaryProducerAOD')
+#     process.MessageLogger.categories.append('L1GtTrigReport')
+#     process.MessageLogger.categories.append('HLTrigReport')
+#     process.MessageLogger.categories.append('FastReport')
 
 # load the DQMStore and DQMRootOutputModule
 #process.load( "DQMServices.Core.DQMStore_cfi" )
@@ -9205,7 +9204,7 @@ process.ana_step = cms.Path(process.L1UpgradeAnalyzer *
                             process.hiEvtAnalyzer*
                             process.HiGenParticleAna*
                             #process.hiGenJetsCleaned*
-                            process.quickTrackAssociatorByHits*
+                            #process.quickTrackAssociatorByHits*
                             #process.tpRecoAssocGeneralTracks + #used in HiPFJetAnalyzer
                             #process.hiSelectGenJets +
                             process.jetSequences +
@@ -9221,16 +9220,19 @@ process.ana_step = cms.Path(process.L1UpgradeAnalyzer *
                             )
 process.hltAnaPath = cms.EndPath(process.hltbitanalysis)
 
-process.load('HeavyIonsAnalysis.JetAnalysis.EventSelection_cff')
-process.phltJetHI = cms.Path( process.hltJetHI )
+#process.load('HeavyIonsAnalysis.JetAnalysis.EventSelection_cff')
+process.load('HeavyIonsAnalysis.Configuration.collisionEventSelection_cff')
+process.load('HeavyIonsAnalysis.VertexAnalysis.PAPileUpVertexFilter_cff')
+#process.phltJetHI = cms.Path( process.hltJetHI )
 process.pcollisionEventSelection = cms.Path(process.collisionEventSelection)
-# process.pHBHENoiseFilter = cms.Path( process.HBHENoiseFilter ) #should be put back in later
-#process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
+#process.pHBHENoiseFilter = cms.Path( process.HBHENoiseFilter ) #should be put back in later
+process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
+process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
 process.phfCoincFilter = cms.Path(process.hfCoincFilter )
 process.phfCoincFilter3 = cms.Path(process.hfCoincFilter3 )
 process.pprimaryVertexFilter = cms.Path(process.primaryVertexFilter )
 process.phltPixelClusterShapeFilter = cms.Path(process.siPixelRecHits*process.hltPixelClusterShapeFilter )
-process.phiEcalRecHitSpikeFilter = cms.Path(process.hiEcalRecHitSpikeFilter )
+#process.phiEcalRecHitSpikeFilter = cms.Path(process.hiEcalRecHitSpikeFilter )
 
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cff')
 process.skimanalysis.hltresults = cms.InputTag("TriggerResults", "", "TEST")
@@ -9238,7 +9240,7 @@ process.pAna = cms.EndPath(process.skimanalysis)
 
 process.schedule = cms.Schedule()
 process.schedule.extend(process.HLTSchedule)
-process.schedule.extend([process.ana_step, process.phltJetHI, process.pcollisionEventSelection, process.phfCoincFilter, process.phfCoincFilter3, process.pprimaryVertexFilter, process.phltPixelClusterShapeFilter, process.phiEcalRecHitSpikeFilter, process.pAna, process.hltAnaPath])
+process.schedule.extend([process.ana_step, process.pcollisionEventSelection, process.phfCoincFilter, process.phfCoincFilter3, process.pprimaryVertexFilter, process.phltPixelClusterShapeFilter, process.pAna, process.hltAnaPath])
 
 from CondCore.DBCommon.CondDBSetup_cfi import *
 process.beamspot = cms.ESSource("PoolDBESSource",CondDBSetup,
