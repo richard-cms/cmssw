@@ -5,4 +5,5 @@
 <use   name="CondFormats/DataRecord"/>
 <use   name="CondTools/L1TriggerExt"/>
 <use   name="CondFormats/RunInfo"/>
+<use   name="L1Trigger/L1TCalorimeter"/>
 <flags   EDM_PLUGIN="1"/>
