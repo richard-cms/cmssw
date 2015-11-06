@@ -37,6 +37,7 @@
 //#include "CondFormats/L1TCalorimeter/interface/CaloParams.h"
 #include "CondFormats/L1TObjects/interface/CaloParams.h"
 #include "CondFormats/DataRecord/interface/L1TCaloParamsRcd.h"
+#include "CondFormats/DataRecord/interface/L1TCaloParamsHIRcd.h"
 //#include "CondFormats/L1TObjects/interface/FirmwareVersion.h"
 #include "L1Trigger/L1TCalorimeter/interface/CaloParamsHelper.h"
 
@@ -266,27 +267,6 @@ L1TStage1Layer2Producer::endJob() {
 void L1TStage1Layer2Producer::beginRun(Run const&iR, EventSetup const&iE){
   unsigned long long id = 0;
 
-  id = iE.get<L1TCaloParamsRcd>().cacheIdentifier();
-  if (id != m_paramsCacheId) {
-
-    m_paramsCacheId = id;
-
-    edm::ESHandle<CaloParams> paramsHandle;
-
-    iE.get<L1TCaloParamsRcd>().get(m_conditionsLabel, paramsHandle);
-
-    // replace our local copy of the parameters with a new one using placement new
-    m_params->~CaloParamsHelper();
-    m_params = new (m_params) CaloParamsHelper(*paramsHandle.product());
-
-    LogDebug("L1TDebug") << *m_params << std::endl;
-
-    if (! m_params){
-      edm::LogError("l1t|caloStage1") << "Could not retrieve params from Event Setup" << std::endl;
-    }
-
-  }
-
   id = iE.get<L1TCaloConfigRcd>().cacheIdentifier();
   if (id != m_configCacheId) {
     m_configCacheId = id;
@@ -302,13 +282,51 @@ void L1TStage1Layer2Producer::beginRun(Run const&iR, EventSetup const&iE){
       //update our DB payload in CaloConfigHelper:
       m_config.UpdatePayload(configHandle.product());
       //cout << "DEBUG:  L1T Calo Config reports the Layer2 firmware version is " << m_config.fwv() << "\n";
-    }      
+    }
   }
 
+  if(m_config.fwv() != 1) // all non-HI FW
+  {
+    id = iE.get<L1TCaloParamsRcd>().cacheIdentifier();
+    if (id != m_paramsCacheId) {
 
+      m_paramsCacheId = id;
 
+      edm::ESHandle<CaloParams> paramsHandle;
 
+      iE.get<L1TCaloParamsRcd>().get(m_conditionsLabel, paramsHandle);
 
+      // replace our local copy of the parameters with a new one using placement new
+      m_params->~CaloParamsHelper();
+      m_params = new (m_params) CaloParamsHelper(*paramsHandle.product());
+
+      LogDebug("L1TDebug") << *m_params << std::endl;
+
+      if (! m_params){
+	edm::LogError("l1t|caloStage1") << "Could not retrieve params from Event Setup" << std::endl;
+      }
+    }
+  } else { // HI FW
+    id = iE.get<L1TCaloParamsHIRcd>().cacheIdentifier();
+    if (id != m_paramsCacheId) {
+
+      m_paramsCacheId = id;
+
+      edm::ESHandle<CaloParams> paramsHandle;
+
+      iE.get<L1TCaloParamsHIRcd>().get(m_conditionsLabel, paramsHandle);
+
+      // replace our local copy of the parameters with a new one using placement new
+      m_params->~CaloParamsHelper();
+      m_params = new (m_params) CaloParamsHelper(*paramsHandle.product());
+
+      LogDebug("L1TDebug") << *m_params << std::endl;
+
+      if (! m_params){
+	edm::LogError("l1t|caloStage1") << "Could not retrieve params from Event Setup" << std::endl;
+      }
+    }
+  }
 
   LogDebug("l1t|stage 1 jets") << "L1TStage1Layer2Producer::beginRun function called...\n";
 

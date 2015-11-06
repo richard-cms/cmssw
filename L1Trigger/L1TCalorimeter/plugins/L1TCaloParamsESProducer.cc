@@ -33,6 +33,7 @@
 #include "CondFormats/L1TObjects/interface/CaloParams.h"
 #include "L1Trigger/L1TCalorimeter/interface/CaloParamsHelper.h"
 #include "CondFormats/DataRecord/interface/L1TCaloParamsRcd.h"
+#include "CondFormats/DataRecord/interface/L1TCaloParamsHIRcd.h"
 
 using namespace std;
 
@@ -50,6 +51,7 @@ public:
   typedef boost::shared_ptr<CaloParams> ReturnType;
 
   ReturnType produce(const L1TCaloParamsRcd&);
+  ReturnType produceHI(const L1TCaloParamsHIRcd&);
 
 private:
   CaloParams  m_params ;
@@ -72,7 +74,12 @@ L1TCaloParamsESProducer::L1TCaloParamsESProducer(const edm::ParameterSet& conf)
 
   //the following line is needed to tell the framework what
   // data is being produced
-  setWhatProduced(this);
+  bool pp = conf.getParameter<bool>("ppRecord");
+  if(pp) {
+    setWhatProduced(this, &L1TCaloParamsESProducer::produce);
+  } else {
+    setWhatProduced(this, &L1TCaloParamsESProducer::produceHI);
+  }
   //setWhatProduced(this, conf.getParameter<std::string>("label"));
 
   CaloParamsHelper m_params_helper;
@@ -271,7 +278,15 @@ L1TCaloParamsESProducer::produce(const L1TCaloParamsRcd& iRecord)
    return pCaloParams;
 }
 
+L1TCaloParamsESProducer::ReturnType
+L1TCaloParamsESProducer::produceHI(const L1TCaloParamsHIRcd& iRecord)
+{
+   using namespace edm::es;
+   boost::shared_ptr<CaloParams> pCaloParams ;
 
+   pCaloParams = boost::shared_ptr< CaloParams >(new CaloParams(m_params));
+   return pCaloParams;
+}
 
 //define this as a plug-in
 DEFINE_FWK_EVENTSETUP_MODULE(L1TCaloParamsESProducer);

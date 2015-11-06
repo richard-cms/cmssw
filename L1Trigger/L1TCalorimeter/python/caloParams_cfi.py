@@ -10,6 +10,8 @@ caloParamsSource = cms.ESSource(
 caloParams = cms.ESProducer(
     "L1TCaloParamsESProducer",
 
+    ppRecord = cms.bool(True),
+
     # towers
     towerLsbH        = cms.double(0.5),
     towerLsbE        = cms.double(0.5),
