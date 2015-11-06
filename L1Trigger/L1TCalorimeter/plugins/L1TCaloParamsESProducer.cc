@@ -50,7 +50,7 @@ public:
 
   typedef boost::shared_ptr<CaloParams> ReturnType;
 
-  ReturnType produce(const L1TCaloParamsRcd&);
+  ReturnType producePP(const L1TCaloParamsRcd&);
   ReturnType produceHI(const L1TCaloParamsHIRcd&);
 
 private:
@@ -76,11 +76,11 @@ L1TCaloParamsESProducer::L1TCaloParamsESProducer(const edm::ParameterSet& conf)
   // data is being produced
   bool pp = conf.getParameter<bool>("ppRecord");
   if(pp) {
-    setWhatProduced(this, &L1TCaloParamsESProducer::produce);
+    setWhatProduced(this, &L1TCaloParamsESProducer::producePP);
   } else {
     setWhatProduced(this, &L1TCaloParamsESProducer::produceHI);
   }
-  //setWhatProduced(this, conf.getParameter<std::string>("label"));
+  //setWhatProduced(this);
 
   CaloParamsHelper m_params_helper;
 
@@ -269,7 +269,7 @@ L1TCaloParamsESProducer::~L1TCaloParamsESProducer()
 
 // ------------ method called to produce the data  ------------
 L1TCaloParamsESProducer::ReturnType
-L1TCaloParamsESProducer::produce(const L1TCaloParamsRcd& iRecord)
+L1TCaloParamsESProducer::producePP(const L1TCaloParamsRcd& iRecord)
 {
    using namespace edm::es;
    boost::shared_ptr<CaloParams> pCaloParams ;

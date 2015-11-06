@@ -7,6 +7,13 @@ caloParamsSource = cms.ESSource(
     firstValid = cms.vuint32(1)
 )
 
+caloParamsHISource = cms.ESSource(
+    "EmptyESSource",
+    recordName = cms.string('L1TCaloParamsHIRcd'),
+    iovIsRunNotTime = cms.bool(True),
+    firstValid = cms.vuint32(1)
+)
+
 caloParams = cms.ESProducer(
     "L1TCaloParamsESProducer",
 

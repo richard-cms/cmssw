@@ -36,9 +36,12 @@ REGISTER_L1_WRITER(L1TriggerKeyListExtRcd, L1TriggerKeyListExt);
 
 #include "CondFormats/L1TObjects/interface/CaloParams.h"
 #include "CondFormats/DataRecord/interface/L1TCaloParamsRcd.h"
+
 #include "CondFormats/L1TObjects/interface/CaloConfig.h"
 #include "CondFormats/DataRecord/interface/L1TCaloConfigRcd.h"
+#include "CondFormats/DataRecord/interface/L1TCaloParamsHIRcd.h"
 
 using namespace l1t;
 REGISTER_L1_WRITER(L1TCaloParamsRcd, CaloParams);
+REGISTER_L1_WRITER(L1TCaloParamsHIRcd, CaloParams);
 REGISTER_L1_WRITER(L1TCaloConfigRcd, CaloConfig);
