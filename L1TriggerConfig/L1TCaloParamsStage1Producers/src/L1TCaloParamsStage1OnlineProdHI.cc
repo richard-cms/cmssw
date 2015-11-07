@@ -127,7 +127,8 @@ boost::shared_ptr<l1t::CaloParams> L1TCaloParamsStage1OnlineProdHI::newObject(co
     // Parse all energy registers that are in 0.5GeV steps
     // TODO: Put energy_thr (pileup threshold) to proper place
     m_params_helper->setJetSeedThreshold(jet_seed_thr/2.);
-    m_params_helper->setEtSumEtThreshold(0, ht_sum_thr/2.);
+    m_params_helper->setEtSumEtThreshold(0, 0); // Online hard-codes this
+    m_params_helper->setEtSumEtThreshold(1, ht_sum_thr/2.);
     m_params_helper->setCentralityRegionMask(centrality_eta_mask);
     m_params_helper->setEgEtaCut(eg_eta_cut);
     m_params_helper->setJetRegionMask(phi_ring_eta_masking);
