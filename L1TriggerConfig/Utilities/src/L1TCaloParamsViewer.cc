@@ -99,6 +99,7 @@ void L1TCaloParamsViewer::analyze(const edm::Event& iEvent, const edm::EventSetu
 
     cout<<endl<<" EG: "<<endl;
     cout<<"  egLsb=                  "<<ptr1->egLsb()<<endl;
+    cout<<"  egEtaCut=               "<<ptr1->egEtaCut()<<endl;
     cout<<"  egSeedThreshold=        "<<ptr1->egSeedThreshold()<<endl;
     cout<<"  egNeighbourThreshold=   "<<ptr1->egNeighbourThreshold()<<endl;
     cout<<"  egHcalThreshold=        "<<ptr1->egHcalThreshold()<<endl;
@@ -184,6 +185,7 @@ void L1TCaloParamsViewer::analyze(const edm::Event& iEvent, const edm::EventSetu
 
     cout<<endl<<" Tau: "<<endl;
     cout<<"  tauLsb=                 "<<ptr1->tauLsb()<<endl;
+    cout<<"  tauRegionMask=          "<<ptr1->tauRegionMask()<<endl;
     cout<<"  tauSeedThreshold=       "<<ptr1->tauSeedThreshold()<<endl;
     cout<<"  tauNeighbourThreshold=  "<<ptr1->tauNeighbourThreshold()<<endl;
     cout<<"  tauMaxPtTauVeto=        "<<ptr1->tauMaxPtTauVeto()<<endl;
@@ -240,6 +242,7 @@ void L1TCaloParamsViewer::analyze(const edm::Event& iEvent, const edm::EventSetu
 
     cout<<endl<<" Jets: "<<endl;
     cout<<"  jetLsb=                 "<<ptr1->jetLsb()<<endl;
+    cout<<"  jetRegionMask           "<<ptr1->jetRegionMask()<<endl;
     cout<<"  jetSeedThreshold=       "<<ptr1->jetSeedThreshold()<<endl;
     cout<<"  jetNeighbourThreshold=  "<<ptr1->jetNeighbourThreshold()<<endl;
     cout<<"  jetPUSType=             "<<ptr1->jetPUSType()<<endl;
@@ -272,17 +275,15 @@ void L1TCaloParamsViewer::analyze(const edm::Event& iEvent, const edm::EventSetu
     cout<<"  etSumLsb=               "<<ptr1->etSumLsb()<<endl;
 ///    cout<<"  etSumEtaMin=            ["; for(unsigned int i=0; ptr1->etSumEtaMin(i)<0.001; i++) cout<<(i==0?"":",")<<ptr1->etSumEtaMin(i); cout<<"]"<<endl;
 ///    cout<<"  etSumEtaMax=            ["; for(unsigned int i=0; ptr1->etSumEtaMax(i)<0.001; i++) cout<<(i==0?"":",")<<ptr1->etSumEtaMax(i); cout<<"]"<<endl;
-///    cout<<"  etSumEtThreshold=       ["; for(unsigned int i=0; ptr1->etSumEtThreshold(i)<0.001; i++) cout<<(i==0?"":",")<<ptr1->etSumEtThreshold(i); cout<<"]"<<endl;
+    cout<<"  etSumEtThreshold=       ["; for(unsigned int i=0; i<2; i++) cout<<(i==0?"":",")<<ptr1->etSumEtThreshold(i); cout<<"]"<<endl;
 
     cout<<endl<<" HI centrality trigger: "<<endl;
+    cout<<"  centralityRegionMask=    "<<ptr1->centralityRegionMask()<<endl;
     cout<<"  centralityLUT=          ["; for(unsigned int i=0; i<ptr1->centralityLUT()->maxSize(); i++) cout<<(i==0?"":",")<<ptr1->centralityLUT()->data(i); cout<<"]"<<endl;
+    cout<<"  altMbThresholds=        ["; for(unsigned int i=0; i<ptr1->minimumBiasThresholds().size(); i++) cout<<(i==0?"":",")<<ptr1->minimumBiasThresholds().at(i); cout<<"]"<<endl;
 
-    cout<<endl<<"centralityRegionMask() = "<<ptr1->centralityRegionMask()<<endl;
-    cout<<endl<<"jetRegionMask() = "<<ptr1->jetRegionMask()<<endl;
-    cout<<endl<<"tauRegionMask() = "<<ptr1->tauRegionMask()<<endl;
-
-    cout<<endl<<" HI Q2 trigger: "<<endl;
-    cout<<"  q2LUT=                  ["; for(unsigned int i=0; i<ptr1->q2LUT()->maxSize(); i++) cout<<(i==0?"":",")<<ptr1->q2LUT()->data(i); cout<<"]"<<endl;
+//    cout<<endl<<" HI Q2 trigger: "<<endl;
+//    cout<<"  q2LUT=                  ["; for(unsigned int i=0; i<ptr1->q2LUT()->maxSize(); i++) cout<<(i==0?"":",")<<ptr1->q2LUT()->data(i); cout<<"]"<<endl;
 
 }
 
@@ -291,4 +292,3 @@ void L1TCaloParamsViewer::analyze(const edm::Event& iEvent, const edm::EventSetu
 #include "FWCore/Framework/interface/ModuleFactory.h"
 
 DEFINE_FWK_MODULE(L1TCaloParamsViewer);
-
