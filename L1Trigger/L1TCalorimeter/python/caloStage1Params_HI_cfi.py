@@ -3,11 +3,12 @@ import FWCore.ParameterSet.Config as cms
 from L1Trigger.L1TCalorimeter.caloStage1RegionSF_cfi import *
 from L1Trigger.L1TCalorimeter.caloStage1JetSF_cfi import *
 
-from L1Trigger.L1TCalorimeter.caloParams_cfi import caloParamsSource
+from L1Trigger.L1TCalorimeter.caloParams_cfi import caloParamsHISource
 import L1Trigger.L1TCalorimeter.caloParams_cfi
 #caloStage1ParamsSource = L1Trigger.L1TCalorimeter.caloParams_cfi.caloParamsSource.clone()
 caloStage1Params = L1Trigger.L1TCalorimeter.caloParams_cfi.caloParams.clone()
 
+caloStage1Params.ppRecord = cms.bool(False)
 caloStage1Params.regionPUSType    = cms.string("zeroWall")       #"None" for no PU subtraction, "PUM0", "HICaloRingSub"
 caloStage1Params.regionPUSParams  = regionSubtraction_PU40_MC13TeV
 
