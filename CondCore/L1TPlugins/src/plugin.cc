@@ -212,10 +212,10 @@ REGISTER_PLUGIN(L1CaloGeometryRecord, L1CaloGeometry);
 
 #include "CondFormats/L1TObjects/interface/CaloParams.h"
 #include "CondFormats/DataRecord/interface/L1TCaloParamsRcd.h"
-#include "CondFormats/DataRecord/interface/L1TCaloParamsHIRcd.h"
+#include "CondFormats/DataRecord/interface/L1TCaloParamsStage1HIRcd.h"
 #include "CondFormats/L1TObjects/interface/CaloConfig.h"
 #include "CondFormats/DataRecord/interface/L1TCaloConfigRcd.h"
 //using namespace l1t;
 REGISTER_PLUGIN(L1TCaloParamsRcd, l1t::CaloParams);
-REGISTER_PLUGIN(L1TCaloParamsHIRcd, l1t::CaloParams);
+REGISTER_PLUGIN(L1TCaloParamsStage1HIRcd, l1t::CaloParams);
 REGISTER_PLUGIN(L1TCaloConfigRcd, l1t::CaloConfig);

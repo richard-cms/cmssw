@@ -9,7 +9,7 @@ caloParamsSource = cms.ESSource(
 
 caloParamsHISource = cms.ESSource(
     "EmptyESSource",
-    recordName = cms.string('L1TCaloParamsHIRcd'),
+    recordName = cms.string('L1TCaloParamsStage1HIRcd'),
     iovIsRunNotTime = cms.bool(True),
     firstValid = cms.vuint32(1)
 )

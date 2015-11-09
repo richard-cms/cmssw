@@ -37,7 +37,7 @@
 //#include "CondFormats/L1TCalorimeter/interface/CaloParams.h"
 #include "CondFormats/L1TObjects/interface/CaloParams.h"
 #include "CondFormats/DataRecord/interface/L1TCaloParamsRcd.h"
-#include "CondFormats/DataRecord/interface/L1TCaloParamsHIRcd.h"
+#include "CondFormats/DataRecord/interface/L1TCaloParamsStage1HIRcd.h"
 //#include "CondFormats/L1TObjects/interface/FirmwareVersion.h"
 #include "L1Trigger/L1TCalorimeter/interface/CaloParamsHelper.h"
 
@@ -307,14 +307,14 @@ void L1TStage1Layer2Producer::beginRun(Run const&iR, EventSetup const&iE){
       }
     }
   } else { // HI FW
-    id = iE.get<L1TCaloParamsHIRcd>().cacheIdentifier();
+    id = iE.get<L1TCaloParamsStage1HIRcd>().cacheIdentifier();
     if (id != m_paramsCacheId) {
 
       m_paramsCacheId = id;
 
       edm::ESHandle<CaloParams> paramsHandle;
 
-      iE.get<L1TCaloParamsHIRcd>().get(m_conditionsLabel, paramsHandle);
+      iE.get<L1TCaloParamsStage1HIRcd>().get(m_conditionsLabel, paramsHandle);
 
       // replace our local copy of the parameters with a new one using placement new
       m_params->~CaloParamsHelper();

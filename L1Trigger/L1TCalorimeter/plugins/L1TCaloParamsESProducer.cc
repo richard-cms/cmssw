@@ -33,7 +33,7 @@
 #include "CondFormats/L1TObjects/interface/CaloParams.h"
 #include "L1Trigger/L1TCalorimeter/interface/CaloParamsHelper.h"
 #include "CondFormats/DataRecord/interface/L1TCaloParamsRcd.h"
-#include "CondFormats/DataRecord/interface/L1TCaloParamsHIRcd.h"
+#include "CondFormats/DataRecord/interface/L1TCaloParamsStage1HIRcd.h"
 
 using namespace std;
 
@@ -51,7 +51,7 @@ public:
   typedef boost::shared_ptr<CaloParams> ReturnType;
 
   ReturnType producePP(const L1TCaloParamsRcd&);
-  ReturnType produceHI(const L1TCaloParamsHIRcd&);
+  ReturnType produceHI(const L1TCaloParamsStage1HIRcd&);
 
 private:
   CaloParams  m_params ;
@@ -279,7 +279,7 @@ L1TCaloParamsESProducer::producePP(const L1TCaloParamsRcd& iRecord)
 }
 
 L1TCaloParamsESProducer::ReturnType
-L1TCaloParamsESProducer::produceHI(const L1TCaloParamsHIRcd& iRecord)
+L1TCaloParamsESProducer::produceHI(const L1TCaloParamsStage1HIRcd& iRecord)
 {
    using namespace edm::es;
    boost::shared_ptr<CaloParams> pCaloParams ;

@@ -18,7 +18,7 @@ def initL1SubsystemsExt( tagBaseVec = [],
             key = cms.string(objectKey)
         ),
         cms.PSet(
-            record = cms.string('L1TCaloParamsHIRcd'),
+            record = cms.string('L1TCaloParamsStage1HIRcd'),
             tag = cms.string('L1TCaloParamsHI_' + tagBaseVec[ L1CondEnumExt.L1TCaloParams ]),
             type = cms.string('l1t::CaloParams'),
             key = cms.string(objectKey)
