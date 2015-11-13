@@ -11,6 +11,13 @@ from RecoPixelVertexing.PixelLowPtUtilities.siPixelClusterShapeCache_cfi import 
 
 # Ecal
 from RecoLocalCalo.Configuration.ecalLocalRecoSequence_cff import *
+from RecoLocalCalo.EcalRecProducers.ecalGlobalUncalibRecHit_cfi import *
+ecalUncalibRecHitSequenceHI = cms.Sequence(ecalGlobalUncalibRecHit*
+                                           ecalDetIdToBeRecovered)
+ecalLocalRecoSequenceHI     = cms.Sequence(ecalUncalibRecHitSequenceHI*
+                                           ecalRecHitSequence)
+ecalRecHit.EEuncalibRecHitCollection = cms.InputTag("ecalGlobalUncalibRecHit","EcalUncalibRecHitsEE")
+ecalRecHit.EBuncalibRecHitCollection = cms.InputTag("ecalGlobalUncalibRecHit","EcalUncalibRecHitsEB")
 from RecoLocalCalo.EcalRecAlgos.EcalSeverityLevelESProducer_cfi import *
 
 # Hcal
@@ -38,7 +45,7 @@ siPixelClusterShapeCachePreSplitting = siPixelClusterShapeCache.clone(
     src = 'siPixelClustersPreSplitting'
     )
 
-caloReco = cms.Sequence(ecalLocalRecoSequence*hcalLocalRecoSequence)
+caloReco = cms.Sequence(ecalLocalRecoSequenceHI*hcalLocalRecoSequence)
 hbhereco = hbheprereco.clone()
 hcalLocalRecoSequence.replace(hbheprereco,hbhereco)
 muonReco = cms.Sequence(trackerlocalreco+MeasurementTrackerEventPreSplitting+siPixelClusterShapeCachePreSplitting+muonlocalreco)
