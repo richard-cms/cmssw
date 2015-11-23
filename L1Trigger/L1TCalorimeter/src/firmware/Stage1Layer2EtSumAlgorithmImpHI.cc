@@ -46,13 +46,13 @@ void l1t::Stage1Layer2EtSumAlgorithmImpHI::processEvent(const std::vector<l1t::C
   //regionPUSType is set to None in the config
   double jetLsb=params_->jetLsb();
 
-  int etSumEtaMinEt = params_->etSumEtaMin(0);
-  int etSumEtaMaxEt = params_->etSumEtaMax(0);
+  int etSumEtaMinEt = 4;//params_->etSumEtaMin(0);
+  int etSumEtaMaxEt = 17;//params_->etSumEtaMax(0);
   //double etSumEtThresholdEt = params_->etSumEtThreshold(0);
   int etSumEtThresholdEt = (int) (params_->etSumEtThreshold(0) / jetLsb);
 
-  int etSumEtaMinHt = params_->etSumEtaMin(1);
-  int etSumEtaMaxHt = params_->etSumEtaMax(1);
+  int etSumEtaMinHt = 4;//params_->etSumEtaMin(1);
+  int etSumEtaMaxHt = 17;//params_->etSumEtaMax(1);
   //double etSumEtThresholdHt = params_->etSumEtThreshold(1);
   int etSumEtThresholdHt = (int) (params_->etSumEtThreshold(1) / jetLsb);
 
